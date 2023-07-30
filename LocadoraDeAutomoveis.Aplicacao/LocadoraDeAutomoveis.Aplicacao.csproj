@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Compartilhado\" />
+    <Folder Include="ModuloAluguel\" />
+    <Folder Include="ModuloAutomovel\" />
+    <Folder Include="ModuloCliente\" />
+    <Folder Include="ModuloCondutor\" />
+    <Folder Include="ModuloCupom\" />
+    <Folder Include="ModuloFuncionario\" />
+    <Folder Include="ModuloGrupoDoAutomovel\" />
+    <Folder Include="ModuloParceiro\" />
+    <Folder Include="ModuloPlanoDeCobranca\" />
+    <Folder Include="ModuloTaxaServico\" />
+  </ItemGroup>
+
+</Project>
