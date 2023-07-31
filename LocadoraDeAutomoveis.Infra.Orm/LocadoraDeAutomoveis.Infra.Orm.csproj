@@ -7,17 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Compartilhado\" />
-    <Folder Include="ModuloAluguel\" />
-    <Folder Include="ModuloAutomovel\" />
-    <Folder Include="ModuloCliente\" />
-    <Folder Include="ModuloCondutor\" />
-    <Folder Include="ModuloCupom\" />
-    <Folder Include="ModuloFuncionario\" />
-    <Folder Include="ModuloGrupoDoAutomovel\" />
-    <Folder Include="ModuloParceiro\" />
-    <Folder Include="ModuloPlanoDeCobranca\" />
-    <Folder Include="ModuloTaxaServico\" />
+    <Folder Include="Acesso a Dados\ModuloAluguel\" />
+    <Folder Include="Acesso a Dados\ModuloAutomovel\" />
+    <Folder Include="Acesso a Dados\ModuloCliente\" />
+    <Folder Include="Acesso a Dados\ModuloCondutor\" />
+    <Folder Include="Acesso a Dados\ModuloCupom\" />
+    <Folder Include="Acesso a Dados\ModuloFuncionario\" />
+    <Folder Include="Acesso a Dados\ModuloGrupoDoAutomovel\" />
+    <Folder Include="Acesso a Dados\ModuloParceiro\" />
+    <Folder Include="Acesso a Dados\ModuloPlanoDeCobranca\" />
+    <Folder Include="Acesso a Dados\ModuloTaxaServico\" />
+    <Folder Include="Massa de Dados\" />
+    <Folder Include="PDF\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocadoraDeAutomoveis.Dominio\LocadoraDeAutomoveis.Dominio.csproj" />
   </ItemGroup>
 
 </Project>
