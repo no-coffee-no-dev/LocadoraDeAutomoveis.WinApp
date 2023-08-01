@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SequentialGuid;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,13 @@ namespace LocadoraDeAutomoveis.Dominio.Compartilhado
 {
     public abstract class EntidadeBase<TEntidade>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+
+        public EntidadeBase()
+        {
+            Id = SequentialGuidGenerator.Instance.NewGuid();
+        }
+
         public abstract void Atualizar(TEntidade registro);
     } 
 }

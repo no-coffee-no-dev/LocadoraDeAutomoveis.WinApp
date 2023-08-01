@@ -16,7 +16,6 @@
     <Folder Include="ModuloCupom\" />
     <Folder Include="ModuloFuncionario\" />
     <Folder Include="ModuloGrupoDoAutomovel\" />
-    <Folder Include="ModuloParceiro\" />
     <Folder Include="ModuloPlanoDeCobranca\" />
 	<Folder Include="ModuloPlanoDeCobranca\" />
     <Folder Include="ModuloTaxaServico\" />
@@ -36,6 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocadoraDeAutomoveis.Aplicacao\LocadoraDeAutomoveis.Aplicacao.csproj" />
+    <ProjectReference Include="..\LocadoraDeAutomoveis.Dominio\LocadoraDeAutomoveis.Dominio.csproj" />
+    <ProjectReference Include="..\LocadoraDeAutomoveis.Infra.Orm\LocadoraDeAutomoveis.Infra.Orm.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -48,6 +53,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

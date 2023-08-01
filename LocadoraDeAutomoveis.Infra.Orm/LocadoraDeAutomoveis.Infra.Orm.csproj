@@ -14,7 +14,6 @@
     <Folder Include="Acesso a Dados\ModuloCupom\" />
     <Folder Include="Acesso a Dados\ModuloFuncionario\" />
     <Folder Include="Acesso a Dados\ModuloGrupoDoAutomovel\" />
-    <Folder Include="Acesso a Dados\ModuloParceiro\" />
     <Folder Include="Acesso a Dados\ModuloPlanoDeCobranca\" />
     <Folder Include="Acesso a Dados\ModuloTaxaServico\" />
     <Folder Include="Massa de Dados\" />
