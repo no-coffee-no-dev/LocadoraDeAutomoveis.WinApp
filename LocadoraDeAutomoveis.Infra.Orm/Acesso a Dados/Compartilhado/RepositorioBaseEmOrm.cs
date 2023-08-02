@@ -30,7 +30,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
         {
             registros.Update(entidade);
 
-            dbContext.SaveChanges(); throw new NotImplementedException();
+            dbContext.SaveChanges(); 
         }
         public void Deletar(TEntidade entidade)
         {

@@ -1,4 +1,5 @@
-﻿using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
+﻿using FluentResults;
+using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,34 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloParceiro
 
         public override void Deletar()
         {
-            throw new NotImplementedException();
+            Guid id = tabelaParceiros.ObtemIdSelecionado();
+
+            Parceiro parceiroSelecionada = repositorioParceiro.Busca(id);
+
+            if (parceiroSelecionada == null)
+            {
+                MessageBox.Show("Selecione um parceiro primeiro",
+                "Exclusão de Parceiros", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja realmente excluir o parceiro {parceiroSelecionada.Nome}?",
+               "Exclusão de Parceiros", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Result resultado = servicoParceiro.Excluir(parceiroSelecionada);
+
+                if (resultado.IsFailed)
+                {
+                    MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Parceiros",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                CarregarEntidades();
+            }
         }
 
         public override void Editar()

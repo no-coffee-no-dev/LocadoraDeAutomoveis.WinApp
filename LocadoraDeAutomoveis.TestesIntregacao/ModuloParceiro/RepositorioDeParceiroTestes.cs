@@ -19,5 +19,38 @@ namespace LocadoraDeAutomoveis.TestesIntregacao
             //assert
             repositorioParceiro.Busca(parceiro.Id).Should().Be(parceiro);
         }
+
+        [TestMethod]
+        public void Deve_editar_Parceiro()
+        {
+            //arrange
+            var disciplinaId = Builder<Parceiro>.CreateNew().Persist().Id;
+
+            var disciplina = repositorioParceiro.Busca(disciplinaId);
+            disciplina.Nome = "História";
+
+            //action
+            repositorioParceiro.Atualizar(disciplina);
+
+            //assert
+            repositorioParceiro.Busca(disciplina.Id)
+                .Should().Be(disciplina);
+        }
+        [TestMethod]
+        public void Deve_deletar_Parceiro()
+        {
+            //arrange
+            var disciplinaId = Builder<Parceiro>.CreateNew().Persist().Id;
+
+            var disciplina = repositorioParceiro.Busca(disciplinaId);
+            disciplina.Nome = "História";
+
+            //action
+            repositorioParceiro.Deletar(disciplina);
+
+            //assert
+            repositorioParceiro.Busca(disciplina.Id)
+                .Should().BeNull();
+        }
     }
 }
