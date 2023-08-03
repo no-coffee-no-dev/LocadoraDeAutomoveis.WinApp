@@ -1,7 +1,11 @@
+using LocadoraDeAutomoveis.Aplicacao.ModuloCupom;
 using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
+using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
+using LocadoraDeAutomoveis.WinApp.ModuloCupom;
 using LocadoraDeAutomoveis.WinApp.ModuloParceiro;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +23,7 @@ namespace LocadoraDeAutomoveis.WinApp
             Instancia = this;
 
             controladores = new Dictionary<string, ControladorBase>();
+            this.ConfigurarDialog();
             ConfigurarControladores();
 
         }
@@ -124,7 +129,7 @@ namespace LocadoraDeAutomoveis.WinApp
             painelPrincipal.Controls.Add(listagemControl);
         }
         private void ConfigurarControladores()
-         {
+        {
             var configuracao = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appSettings.json")
@@ -146,34 +151,62 @@ namespace LocadoraDeAutomoveis.WinApp
             }
 
             IRepositorioParceiro repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            IRepositorioCupom repositorioCupom = new RepositorioCupomOrm(dbContext);
+
+
 
             ValidadorParceiro validadorParceiro = new ValidadorParceiro();
+            ValidadorCupom validadorCupom = new ValidadorCupom();
+
+
 
             ServicoParceiro servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
+            ServicoCupom servicoCupom = new ServicoCupom(repositorioCupom, validadorCupom);
+
+
+
+
 
             controladores.Add("ControladorParceiro", new ControladorParceiro(repositorioParceiro, servicoParceiro));
+            controladores.Add("ControladorCupom", new ControladorCupom(repositorioCupom, repositorioParceiro, servicoCupom));
 
         }
         #endregion 
 
         private void btnInserir_Click_1(object sender, EventArgs e)
         {
-            controlador.Inserir();
+            if (VerificaControladorVazio(controlador) == false)
+                controlador.Inserir();
         }
 
         private void btnEditar_Click_1(object sender, EventArgs e)
         {
-            controlador.Editar();
+            if (VerificaControladorVazio(controlador) == false)
+                controlador.Editar();
         }
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-            controlador.Deletar();
+            if (VerificaControladorVazio(controlador) == false)
+                controlador.Deletar();
         }
 
         private void parceirosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal(controladores["ControladorParceiro"]);
+        }
+
+        private void cupomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal(controladores["ControladorCupom"]);
+        }
+
+        private bool VerificaControladorVazio(ControladorBase controlador)
+        {
+            if (controlador == null)
+                return true;
+            else
+                return false;
         }
     }
 }

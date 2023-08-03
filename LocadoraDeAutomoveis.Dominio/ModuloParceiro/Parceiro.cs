@@ -31,5 +31,9 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloParceiro
             Nome = registro.Nome;
         }
 
+        public override string? ToString()
+        {
+            return $"{Nome}";
+        }
     }
 }

@@ -73,7 +73,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloParceiro
             if (parceiroSelecionada == null)
             {
                 MessageBox.Show("Selecione uma parceiro primeiro",
-                "Edição de Compromissos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                "Edição de Parceiros", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -125,7 +125,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloParceiro
 
         public override string ObterTipoCadastro()
         {
-            return "";
+            return "Cadastro de Parceiros";
         }
 
     }

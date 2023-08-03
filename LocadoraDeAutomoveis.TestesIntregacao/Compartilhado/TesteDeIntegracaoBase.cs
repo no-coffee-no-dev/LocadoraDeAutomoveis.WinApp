@@ -1,6 +1,8 @@
 ﻿using FizzWare.NBuilder;
+using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
     public class TesteDeIntegracaoBase
     {
         protected IRepositorioParceiro repositorioParceiro;
+        protected IRepositorioCupom repositorioCupom;
         public TesteDeIntegracaoBase()
         {
             LimparTabelas();
@@ -29,8 +32,10 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
             var dbContext = new LocadoraDeAutomoveisDbContext(optionsBuilder.Options);
 
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            repositorioCupom = new RepositorioCupomOrm(dbContext);
 
             BuilderSetup.SetCreatePersistenceMethod<Parceiro>(repositorioParceiro.Inserir);
+            BuilderSetup.SetCreatePersistenceMethod<Cupom>(repositorioCupom.Inserir);
         }
 
         protected static void LimparTabelas()
@@ -41,6 +46,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
 
             string sqlLimpezaTabela =
                 @"
+                DELETE FROM [DBO].[TBCUPOM]
                 DELETE FROM [DBO].[TBPARCEIRO];";
 
             SqlCommand comando = new SqlCommand(sqlLimpezaTabela, sqlConnection);

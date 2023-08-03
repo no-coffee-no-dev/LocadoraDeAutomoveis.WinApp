@@ -109,10 +109,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloParceiro
 
                 string msgErro;
 
-                if (ex.Message.Contains("FK_TBMateria_TBParceiro"))
-                    msgErro = "Esta parceiro está relacionada com uma matéria e não pode ser excluída";
-                else
-                    msgErro = "Falha ao tentar excluir parceiro";
+                msgErro = "Falha ao tentar excluir parceiro";
 
                 erros.Add(msgErro);
 

@@ -46,7 +46,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
         }
 
 
-        public TEntidade Busca(Guid id)
+        public virtual TEntidade Busca(Guid id)
         {
             return registros.Find(id);
         }    
@@ -54,7 +54,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
 
 
 
-        public List<TEntidade> RetornarTodos()
+        public virtual List<TEntidade> RetornarTodos()
         {
             return registros.ToList();
         }

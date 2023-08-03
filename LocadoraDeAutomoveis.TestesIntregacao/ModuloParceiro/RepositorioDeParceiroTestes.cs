@@ -24,17 +24,17 @@ namespace LocadoraDeAutomoveis.TestesIntregacao
         public void Deve_editar_Parceiro()
         {
             //arrange
-            var disciplinaId = Builder<Parceiro>.CreateNew().Persist().Id;
+            var parceiroId = Builder<Parceiro>.CreateNew().Persist().Id;
 
-            var disciplina = repositorioParceiro.Busca(disciplinaId);
-            disciplina.Nome = "História";
+            var parceiro = repositorioParceiro.Busca(parceiroId);
+            parceiro.Nome = "História";
 
             //action
-            repositorioParceiro.Atualizar(disciplina);
+            repositorioParceiro.Atualizar(parceiro);
 
             //assert
-            repositorioParceiro.Busca(disciplina.Id)
-                .Should().Be(disciplina);
+            repositorioParceiro.Busca(parceiro.Id)
+                .Should().Be(parceiro);
         }
         [TestMethod]
         public void Deve_deletar_Parceiro()
