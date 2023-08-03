@@ -51,6 +51,7 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = SystemColors.MenuBar;
             menuStrip1.Dock = DockStyle.Left;
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
@@ -61,6 +62,7 @@
             // 
             // cadastrosToolStripMenuItem
             // 
+            cadastrosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
             cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(64, 19);
@@ -68,15 +70,17 @@
             // 
             // parceirosToolStripMenuItem
             // 
+            parceirosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
             parceirosToolStripMenuItem.Name = "parceirosToolStripMenuItem";
-            parceirosToolStripMenuItem.Size = new Size(122, 22);
+            parceirosToolStripMenuItem.Size = new Size(180, 22);
             parceirosToolStripMenuItem.Text = "Parceiros";
             parceirosToolStripMenuItem.Click += parceirosToolStripMenuItem_Click;
             // 
             // cupomToolStripMenuItem
             // 
+            cupomToolStripMenuItem.BackColor = SystemColors.ScrollBar;
             cupomToolStripMenuItem.Name = "cupomToolStripMenuItem";
-            cupomToolStripMenuItem.Size = new Size(122, 22);
+            cupomToolStripMenuItem.Size = new Size(180, 22);
             cupomToolStripMenuItem.Text = "Cupom";
             cupomToolStripMenuItem.Click += cupomToolStripMenuItem_Click;
             // 
@@ -166,11 +170,12 @@
             // lblTipoCadastro
             // 
             lblTipoCadastro.AutoSize = true;
-            lblTipoCadastro.Location = new Point(128, 413);
+            lblTipoCadastro.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
+            lblTipoCadastro.Location = new Point(131, 413);
             lblTipoCadastro.Name = "lblTipoCadastro";
-            lblTipoCadastro.Size = new Size(115, 15);
+            lblTipoCadastro.Size = new Size(103, 17);
             lblTipoCadastro.TabIndex = 4;
-            lblTipoCadastro.Text = "Cadastro de Clientes";
+            lblTipoCadastro.Text = "___________________";
             // 
             // TelaPrincipal
             // 

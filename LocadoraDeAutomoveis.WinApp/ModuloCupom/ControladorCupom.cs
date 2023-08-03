@@ -32,7 +32,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
 
             tabelaCupons.AtualizarRegistros(cupons);
 
-            stringRodape = string.Format("Visualizando {0} parceiro{1}", cupons.Count, cupons.Count == 1 ? "" : "s");
+            stringRodape = string.Format("Visualizando {0} cupo{1}", cupons.Count, cupons.Count == 1 ? "m" : "ns");
 
             TelaPrincipal.Instancia.AtualizarRodape(stringRodape);
         }

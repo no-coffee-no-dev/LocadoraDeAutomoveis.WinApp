@@ -23,6 +23,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
         public TelaCupomForm(IRepositorioParceiro repositorioParceiro)
         {
             InitializeComponent();
+            this.ConfigurarDialog();
             ConfigurarListaDeParceiro(repositorioParceiro);
         }
 

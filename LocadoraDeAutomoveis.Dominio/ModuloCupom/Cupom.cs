@@ -45,7 +45,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCupom
 
         public void Expirou()
         {
-            if (DataDeValidade > DateTime.UtcNow.Date)
+            if (DataDeValidade < DateTime.UtcNow.Date)
             {
                 this.Expirado = true;
             }
