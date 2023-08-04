@@ -9,7 +9,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom
     {
         public void Configure(EntityTypeBuilder<Cupom> cupomBuilder)
         {
-            Cupom c = new Cupom();
 
             cupomBuilder.ToTable("TBCupom");
 

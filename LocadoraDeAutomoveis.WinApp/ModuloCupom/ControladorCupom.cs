@@ -39,7 +39,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
 
         public override void Deletar()
         {
-            Guid id = tabelaCupons.ObtemIdSelecionado();
+            Guid? id = tabelaCupons.ObtemIdSelecionado();
 
             Cupom cupomSelecionada = repositorioCupom.Busca(id);
 
@@ -71,7 +71,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
 
         public override void Editar()
         {
-            Guid id = tabelaCupons.ObtemIdSelecionado();
+            Guid? id = tabelaCupons.ObtemIdSelecionado();
 
             Cupom cupomSelecionada = repositorioCupom.Busca(id);
 

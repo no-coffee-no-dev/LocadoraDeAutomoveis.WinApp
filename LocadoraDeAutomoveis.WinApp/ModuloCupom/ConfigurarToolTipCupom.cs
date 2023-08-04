@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
 {
-    internal class ConfigurarToolTipCupom : ConfigurarToolTipBase
+    public class ConfigurarToolTipCupom : ConfigurarToolTipBase
     {
         public override string TipoCadastro => "Cadastro de Cupons";
 

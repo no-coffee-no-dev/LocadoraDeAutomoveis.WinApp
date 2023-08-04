@@ -13,6 +13,6 @@ namespace LocadoraDeAutomoveis.Dominio.Compartilhado
         void Deletar(TEntidade entidade);
         bool Existe(TEntidade registro);
         List<TEntidade> RetornarTodos();
-        TEntidade Busca(Guid id);
+        TEntidade Busca(Guid? id);
     }
 }

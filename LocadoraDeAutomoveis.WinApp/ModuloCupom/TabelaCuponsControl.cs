@@ -65,7 +65,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
 
             return colunas;
         }
-        public Guid ObtemIdSelecionado()
+        public Guid? ObtemIdSelecionado()
         {
             return tabelaCupons.ObterIDdoGrid();
         }

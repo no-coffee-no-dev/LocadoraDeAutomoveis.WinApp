@@ -55,7 +55,7 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado
             grid.AllowUserToResizeRows = false;
         }
 
-        public static Guid ObterIDdoGrid(this DataGridView grid)
+        public static Guid? ObterIDdoGrid(this DataGridView grid)
         {
 
             object id;
@@ -69,7 +69,10 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado
                 id = "";
             }
 
-            return Guid.Parse(id.ToString());
+            if(id != null)
+                return Guid.Parse(id.ToString());
+            else
+                return null;
         }
     }
 }

@@ -36,6 +36,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCupom
 
             try
             {
+                cupom.Expirou();
                 repositorioCupom.Inserir(cupom);
 
                 Log.Debug("Cupom {CupomId} inserido com sucesso", cupom.Id);
@@ -64,6 +65,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCupom
 
             try
             {
+                cupom.Expirou();
                 repositorioCupom.Atualizar(cupom);
 
                 Log.Debug("Cupom {CupomId} editado com sucesso", cupom.Id);

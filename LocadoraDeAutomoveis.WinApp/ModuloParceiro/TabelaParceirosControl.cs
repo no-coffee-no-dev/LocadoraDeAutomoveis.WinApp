@@ -40,7 +40,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloParceiro
 
             return colunas;
         }
-        public Guid ObtemIdSelecionado()
+        public Guid? ObtemIdSelecionado()
         {
             return tabelaParceiros.ObterIDdoGrid();
         }

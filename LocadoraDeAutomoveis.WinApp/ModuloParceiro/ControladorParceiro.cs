@@ -34,7 +34,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloParceiro
 
         public override void Deletar()
         {
-            Guid id = tabelaParceiros.ObtemIdSelecionado();
+            Guid? id = tabelaParceiros.ObtemIdSelecionado();
 
             Parceiro parceiroSelecionada = repositorioParceiro.Busca(id);
 
@@ -66,7 +66,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloParceiro
 
         public override void Editar()
         {
-            Guid id = tabelaParceiros.ObtemIdSelecionado();
+            Guid? id = tabelaParceiros.ObtemIdSelecionado();
 
             Parceiro parceiroSelecionada = repositorioParceiro.Busca(id);
 

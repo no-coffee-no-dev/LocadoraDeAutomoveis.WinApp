@@ -1,11 +1,15 @@
 using LocadoraDeAutomoveis.Aplicacao.ModuloCupom;
+using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.WinApp.ModuloCupom;
+using LocadoraDeAutomoveis.WinApp.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloParceiro;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -152,16 +156,18 @@ namespace LocadoraDeAutomoveis.WinApp
 
             IRepositorioParceiro repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             IRepositorioCupom repositorioCupom = new RepositorioCupomOrm(dbContext);
-
+            IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis = new RepositorioGrupoDeAutomoveisOrm(dbContext);
 
 
             ValidadorParceiro validadorParceiro = new ValidadorParceiro();
             ValidadorCupom validadorCupom = new ValidadorCupom();
+            ValidadorGrupoDeAutomoveis validadorGrupoDeAutomoveis = new ValidadorGrupoDeAutomoveis();
 
 
 
             ServicoParceiro servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
             ServicoCupom servicoCupom = new ServicoCupom(repositorioCupom, validadorCupom);
+            ServicoGrupoDeAutomoveis servicoGrupoDeAutomoveis = new ServicoGrupoDeAutomoveis(repositorioGrupoDeAutomoveis,validadorGrupoDeAutomoveis);
 
 
 
@@ -169,6 +175,7 @@ namespace LocadoraDeAutomoveis.WinApp
 
             controladores.Add("ControladorParceiro", new ControladorParceiro(repositorioParceiro, servicoParceiro));
             controladores.Add("ControladorCupom", new ControladorCupom(repositorioCupom, repositorioParceiro, servicoCupom));
+            controladores.Add("ControladorGrupoDeAutomoveis", new ControladorGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, servicoGrupoDeAutomoveis));
 
         }
         #endregion 
@@ -201,6 +208,11 @@ namespace LocadoraDeAutomoveis.WinApp
             ConfigurarTelaPrincipal(controladores["ControladorCupom"]);
         }
 
+        private void grupoDeAutomoveisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal(controladores["ControladorGrupoDeAutomoveis"]);
+        }
+
         private bool VerificaControladorVazio(ControladorBase controlador)
         {
             if (controlador == null)
@@ -208,5 +220,7 @@ namespace LocadoraDeAutomoveis.WinApp
             else
                 return false;
         }
+
+
     }
 }
