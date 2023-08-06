@@ -54,5 +54,22 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado
 
             grid.AllowUserToResizeRows = false;
         }
+
+        public static Guid ObterIDdoGrid(this DataGridView grid)
+        {
+
+            object id;
+
+            try
+            {
+                id = grid.SelectedRows[0].Cells["id"].Value;
+            }
+            catch
+            {
+                id = "";
+            }
+
+            return Guid.Parse(id.ToString());
+        }
     }
 }

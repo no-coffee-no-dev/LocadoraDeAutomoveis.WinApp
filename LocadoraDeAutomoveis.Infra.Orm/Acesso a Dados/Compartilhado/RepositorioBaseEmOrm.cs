@@ -1,18 +1,12 @@
 ﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
 {
     public class RepositorioBaseEmOrm<TEntidade> : IRepositorio<TEntidade> where TEntidade : EntidadeBase<TEntidade>
     {
         protected readonly LocadoraDeAutomoveisDbContext dbContext;
-        protected DbSet<TEntidade> registros; 
+        protected DbSet<TEntidade> registros;
         public RepositorioBaseEmOrm(LocadoraDeAutomoveisDbContext dbContext)
         {
             this.dbContext = dbContext;
@@ -30,7 +24,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
         {
             registros.Update(entidade);
 
-            dbContext.SaveChanges(); throw new NotImplementedException();
+            dbContext.SaveChanges();
         }
         public void Deletar(TEntidade entidade)
         {
@@ -46,15 +40,13 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
         }
 
 
-        public TEntidade Busca(int id)
+        public virtual TEntidade Busca(Guid id)
         {
             return registros.Find(id);
-        }    
+        }
 
 
-
-
-        public List<TEntidade> RetornarTodos()
+        public virtual List<TEntidade> RetornarTodos()
         {
             return registros.ToList();
         }
