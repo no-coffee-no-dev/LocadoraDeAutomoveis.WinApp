@@ -12,7 +12,6 @@
     <Folder Include="Acesso a Dados\ModuloCliente\" />
     <Folder Include="Acesso a Dados\ModuloCondutor\" />
     <Folder Include="Acesso a Dados\ModuloFuncionario\" />
-    <Folder Include="Acesso a Dados\ModuloPlanoDeCobranca\" />
     <Folder Include="Acesso a Dados\ModuloTaxaServico\" />
     <Folder Include="Massa de Dados\" />
     <Folder Include="PDF\" />

@@ -81,7 +81,7 @@
             Controls.Add(txtNome);
             Controls.Add(label1);
             Name = "TelaGrupoDeAutomoveisForm";
-            Text = "TelaGrupoDeAutomoveisForm";
+            Text = "Cadastrar Grupo De Automoveis";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -2,10 +2,12 @@
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
+using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
         protected IRepositorioParceiro repositorioParceiro;
         protected IRepositorioCupom repositorioCupom;
         protected IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis;
+        protected IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca;
         public TesteDeIntegracaoBase()
         {
             LimparTabelas();
@@ -37,10 +40,12 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             repositorioCupom = new RepositorioCupomOrm(dbContext);
             repositorioGrupoDeAutomoveis = new RepositorioGrupoDeAutomoveisOrm(dbContext);
+            repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaOrm(dbContext);
 
             BuilderSetup.SetCreatePersistenceMethod<Parceiro>(repositorioParceiro.Inserir);
             BuilderSetup.SetCreatePersistenceMethod<Cupom>(repositorioCupom.Inserir);
             BuilderSetup.SetCreatePersistenceMethod<GrupoDeAutomoveis>(repositorioGrupoDeAutomoveis.Inserir);
+            BuilderSetup.SetCreatePersistenceMethod<PlanoDeCobranca>(repositorioPlanoDeCobranca.Inserir);
         }
 
         protected static void LimparTabelas()
@@ -51,6 +56,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
 
             string sqlLimpezaTabela =
                 @"
+                DELETE FROM [DBO].[TBPLANODECOBRANCA]
                 DELETE FROM [DBO].[TBCUPOM]
                 DELETE FROM [DBO].[TBGRUPODEAUTOMOVEIS]
                 DELETE FROM [DBO].[TBPARCEIRO];";

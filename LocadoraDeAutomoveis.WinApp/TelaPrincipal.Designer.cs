@@ -33,6 +33,7 @@
             cadastrosToolStripMenuItem = new ToolStripMenuItem();
             parceirosToolStripMenuItem = new ToolStripMenuItem();
             cupomToolStripMenuItem = new ToolStripMenuItem();
+            grupoDeAutomoveisToolStripMenuItem = new ToolStripMenuItem();
             toolStripBarraDeTarefas = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -43,7 +44,7 @@
             painelPrincipal = new Panel();
             label1 = new Label();
             lblTipoCadastro = new Label();
-            grupoDeAutomoveisToolStripMenuItem = new ToolStripMenuItem();
+            planoDeCobrancaToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             toolStripBarraDeTarefas.SuspendLayout();
             StatusRodape.SuspendLayout();
@@ -64,7 +65,7 @@
             // cadastrosToolStripMenuItem
             // 
             cadastrosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
-            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem });
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(113, 19);
             cadastrosToolStripMenuItem.Text = "Cadastros";
@@ -84,6 +85,14 @@
             cupomToolStripMenuItem.Size = new Size(191, 22);
             cupomToolStripMenuItem.Text = "Cupom";
             cupomToolStripMenuItem.Click += cupomToolStripMenuItem_Click;
+            // 
+            // grupoDeAutomoveisToolStripMenuItem
+            // 
+            grupoDeAutomoveisToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            grupoDeAutomoveisToolStripMenuItem.Name = "grupoDeAutomoveisToolStripMenuItem";
+            grupoDeAutomoveisToolStripMenuItem.Size = new Size(191, 22);
+            grupoDeAutomoveisToolStripMenuItem.Text = "Grupo De Automoveis";
+            grupoDeAutomoveisToolStripMenuItem.Click += grupoDeAutomoveisToolStripMenuItem_Click;
             // 
             // toolStripBarraDeTarefas
             // 
@@ -178,13 +187,13 @@
             lblTipoCadastro.TabIndex = 4;
             lblTipoCadastro.Text = "___________________";
             // 
-            // grupoDeAutomoveisToolStripMenuItem
+            // planoDeCobrancaToolStripMenuItem
             // 
-            grupoDeAutomoveisToolStripMenuItem.BackColor = SystemColors.ScrollBar;
-            grupoDeAutomoveisToolStripMenuItem.Name = "grupoDeAutomoveisToolStripMenuItem";
-            grupoDeAutomoveisToolStripMenuItem.Size = new Size(191, 22);
-            grupoDeAutomoveisToolStripMenuItem.Text = "Grupo De Automoveis";
-            grupoDeAutomoveisToolStripMenuItem.Click += grupoDeAutomoveisToolStripMenuItem_Click;
+            planoDeCobrancaToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            planoDeCobrancaToolStripMenuItem.Name = "planoDeCobrancaToolStripMenuItem";
+            planoDeCobrancaToolStripMenuItem.Size = new Size(191, 22);
+            planoDeCobrancaToolStripMenuItem.Text = "Plano De Cobranca";
+            planoDeCobrancaToolStripMenuItem.Click += planoDeCobrancaToolStripMenuItem_Click;
             // 
             // TelaPrincipal
             // 
@@ -229,5 +238,6 @@
         private ToolStripMenuItem parceirosToolStripMenuItem;
         private ToolStripMenuItem cupomToolStripMenuItem;
         private ToolStripMenuItem grupoDeAutomoveisToolStripMenuItem;
+        private ToolStripMenuItem planoDeCobrancaToolStripMenuItem;
     }
 }
