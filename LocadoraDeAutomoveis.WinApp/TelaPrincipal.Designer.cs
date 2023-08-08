@@ -55,6 +55,7 @@
             // 
             menuStrip1.BackColor = SystemColors.MenuBar;
             menuStrip1.Dock = DockStyle.Left;
+            menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -94,15 +95,23 @@
             grupoDeAutomoveisToolStripMenuItem.Text = "Grupo De Automoveis";
             grupoDeAutomoveisToolStripMenuItem.Click += grupoDeAutomoveisToolStripMenuItem_Click;
             // 
+            // clienteToolStripMenuItem
+            // 
+            clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            clienteToolStripMenuItem.Size = new Size(224, 26);
+            clienteToolStripMenuItem.Text = "Cliente";
+            clienteToolStripMenuItem.Click += clienteToolStripMenuItem_Click;
+            // 
             // toolStripBarraDeTarefas
             // 
             toolStripBarraDeTarefas.Dock = DockStyle.Left;
             toolStripBarraDeTarefas.GripStyle = ToolStripGripStyle.Hidden;
+            toolStripBarraDeTarefas.ImageScalingSize = new Size(20, 20);
             toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1 });
             toolStripBarraDeTarefas.Location = new Point(126, 0);
             toolStripBarraDeTarefas.Name = "toolStripBarraDeTarefas";
             toolStripBarraDeTarefas.RenderMode = ToolStripRenderMode.Professional;
-            toolStripBarraDeTarefas.Size = new Size(51, 450);
+            toolStripBarraDeTarefas.Size = new Size(51, 600);
             toolStripBarraDeTarefas.TabIndex = 1;
             toolStripBarraDeTarefas.Text = "toolStrip1";
             // 
@@ -197,7 +206,7 @@
             // 
             // TelaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(lblTipoCadastro);
@@ -207,6 +216,7 @@
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "TelaPrincipal";
             Text = "Locadora De Automoveis";
             menuStrip1.ResumeLayout(false);

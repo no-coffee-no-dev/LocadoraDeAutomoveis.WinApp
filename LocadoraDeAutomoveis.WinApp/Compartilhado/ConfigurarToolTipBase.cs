@@ -28,16 +28,6 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado
 
         public virtual string TooltipVisualizar { get; }
 
-
-
-
-
-
-
-
-
-
-
         public virtual bool InserirHabilitado { get { return true; } }
 
         public virtual bool EditarHabilitado { get { return true; } }
