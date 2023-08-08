@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
+﻿namespace LocadoraDeAutomoveis.WinApp.ModuloCupom
 {
     public class ConfigurarToolTipCupom : ConfigurarToolTipBase
     {

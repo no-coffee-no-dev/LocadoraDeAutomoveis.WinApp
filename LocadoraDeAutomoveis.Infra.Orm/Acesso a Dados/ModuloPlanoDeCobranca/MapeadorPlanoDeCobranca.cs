@@ -22,7 +22,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca
             planoDeCobrancaBuilder.Property(p => p.PrecoDaDiaria).HasColumnType("decimal(18,0)").IsRequired();
             planoDeCobrancaBuilder.Property(p => p.KmDisponiveis).HasColumnType("decimal(18,0)");
             planoDeCobrancaBuilder.Property(p => p.PrecoPorKM).HasColumnType("decimal(18,0)");
-            planoDeCobrancaBuilder.Property(p => p.TipoDePlano).HasConversion<int>().IsRequired(); ;
+            planoDeCobrancaBuilder.Property(p => p.TipoDePlano).HasConversion<int>().IsRequired();
 
             planoDeCobrancaBuilder.HasOne(p => p.GrupoDeAutomoveis)
                .WithMany()
