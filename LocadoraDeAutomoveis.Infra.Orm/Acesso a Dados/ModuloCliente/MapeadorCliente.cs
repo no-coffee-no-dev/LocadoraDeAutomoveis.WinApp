@@ -4,7 +4,7 @@ using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 
 namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom
 {
-    public class MapeadorCupom : IEntityTypeConfiguration<Cliente>
+    public class MapeadorCliente : IEntityTypeConfiguration<Cliente>
     {
         public void Configure(EntityTypeBuilder<Cliente> clienteBuilder)
         {

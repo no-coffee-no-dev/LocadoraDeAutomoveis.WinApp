@@ -30,7 +30,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCliente
 
         public override void Deletar()
         {
-            Guid id = tabelaCliente.ObtemIdSelecionado();
+            Guid? id = tabelaCliente.ObtemIdSelecionado();
 
             Cliente ClienteSelecionada = repositorioCliente.Busca(id);
 
@@ -62,7 +62,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCliente
 
         public override void Editar()
         {
-            Guid id = tabelaCliente.ObtemIdSelecionado();
+            Guid? id = tabelaCliente.ObtemIdSelecionado();
 
             Cliente ClienteSelecionada = repositorioCliente.Busca(id);
 

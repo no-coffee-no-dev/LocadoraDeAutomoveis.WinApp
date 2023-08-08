@@ -96,17 +96,6 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCliente
             txtCPF.Enabled = false;
             txtCNPJ.Enabled = true;
         }
-
-        private void Estado_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnGravar_Click_1(object sender, EventArgs e)
         {
             cliente = ObterCliente();
@@ -123,10 +112,6 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCliente
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }
 

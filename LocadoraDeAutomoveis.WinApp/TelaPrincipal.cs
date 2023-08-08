@@ -1,16 +1,20 @@
+using LocadoraDeAutomoveis.Aplicacao.ModuloCliente;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCupom;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca;
+using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCliente;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
+using LocadoraDeAutomoveis.WinApp.ModuloCliente;
 using LocadoraDeAutomoveis.WinApp.ModuloCupom;
 using LocadoraDeAutomoveis.WinApp.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloParceiro;
@@ -45,36 +49,6 @@ namespace LocadoraDeAutomoveis.WinApp
         {
             lblRodape.Text = mensagem;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -158,6 +132,8 @@ namespace LocadoraDeAutomoveis.WinApp
                 dbContext.Database.Migrate();
             }
 
+
+            IRepositorioCliente repositorioCliente = new RepositorioClienteOrm(dbContext);
             IRepositorioParceiro repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             IRepositorioCupom repositorioCupom = new RepositorioCupomOrm(dbContext);
             IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis = new RepositorioGrupoDeAutomoveisOrm(dbContext);
@@ -168,14 +144,15 @@ namespace LocadoraDeAutomoveis.WinApp
             ValidadorCupom validadorCupom = new ValidadorCupom();
             ValidadorGrupoDeAutomoveis validadorGrupoDeAutomoveis = new ValidadorGrupoDeAutomoveis();
             ValidadorPlanoDeCobranca validadorPlanoDeCobranca = new ValidadorPlanoDeCobranca();
+            ValidadorCliente validadorCliente = new ValidadorCliente();
 
 
 
             ServicoParceiro servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
             ServicoCupom servicoCupom = new ServicoCupom(repositorioCupom, validadorCupom);
             ServicoGrupoDeAutomoveis servicoGrupoDeAutomoveis = new ServicoGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, validadorGrupoDeAutomoveis);
-            ServicoPlanoDeCobranca servicoPlanoDeCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca,validadorPlanoDeCobranca);
-
+            ServicoPlanoDeCobranca servicoPlanoDeCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca, validadorPlanoDeCobranca);
+            ServicoCliente servicoCliente = new ServicoCliente(repositorioCliente, validadorCliente);
 
 
 
@@ -183,7 +160,8 @@ namespace LocadoraDeAutomoveis.WinApp
             controladores.Add("ControladorParceiro", new ControladorParceiro(repositorioParceiro, servicoParceiro));
             controladores.Add("ControladorCupom", new ControladorCupom(repositorioCupom, repositorioParceiro, servicoCupom));
             controladores.Add("ControladorGrupoDeAutomoveis", new ControladorGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, servicoGrupoDeAutomoveis));
-            controladores.Add("ControladorPlanoDeCobranca", new ControladorPlanoDeCobranca(repositorioPlanoDeCobranca,repositorioGrupoDeAutomoveis,servicoPlanoDeCobranca));
+            controladores.Add("ControladorPlanoDeCobranca", new ControladorPlanoDeCobranca(repositorioPlanoDeCobranca, repositorioGrupoDeAutomoveis, servicoPlanoDeCobranca));
+            controladores.Add("ControladorCliente", new ControladorCliente(repositorioCliente, servicoCliente));
 
         }
         #endregion 
@@ -224,133 +202,17 @@ namespace LocadoraDeAutomoveis.WinApp
         {
             ConfigurarTelaPrincipal(controladores["ControladorPlanoDeCobranca"]);
         }
-        private bool VerificaControladorVazio(ControladorBase controlador)
-        {
-            if (controlador == null)
-                return true;
-            else
-                return false;
-        }
-
-
-        private void ConfigurarTelaPrincipal(ControladorBase controlador)
-        {
-            this.controlador = controlador;
-
-            ConfigurarToolbox();
-
-            ConfigurarListagem();
-
-            string mensagemRodape = controlador.ObterStringRodape();
-
-            AtualizarRodape(mensagemRodape);
-        }
-
-        private void ConfigurarToolbox()
-        {
-            ConfigurarToolTipBase configuracao = controlador.ObtemConfiguracaoTooltip();
-
-            if (configuracao != null)
-            {
-                toolStripBarraDeTarefas.Enabled = true;
-
-                lblTipoCadastro.Text = configuracao.TipoCadastro;
-
-                ConfigurarTooltips(configuracao);
-
-                ConfigurarBotoes(configuracao);
-            }
-        }
-
-        private void ConfigurarListagem()
-        {
-            AtualizarRodape("");
-
-            var listagemControl = controlador.ObterListagem();
-
-            painelPrincipal.Controls.Clear();
-
-            listagemControl.Dock = DockStyle.Fill;
-
-            painelPrincipal.Controls.Add(listagemControl);
-        }
-        private void ConfigurarControladores()
-        {
-            //var configuracao = new ConfigurationBuilder()
-            //   .SetBasePath(Directory.GetCurrentDirectory())
-            //   .AddJsonFile("appSettings.json")
-            //   .Build();
-
-            //var connectionString = configuracao.GetConnectionString("SqlServer");
-
-            var optionsBuilder = new DbContextOptionsBuilder<LocadoraDeAutomoveisDbContext>();
-
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=LocadoraVeiculosOrm;Integrated Security=True");
-
-            var dbContext = new LocadoraDeAutomoveisDbContext(optionsBuilder.Options);
-
-            var migracoesPendentes = dbContext.Database.GetPendingMigrations();
-
-            if (migracoesPendentes.Count() > 0)
-            {
-                dbContext.Database.Migrate();
-            }
-
-            IRepositorioCliente repositorioCliente = new RepositorioClienteOrm(dbContext);
-
-            ValidadorCliente validadorCliente = new ValidadorCliente();
-
-            ServicoCliente servicoCliente = new ServicoCliente(repositorioCliente, validadorCliente);
-
-            controladores.Add("ControladorCliente", new ControladorCliente(repositorioCliente, servicoCliente));
-        }
-        #endregion 
-
-        private void btnInserir_Click_1(object sender, EventArgs e)
-        {
-            if (VerificaControladorVazio(controlador) == false)
-                controlador.Inserir();
-        }
-
-        private void btnEditar_Click_1(object sender, EventArgs e)
-        {
-            if (VerificaControladorVazio(controlador) == false)
-                controlador.Editar();
-        }
-
-        private void btnDeletar_Click(object sender, EventArgs e)
-        {
-            if (VerificaControladorVazio(controlador) == false)
-                controlador.Deletar();
-        }
-
-        private void parceirosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ConfigurarTelaPrincipal(controladores["ControladorParceiro"]);
-        }
-
-        private void cupomToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ConfigurarTelaPrincipal(controladores["ControladorCupom"]);
-        }
-
-        private bool VerificaControladorVazio(ControladorBase controlador)
-        {
-            if (controlador == null)
-                return true;
-            else
-                return false;
-        }
-
-        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void clienteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal(controladores["ControladorCliente"]);
         }
-
-        private void btnInserir_Click(object sender, EventArgs e)
+        private bool VerificaControladorVazio(ControladorBase controlador)
         {
-            if (VerificaControladorVazio(controlador) == false)
-                controlador.Inserir();
+            if (controlador == null)
+                return true;
+            else
+                return false;
         }
+
     }
 }

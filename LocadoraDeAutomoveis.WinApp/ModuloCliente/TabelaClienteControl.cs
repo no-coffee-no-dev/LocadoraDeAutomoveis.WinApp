@@ -90,7 +90,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCliente
 
             return colunas;
         }
-        public Guid ObtemIdSelecionado()
+        public Guid? ObtemIdSelecionado()
         {
             return tabelaClientes.ObterIDdoGrid();
         }
