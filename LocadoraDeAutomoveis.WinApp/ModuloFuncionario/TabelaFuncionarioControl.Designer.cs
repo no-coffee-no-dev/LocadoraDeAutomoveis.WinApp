@@ -28,10 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            tabelaFuncionario = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)tabelaFuncionario).BeginInit();
+            SuspendLayout();
+            // 
+            // tabelaFuncionario
+            // 
+            tabelaFuncionario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tabelaFuncionario.Location = new Point(18, 31);
+            tabelaFuncionario.Name = "tabelaFuncionario";
+            tabelaFuncionario.RowTemplate.Height = 25;
+            tabelaFuncionario.Size = new Size(240, 150);
+            tabelaFuncionario.TabIndex = 0;
+            // 
+            // TabelaFuncionarioControl
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(tabelaFuncionario);
+            Name = "TabelaFuncionarioControl";
+            Size = new Size(272, 214);
+            ((System.ComponentModel.ISupportInitialize)tabelaFuncionario).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView tabelaFuncionario;
     }
 }
