@@ -18,6 +18,16 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
               .MinimumLength(3)
               .DevePossuirNumeros();
 
+            RuleFor(x => x.Placa)
+            .NotEmpty()
+            .NotNull()
+            .MaximumLength(7)
+            .DevePossuirPlacaValida();
+
+            RuleFor(x => x.Ano)
+           .NotEmpty()
+           .NotNull();
+
             RuleFor(x => x.CapacidadeEmLitros)
                 .NotNull()
                 .NotEmpty();
@@ -30,7 +40,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
             RuleFor(x => x.Foto)
               .NotNull()
               .NotEmpty()
-              .When(p => p.Foto.Length > 10000000);
+              .Must(x => x == null || x.Length <= 2697000)
+              .WithMessage("Tamanmho maximo permitido de 2mb.");
 
             RuleFor(x => x.Marca)
               .NotNull()

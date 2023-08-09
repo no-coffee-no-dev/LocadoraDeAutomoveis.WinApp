@@ -13,5 +13,9 @@ namespace LocadoraDeAutomoveis.Dominio.Compartilhado
         {
             return ruleBuilder.SetValidator(new DevePossuirNumerosValidator<T>());
         }
+        public static IRuleBuilderOptions<T, string> DevePossuirPlacaValida<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder.SetValidator(new VerificadorDePlaca<T>());
+        }
     }
 }

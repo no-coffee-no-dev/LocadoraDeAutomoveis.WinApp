@@ -12,20 +12,22 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAutomovel
 {
     public class MapeadorAutomovel : IEntityTypeConfiguration<Automovel>
     {
-        public void Configure(EntityTypeBuilder<Automovel> cupomBuilder)
+        public void Configure(EntityTypeBuilder<Automovel> automovelBuilder)
         {
 
-            cupomBuilder.ToTable("TBAutomovel");
+            automovelBuilder.ToTable("TBAutomovel");
 
-            cupomBuilder.Property(a => a.Id).IsRequired().ValueGeneratedNever();
-            cupomBuilder.Property(a => a.Modelo).HasColumnType("varchar(100)").IsRequired();
-            cupomBuilder.Property(a => a.Marca).HasColumnType("varchar(100)").IsRequired();
-            cupomBuilder.Property(a => a.CapacidadeEmLitros).HasColumnType("integer").IsRequired();
-            cupomBuilder.Property(a => a.Foto).HasColumnType("varbinary(MAX)").IsRequired();
-            cupomBuilder.Property(a => a.TipoDeCombustivel).HasConversion<int>().IsRequired();
-            cupomBuilder.Property(a => a.Cor).HasColumnType("varchar(100)").IsRequired();
+            automovelBuilder.Property(a => a.Id).IsRequired().ValueGeneratedNever();
+            automovelBuilder.Property(a => a.Modelo).HasColumnType("varchar(100)").IsRequired();
+            automovelBuilder.Property(a => a.Marca).HasColumnType("varchar(100)").IsRequired();
+            automovelBuilder.Property(a => a.Ano).HasColumnType("datetime").IsRequired();
+            automovelBuilder.Property(a => a.Placa).HasColumnType("varchar(7)").IsRequired();
+            automovelBuilder.Property(a => a.CapacidadeEmLitros).HasColumnType("integer").IsRequired();
+            automovelBuilder.Property(a => a.Foto).HasColumnType("varbinary(MAX)").IsRequired();
+            automovelBuilder.Property(a => a.TipoDeCombustivel).HasConversion<int>().IsRequired();
+            automovelBuilder.Property(a => a.Cor).HasColumnType("varchar(100)").IsRequired();
 
-            cupomBuilder.HasOne(a => a.GrupoDeAutomoveis)
+            automovelBuilder.HasOne(a => a.GrupoDeAutomoveis)
                .WithMany()
                .IsRequired()
                .HasConstraintName("FK_TBAutomovel_TBGrupoDeAutoveis")

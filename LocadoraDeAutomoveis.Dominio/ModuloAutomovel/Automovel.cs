@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -18,6 +19,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
         public string Modelo { get; set; }
         public string Marca { get; set; }
         public string Cor { get; set; }
+        public string Placa { get; set; }
+        public DateTime Ano { get; set; }
         public GrupoDeAutomoveis GrupoDeAutomoveis { get; set; }
         public int CapacidadeEmLitros { get; set; }
         public byte[] Foto { get; set; }
@@ -33,11 +36,13 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
             Id = id;
         }
 
-        public Automovel(Guid id,string modelo, string marca, string cor, GrupoDeAutomoveis grupoDeAutomoveis, int capacidadeEmLitros, byte[] foto, TipoDeCombustivelEnum tipoDeCombustivel) : this(id)
+        public Automovel(Guid id,string modelo, string marca, string cor, string placa, DateTime ano, GrupoDeAutomoveis grupoDeAutomoveis, int capacidadeEmLitros, byte[] foto, TipoDeCombustivelEnum tipoDeCombustivel) : this(id)
         {
             Modelo = modelo;
             Marca = marca;
             Cor = cor;
+            Placa = placa;
+            Ano = ano;
             GrupoDeAutomoveis = grupoDeAutomoveis;
             CapacidadeEmLitros = capacidadeEmLitros;
             Foto = foto;
@@ -50,6 +55,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
             Modelo = registro.Modelo;
             Marca = registro.Marca;
             Cor = registro.Cor;
+            Placa = registro.Placa;
+            Ano = registro.Ano;
             GrupoDeAutomoveis = registro.GrupoDeAutomoveis;
             CapacidadeEmLitros = registro.CapacidadeEmLitros;
             Foto = registro.Foto;

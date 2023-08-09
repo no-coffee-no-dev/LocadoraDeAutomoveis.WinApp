@@ -27,6 +27,9 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("Ano")
+                        .HasColumnType("datetime");
+
                     b.Property<int>("CapacidadeEmLitros")
                         .HasColumnType("integer");
 
@@ -48,6 +51,10 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Placa")
+                        .IsRequired()
+                        .HasColumnType("varchar(7)");
 
                     b.Property<int>("TipoDeCombustivel")
                         .HasColumnType("int");
