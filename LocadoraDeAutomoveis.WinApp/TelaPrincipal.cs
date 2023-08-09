@@ -192,6 +192,12 @@ namespace LocadoraDeAutomoveis.WinApp
                 controlador.Deletar();
         }
 
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (VerificaControladorVazio(controlador) == false)
+                controlador.Filtrar();
+        }
+
         private void parceirosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal(controladores["ControladorParceiro"]);

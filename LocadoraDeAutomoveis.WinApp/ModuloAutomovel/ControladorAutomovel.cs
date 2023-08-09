@@ -37,6 +37,19 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
             TelaPrincipal.Instancia.AtualizarRodape(stringRodape);
         }
 
+        private void CarregarAutomovelComFiltro(GrupoDeAutomoveis grupoSelecionado)
+        {
+           
+            List<Automovel> automoveis = repositorioAutomovel.RetornarCarrosFiltrados(grupoSelecionado);
+
+            tabelaAutomovel.AtualizarRegistros(automoveis);
+
+            stringRodape = string.Format("Visualizando {0} automove{1}", automoveis.Count, automoveis.Count == 1 ? "l" : "is");
+
+            TelaPrincipal.Instancia.AtualizarRodape(stringRodape);
+        }
+
+
         public override void Deletar()
         {
             Guid? id = tabelaAutomovel.ObtemIdSelecionado();
@@ -112,17 +125,22 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
             };
         }
 
+        public override void Filtrar()
+        {
+            TelaFiltroGrupoDeAutomoveis telaFiltro = new(repositorioGrupoDeAutomoveis);
+            telaFiltro.ShowDialog();
+            GrupoDeAutomoveis grupoSelecionado = telaFiltro.grupoDeAutomoveis;
 
+            if (grupoSelecionado == null)
+            {
+                MessageBox.Show("Selecione um grupo de automovel primeiro",
+                "Filtragem por grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else
+                CarregarAutomovelComFiltro(grupoSelecionado);
 
-
-
-
-
-
-
-
-
-
+        }
 
         public override ConfigurarToolTipBase ObtemConfiguracaoTooltip()
         {

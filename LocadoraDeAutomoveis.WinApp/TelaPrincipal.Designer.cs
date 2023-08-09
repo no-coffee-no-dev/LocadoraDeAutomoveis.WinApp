@@ -46,6 +46,8 @@
             lblRodape = new ToolStripStatusLabel();
             painelPrincipal = new Panel();
             lblTipoCadastro = new Label();
+            btnFiltrar = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
             menuStrip1.SuspendLayout();
             toolStripBarraDeTarefas.SuspendLayout();
             StatusRodape.SuspendLayout();
@@ -125,7 +127,7 @@
             toolStripBarraDeTarefas.Dock = DockStyle.Left;
             toolStripBarraDeTarefas.GripStyle = ToolStripGripStyle.Hidden;
             toolStripBarraDeTarefas.ImageScalingSize = new Size(20, 20);
-            toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1 });
+            toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1, btnFiltrar, toolStripSeparator2 });
             toolStripBarraDeTarefas.Location = new Point(76, 0);
             toolStripBarraDeTarefas.Name = "toolStripBarraDeTarefas";
             toolStripBarraDeTarefas.RenderMode = ToolStripRenderMode.Professional;
@@ -206,6 +208,24 @@
             lblTipoCadastro.TabIndex = 4;
             lblTipoCadastro.Text = "___________________";
             // 
+            // btnFiltrar
+            // 
+            btnFiltrar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnFiltrar.Image = Properties.Resources.filter;
+            btnFiltrar.ImageScaling = ToolStripItemImageScaling.None;
+            btnFiltrar.ImageTransparentColor = Color.Magenta;
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Padding = new Padding(7);
+            btnFiltrar.Size = new Size(48, 50);
+            btnFiltrar.Text = "Filtrar";
+            btnFiltrar.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnFiltrar.Click += btnFiltrar_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(48, 6);
+            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -249,5 +269,7 @@
         private ToolStripMenuItem planoDeCobrancaToolStripMenuItem;
         private ToolStripMenuItem clienteToolStripMenuItem;
         private ToolStripMenuItem automovelToolStripMenuItem;
+        private ToolStripButton btnFiltrar;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }
