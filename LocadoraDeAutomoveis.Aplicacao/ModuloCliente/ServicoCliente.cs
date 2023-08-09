@@ -17,20 +17,20 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
         }
 
 
-        public Result Inserir(Cliente Cliente)
+        public Result Inserir(Cliente cliente)
         {
-            Log.Debug("Tentando inserir Cliente...{@c}", Cliente);
+            Log.Debug("Tentando inserir Cliente...{@c}", cliente);
 
-            List<string> erros = ValidarCliente(Cliente);
+            List<string> erros = ValidarCliente(cliente);
 
             if (erros.Count() > 0)
                 return Result.Fail(erros); //cenário 2
 
             try
             {
-                repositorioCliente.Inserir(Cliente);
+                repositorioCliente.Inserir(cliente);
 
-                Log.Debug("Cliente {ClienteId} inserido com sucesso", Cliente.Id);
+                Log.Debug("Cliente {ClienteId} inserido com sucesso", cliente.Id);
 
                 return Result.Ok(); //cenário 1
             }
@@ -38,27 +38,27 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             {
                 string msgErro = "Falha ao tentar inserir cliente.";
 
-                Log.Error(exc, msgErro + "{@c}", Cliente);
+                Log.Error(exc, msgErro + "{@c}", cliente);
 
                 return Result.Fail(msgErro); //cenário 3
             }
         }
 
 
-        public Result Atualizar(Cliente Cliente)
+        public Result Atualizar(Cliente cliente)
         {
-            Log.Debug("Tentando editar Cliente...{@c}", Cliente);
+            Log.Debug("Tentando editar Cliente...{@c}", cliente);
 
-            List<string> erros = ValidarCliente(Cliente);
+            List<string> erros = ValidarCliente(cliente);
 
             if (erros.Count() > 0)
                 return Result.Fail(erros);
 
             try
             {
-                repositorioCliente.Atualizar(Cliente);
+                repositorioCliente.Atualizar(cliente);
 
-                Log.Debug("Cliente {ClienteId} editado com sucesso", Cliente.Id);
+                Log.Debug("Cliente {ClienteId} editado com sucesso", cliente.Id);
 
                 return Result.Ok();
             }
@@ -66,31 +66,31 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             {
                 string msgErro = "Falha ao tentar editar Cliente.";
 
-                Log.Error(exc, msgErro + "{@c}", Cliente);
+                Log.Error(exc, msgErro + "{@c}", cliente);
 
                 return Result.Fail(msgErro);
             }
         }
 
 
-        public Result Excluir(Cliente Cliente)
+        public Result Excluir(Cliente cliente)
         {
-            Log.Debug("Tentando excluir Cliente...{@c}", Cliente);
+            Log.Debug("Tentando excluir Cliente...{@c}", cliente);
 
             try
             {
-                bool ClienteExiste = repositorioCliente.Existe(Cliente);
+                bool ClienteExiste = repositorioCliente.Existe(cliente);
 
                 if (ClienteExiste == false)
                 {
-                    Log.Warning("Cliente {ClienteId} não encontrada para excluir", Cliente.Id);
+                    Log.Warning("Cliente {ClienteId} não encontrada para excluir", cliente.Id);
 
                     return Result.Fail("Cliente não encontrado");
                 }
 
-                repositorioCliente.Deletar(Cliente);
+                repositorioCliente.Deletar(cliente);
 
-                Log.Debug("Cliente {ClienteId} excluída com sucesso", Cliente.Id);
+                Log.Debug("Cliente {ClienteId} excluída com sucesso", cliente.Id);
 
                 return Result.Ok();
             }
@@ -100,7 +100,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
                 string msgErro = "não foi possivel deletar o cliente";
 
-                Log.Error(ex, msgErro + " {ClienteId}", Cliente.Id);
+                Log.Error(ex, msgErro + " {ClienteId}", cliente.Id);
 
                 return Result.Fail(erros);
             }
