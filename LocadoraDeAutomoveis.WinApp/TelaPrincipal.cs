@@ -1,8 +1,12 @@
 using LocadoraDeAutomoveis.Aplicacao.ModuloCliente;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCliente;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloTaxaServico;
 using LocadoraDeAutomoveis.WinApp.ModuloCliente;
+using LocadoraDeAutomoveis.WinApp.ModuloTaxaServico;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -115,12 +119,16 @@ namespace LocadoraDeAutomoveis.WinApp
             }
 
             IRepositorioCliente repositorioCliente = new RepositorioClienteOrm(dbContext);
+            IRepositorioTaxaServico repositoriotaxaServico = new RepositorioTaxaServicoOrm(dbContext);
 
             ValidadorCliente validadorCliente = new ValidadorCliente();
+            ValidadorTaxaServico validadorTaxaServico = new ValidadorTaxaServico();
 
             ServicoCliente servicoCliente = new ServicoCliente(repositorioCliente, validadorCliente);
+            ServicoTaxaServico servicoTaxaServico = new ServicoTaxaServico(repositoriotaxaServico, validadorTaxaServico);
 
             controladores.Add("ControladorCliente", new ControladorCliente(repositorioCliente, servicoCliente));
+            controladores.Add("ControladorTaxaServico", new ControladorTaxaServico(repositoriotaxaServico, servicoTaxaServico));
         }
         #endregion 
 
@@ -169,6 +177,11 @@ namespace LocadoraDeAutomoveis.WinApp
         {
             if (VerificaControladorVazio(controlador) == false)
                 controlador.Inserir();
+        }
+
+        private void taxaDeServiçoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal(controladores["ControladorTaxaServico"]);
         }
     }
 }

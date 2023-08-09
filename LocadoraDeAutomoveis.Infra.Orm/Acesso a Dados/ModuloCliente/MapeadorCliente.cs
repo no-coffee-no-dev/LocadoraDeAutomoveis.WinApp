@@ -8,8 +8,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom
     {
         public void Configure(EntityTypeBuilder<Cliente> clienteBuilder)
         {
-            Cliente c = new Cliente();
-
             clienteBuilder.ToTable("TBCliente");
 
             clienteBuilder.Property(p => p.Id).IsRequired().ValueGeneratedNever();

@@ -239,6 +239,7 @@
             rdbPessoaFisica.TabStop = true;
             rdbPessoaFisica.Text = "Pessoa Física";
             rdbPessoaFisica.UseVisualStyleBackColor = true;
+            rdbPessoaFisica.CheckedChanged += rdbPessoaFisica_CheckedChanged_1;
             // 
             // rdbPessoaJuridica
             // 
@@ -250,7 +251,7 @@
             rdbPessoaJuridica.TabStop = true;
             rdbPessoaJuridica.Text = "Pessoa Jurídica";
             rdbPessoaJuridica.UseVisualStyleBackColor = true;
-            rdbPessoaJuridica.Visible = false;
+            rdbPessoaJuridica.CheckedChanged += rdbPessoaJuridica_CheckedChanged_1;
             // 
             // btnGravar
             // 

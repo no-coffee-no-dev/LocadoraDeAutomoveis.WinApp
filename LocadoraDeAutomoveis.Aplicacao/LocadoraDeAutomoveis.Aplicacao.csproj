@@ -16,7 +16,6 @@
     <Folder Include="ModuloGrupoDoAutomovel\" />
     <Folder Include="ModuloParceiro\" />
     <Folder Include="ModuloPlanoDeCobranca\" />
-    <Folder Include="ModuloTaxaServico\" />
   </ItemGroup>
 
   <ItemGroup>
