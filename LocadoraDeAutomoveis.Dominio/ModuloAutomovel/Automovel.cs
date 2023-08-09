@@ -21,6 +21,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
         public string Cor { get; set; }
         public string Placa { get; set; }
         public DateTime Ano { get; set; }
+        public int KmRodados { get; set; }
         public GrupoDeAutomoveis GrupoDeAutomoveis { get; set; }
         public int CapacidadeEmLitros { get; set; }
         public byte[] Foto { get; set; }
@@ -29,15 +30,16 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
 
         public Automovel()
         {
-
+            
         }
         public Automovel(Guid id) : this()
         {
             Id = id;
         }
 
-        public Automovel(Guid id,string modelo, string marca, string cor, string placa, DateTime ano, GrupoDeAutomoveis grupoDeAutomoveis, int capacidadeEmLitros, byte[] foto, TipoDeCombustivelEnum tipoDeCombustivel) : this(id)
+        public Automovel(Guid id, int kmRodados, string modelo, string marca, string cor, string placa, DateTime ano, GrupoDeAutomoveis grupoDeAutomoveis, int capacidadeEmLitros, byte[] foto, TipoDeCombustivelEnum tipoDeCombustivel) : this(id)
         {
+            KmRodados = kmRodados;
             Modelo = modelo;
             Marca = marca;
             Cor = cor;
@@ -46,12 +48,12 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
             GrupoDeAutomoveis = grupoDeAutomoveis;
             CapacidadeEmLitros = capacidadeEmLitros;
             Foto = foto;
-            TipoDeCombustivel = tipoDeCombustivel;
+            
         }
 
         public override void Atualizar(Automovel registro)
         {
-
+            KmRodados = registro.KmRodados;
             Modelo = registro.Modelo;
             Marca = registro.Marca;
             Cor = registro.Cor;

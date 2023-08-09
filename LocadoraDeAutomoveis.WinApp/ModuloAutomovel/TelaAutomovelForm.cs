@@ -31,11 +31,13 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
 
         public void ConfigurarAutomovel(Automovel automovel)
         {
+            listTipoDeCombustivel.SelectedItem = TipoDeCombustivelEnum.Gasolina;
             this.automovel = automovel;
             listGrupoDeAutomoveis.SelectedItem = automovel.GrupoDeAutomoveis;
             listTipoDeCombustivel.SelectedItem = automovel.TipoDeCombustivel;
             txtMarca.Text = automovel.Marca;
             txtModelo.Text = automovel.Modelo;
+            nmrKmsRodados.Value = automovel.KmRodados;
             txtCor.Text = automovel.Cor;
             if (automovel.Ano != DateTime.MinValue)
                 datePickerAnoDoCarro.Value = automovel.Ano;
@@ -53,6 +55,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
             automovel.Marca = txtMarca.Text;
             automovel.Cor = txtCor.Text;
             automovel.Placa = txtPlaca.Text;
+            automovel.KmRodados = (int)nmrKmsRodados.Value;
             automovel.Ano = datePickerAnoDoCarro.Value;
             automovel.CapacidadeEmLitros = (int)nmrCapacidadeEmLitros.Value;
             automovel.TipoDeCombustivel = (TipoDeCombustivelEnum)listTipoDeCombustivel.SelectedItem;
@@ -95,6 +98,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
             listTipoDeCombustivel.Items.Add(TipoDeCombustivelEnum.Alcool);
             listTipoDeCombustivel.Items.Add(TipoDeCombustivelEnum.Diesel);
             listTipoDeCombustivel.Items.Add(TipoDeCombustivelEnum.Gasolina);
+            
         }
         private byte[] ConverterImagemParaByte(byte[] foto)
         {
@@ -112,9 +116,9 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
                         else
                             throw new Exception();
                     }
-                    catch (Exception ex) 
-                    { 
-                        MessageBox.Show("Insira uma imagem"); 
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Insira uma imagem");
                     }
                 }
             }

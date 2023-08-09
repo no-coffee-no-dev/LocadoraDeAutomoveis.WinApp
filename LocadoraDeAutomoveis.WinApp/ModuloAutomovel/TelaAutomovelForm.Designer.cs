@@ -49,14 +49,17 @@
             datePickerAnoDoCarro = new DateTimePicker();
             label10 = new Label();
             txtPlaca = new TextBox();
+            nmrKmsRodados = new NumericUpDown();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)pickBoxFotoAutomovel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nmrCapacidadeEmLitros).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nmrKmsRodados).BeginInit();
             SuspendLayout();
             // 
             // btnSalvar
             // 
             btnSalvar.DialogResult = DialogResult.OK;
-            btnSalvar.Location = new Point(265, 505);
+            btnSalvar.Location = new Point(276, 540);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(79, 33);
             btnSalvar.TabIndex = 14;
@@ -67,7 +70,7 @@
             // btnCancelar
             // 
             btnCancelar.DialogResult = DialogResult.Cancel;
-            btnCancelar.Location = new Point(350, 505);
+            btnCancelar.Location = new Point(361, 540);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(79, 33);
             btnCancelar.TabIndex = 15;
@@ -237,11 +240,30 @@
             txtPlaca.Size = new Size(200, 23);
             txtPlaca.TabIndex = 35;
             // 
+            // nmrKmsRodados
+            // 
+            nmrKmsRodados.Location = new Point(144, 492);
+            nmrKmsRodados.Maximum = new decimal(new int[] { 1410065408, 2, 0, 0 });
+            nmrKmsRodados.Name = "nmrKmsRodados";
+            nmrKmsRodados.Size = new Size(139, 23);
+            nmrKmsRodados.TabIndex = 36;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(53, 494);
+            label11.Name = "label11";
+            label11.Size = new Size(85, 15);
+            label11.TabIndex = 37;
+            label11.Text = "Km's Rodados:";
+            // 
             // TelaAutomovelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(439, 552);
+            ClientSize = new Size(452, 585);
+            Controls.Add(label11);
+            Controls.Add(nmrKmsRodados);
             Controls.Add(txtPlaca);
             Controls.Add(label10);
             Controls.Add(datePickerAnoDoCarro);
@@ -267,6 +289,7 @@
             Text = "Cadastrar Automovel";
             ((System.ComponentModel.ISupportInitialize)pickBoxFotoAutomovel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nmrCapacidadeEmLitros).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nmrKmsRodados).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -294,5 +317,7 @@
         private DateTimePicker datePickerAnoDoCarro;
         private Label label10;
         private TextBox txtPlaca;
+        private NumericUpDown nmrKmsRodados;
+        private Label label11;
     }
 }

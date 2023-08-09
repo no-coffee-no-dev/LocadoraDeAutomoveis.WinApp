@@ -8,6 +8,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
 {
     public enum TipoDeCombustivelEnum
     {
-        Gasolina,Gas,Diesel,Alcool
+        Gasolina,Gas,Diesel,Alcool,nenhum = default
     }
 }

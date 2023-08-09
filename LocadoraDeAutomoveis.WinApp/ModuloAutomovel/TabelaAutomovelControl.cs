@@ -73,6 +73,12 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
                     HeaderText = "Cor"
                 },
 
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "KmsRodados",
+                    HeaderText = "Km's Rodados"
+                },
+
                  new DataGridViewImageColumn
                 {
                     Name = "Foto",
@@ -97,7 +103,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAutomovel
             {
                 Image foto = null;
                 foto = TelaAutomovelForm.ConverterByteEmImagem(automovel, foto);
-                tabelaAutomovel.Rows.Add(automovel.Id, automovel.Modelo, automovel.Marca,automovel.Placa,automovel.Ano.ToString("yyyy"), automovel.GrupoDeAutomoveis.Nome, automovel.TipoDeCombustivel, automovel.Cor,foto);
+                tabelaAutomovel.Rows.Add(automovel.Id, automovel.Modelo, automovel.Marca,automovel.Placa,automovel.Ano.ToString("yyyy"), automovel.GrupoDeAutomoveis.Nome, automovel.TipoDeCombustivel, automovel.Cor, automovel.KmRodados,foto);
             }
         }
         private void ConfigurarGrid()

@@ -33,8 +33,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomovel
                 .NotEmpty();
 
             RuleFor(x => x.TipoDeCombustivel)
-              .NotNull()
-              .NotEmpty();
+              .NotNull();
 
 
             RuleFor(x => x.Foto)

@@ -20,6 +20,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAutomovel
             automovelBuilder.Property(a => a.Id).IsRequired().ValueGeneratedNever();
             automovelBuilder.Property(a => a.Modelo).HasColumnType("varchar(100)").IsRequired();
             automovelBuilder.Property(a => a.Marca).HasColumnType("varchar(100)").IsRequired();
+            automovelBuilder.Property(a => a.KmRodados).HasColumnType("integer").IsRequired();
             automovelBuilder.Property(a => a.Ano).HasColumnType("datetime").IsRequired();
             automovelBuilder.Property(a => a.Placa).HasColumnType("varchar(7)").IsRequired();
             automovelBuilder.Property(a => a.CapacidadeEmLitros).HasColumnType("integer").IsRequired();
