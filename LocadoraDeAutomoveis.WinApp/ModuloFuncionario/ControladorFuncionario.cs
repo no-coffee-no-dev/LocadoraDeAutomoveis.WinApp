@@ -4,6 +4,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
+using LocadoraDeAutomoveis.WinApp.ModuloParceiro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,12 +71,45 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloFuncionario
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Guid? id = tabelaFuncionario.ObtemIdSelecionado();
+
+            Funcionario funcionarioSelecionado = repositorioFuncionario.Busca(id);
+
+            if (funcionarioSelecionado == null)
+            {
+                MessageBox.Show("Selecione uma Funcionário primeiro",
+                "Edição de Funcionário", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+
+            tela.onGravarRegistro += servicoFuncionario.Atualizar;
+
+            tela.ConfigurarFuncionario(funcionarioSelecionado);
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                CarregarEntidades();
+            }
         }
 
         public override void Inserir()
         {
-            throw new NotImplementedException();
+            TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+
+            tela.onGravarRegistro += servicoFuncionario.Inserir;
+
+            tela.ConfigurarFuncionario(new Funcionario());
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                CarregarEntidades();
+            }
         }
 
         public override ConfigurarToolTipBase ObtemConfiguracaoTooltip()
@@ -85,12 +119,17 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloFuncionario
 
         public override UserControl ObterListagem()
         {
-            throw new NotImplementedException();
+            if (tabelaFuncionario == null)
+                tabelaFuncionario = new TabelaFuncionarioControl();
+
+            CarregarEntidades();
+
+            return tabelaFuncionario;
         }
 
         public override string ObterTipoCadastro()
         {
-            throw new NotImplementedException();
+            return "Cadastro de Funcionários";
         }
     }
 }
