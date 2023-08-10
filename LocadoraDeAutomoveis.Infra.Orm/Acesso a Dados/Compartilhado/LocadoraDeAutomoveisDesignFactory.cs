@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
         {
             var configuracao = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.json")
+               .AddJsonFile("appSettings.json")
                .Build();
 
             var connectionString = configuracao.GetConnectionString("SqlServer");

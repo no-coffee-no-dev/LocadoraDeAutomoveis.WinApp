@@ -10,12 +10,6 @@
     <Folder Include="Acesso a Dados\ModuloAluguel\" />
     <Folder Include="Acesso a Dados\ModuloAutomovel\" />
     <Folder Include="Acesso a Dados\ModuloCliente\" />
-    <Folder Include="Acesso a Dados\ModuloCondutor\" />
-    <Folder Include="Acesso a Dados\ModuloCupom\" />
-    <Folder Include="Acesso a Dados\ModuloFuncionario\" />
-    <Folder Include="Acesso a Dados\ModuloGrupoDoAutomovel\" />
-    <Folder Include="Acesso a Dados\ModuloParceiro\" />
-    <Folder Include="Acesso a Dados\ModuloPlanoDeCobranca\" />
     <Folder Include="Acesso a Dados\ModuloTaxaServico\" />
     <Folder Include="Massa de Dados\" />
     <Folder Include="PDF\" />
