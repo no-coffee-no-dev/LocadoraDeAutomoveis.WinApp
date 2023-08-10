@@ -23,7 +23,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
         public DateTime validadeCNH { get; set; }
         public enumTipoCondutor tipoCondutor { get; set; }
 
-    
+
 
         public Condutor()
         {
