@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using Microsoft.Data.SqlClient;
@@ -15,11 +16,13 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
     {
         private IRepositorioFuncionario repositorioFuncionario;
         private IValidadorFuncionario validadorFuncionario;
+        private IContextoPersistencia contextoDePersistencia;
 
-        public ServicoFuncionario(IRepositorioFuncionario repositorioFuncionario, IValidadorFuncionario validadorFuncionario)
+        public ServicoFuncionario(IRepositorioFuncionario repositorioFuncionario, IValidadorFuncionario validadorFuncionario, IContextoPersistencia contextoDePersistencia)
         {
             this.repositorioFuncionario = repositorioFuncionario;
             this.validadorFuncionario = validadorFuncionario;
+            this.contextoDePersistencia = contextoDePersistencia;
         }
 
         public Result Inserir(Funcionario Funcionario)
@@ -29,11 +32,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
             List<string> erros = ValidarFuncionario(Funcionario);
 
             if (erros.Count() > 0)
-                return Result.Fail(erros); 
-
+            {
+                contextoDePersistencia.DesfazerAlteracoes();
+                return Result.Fail(erros);
+            }
             try
             {
                 repositorioFuncionario.Inserir(Funcionario);
+
+                contextoDePersistencia.GravarDados();
 
                 Log.Debug("Funcionário {FuncionarioId} inserido com sucesso", Funcionario.Id);
 
@@ -56,11 +63,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
             List<string> erros = ValidarFuncionario(Funcionario);
 
             if (erros.Count() > 0)
+            {
+                contextoDePersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioFuncionario.Atualizar(Funcionario);
+
+                contextoDePersistencia.GravarDados();
 
                 Log.Debug("Funcionário {FuncionarioId} editado com sucesso", Funcionario.Id);
 
@@ -93,12 +104,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
 
                 repositorioFuncionario.Deletar(Funcionario);
 
+                contextoDePersistencia.GravarDados();
+
                 Log.Debug("Funcionário {FuncionarioID} excluídO com sucesso", Funcionario.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoDePersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro = "não foi possivel deletar o Funcinário";

@@ -1,7 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCliente;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCupom;
+using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca;
@@ -10,7 +12,9 @@ using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
@@ -19,7 +23,9 @@ using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAluguel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCliente;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCondutor;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
@@ -28,6 +34,7 @@ using LocadoraDeAutomoveis.WinApp.ModuloAluguel;
 using LocadoraDeAutomoveis.WinApp.ModuloAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloCliente;
 using LocadoraDeAutomoveis.WinApp.ModuloCupom;
+using LocadoraDeAutomoveis.WinApp.ModuloFuncionario;
 using LocadoraDeAutomoveis.WinApp.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloParceiro;
 using LocadoraDeAutomoveis.WinApp.ModuloPlanoDeCobranca;
@@ -101,6 +108,16 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado.IoC
             servicos.AddTransient<IValidadorTaxaServico, ValidadorTaxaServico>();
             servicos.AddTransient<ServicoTaxaServico>();
             servicos.AddTransient<ControladorTaxaServico>();
+
+            servicos.AddTransient<IRepositorioCondutor, RepositorioCondutorOrm>();
+            servicos.AddTransient<IValidadorCondutor, ValidadorCondutor>();
+            servicos.AddTransient<ServicoCondutor>();
+            //servicos.AddTransient<ControladorCondutor>();
+
+            servicos.AddTransient<IRepositorioFuncionario, RepositorioFuncionarioOrm>();
+            servicos.AddTransient < IValidadorFuncionario, ValidadorFuncionario>();
+            servicos.AddTransient<ServicoFuncionario>();
+            servicos.AddTransient<ControladorFuncionario>();
 
             container = servicos.BuildServiceProvider();
         }

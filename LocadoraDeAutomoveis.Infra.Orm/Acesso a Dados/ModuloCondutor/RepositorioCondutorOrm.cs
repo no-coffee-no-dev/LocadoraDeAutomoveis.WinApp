@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCondutor
 {
-    internal class RepositorioCondutorOrm : RepositorioBaseEmOrm<Condutor>, IRepositorioCondutor
+    public class RepositorioCondutorOrm : RepositorioBaseEmOrm<Condutor>, IRepositorioCondutor
     {
         public RepositorioCondutorOrm(LocadoraDeAutomoveisDbContext dbContext) : base(dbContext)
         {

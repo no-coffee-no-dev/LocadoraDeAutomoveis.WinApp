@@ -31,6 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             menuStrip1 = new MenuStrip();
             cadastrosToolStripMenuItem = new ToolStripMenuItem();
+            funcionarioToolStripMenuItem = new ToolStripMenuItem();
+            aluguelToolStripMenuItem1 = new ToolStripMenuItem();
+            cupomToolStripMenuItem1 = new ToolStripMenuItem();
+            parceiroToolStripMenuItem = new ToolStripMenuItem();
+            automovelToolStripMenuItem1 = new ToolStripMenuItem();
+            condutorToolStripMenuItem = new ToolStripMenuItem();
+            clienteToolStripMenuItem1 = new ToolStripMenuItem();
+            funcionarioToolStripMenuItem1 = new ToolStripMenuItem();
+            grupoDeAutomovelToolStripMenuItem = new ToolStripMenuItem();
+            planoDeCobrancaToolStripMenuItem1 = new ToolStripMenuItem();
+            taxasEServicosToolStripMenuItem = new ToolStripMenuItem();
             parceirosToolStripMenuItem = new ToolStripMenuItem();
             cupomToolStripMenuItem = new ToolStripMenuItem();
             grupoDeAutomoveisToolStripMenuItem = new ToolStripMenuItem();
@@ -39,8 +50,6 @@
             automovelToolStripMenuItem = new ToolStripMenuItem();
             taxaDeServicoToolStripMenuItem = new ToolStripMenuItem();
             aluguelToolStripMenuItem = new ToolStripMenuItem();
-            clienteToolStripMenuItem = new ToolStripMenuItem();
-            funcionárioToolStripMenuItem = new ToolStripMenuItem();
             toolStripBarraDeTarefas = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -66,18 +75,104 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(4, 2, 0, 2);
-            menuStrip1.Size = new Size(124, 393);
+            menuStrip1.Size = new Size(75, 393);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // cadastrosToolStripMenuItem
             // 
             cadastrosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
-            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem, clienteToolStripMenuItem, automovelToolStripMenuItem, taxaDeServicoToolStripMenuItem, aluguelToolStripMenuItem });
-            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem, clienteToolStripMenuItem, funcionárioToolStripMenuItem });
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { funcionarioToolStripMenuItem, aluguelToolStripMenuItem1, cupomToolStripMenuItem1, parceiroToolStripMenuItem, automovelToolStripMenuItem1, condutorToolStripMenuItem, clienteToolStripMenuItem1, funcionarioToolStripMenuItem1, grupoDeAutomovelToolStripMenuItem, planoDeCobrancaToolStripMenuItem1, taxasEServicosToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
-            cadastrosToolStripMenuItem.Size = new Size(115, 19);
+            cadastrosToolStripMenuItem.Size = new Size(66, 19);
             cadastrosToolStripMenuItem.Text = "Cadastros";
+            // 
+            // funcionarioToolStripMenuItem
+            // 
+            funcionarioToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            funcionarioToolStripMenuItem.Name = "funcionarioToolStripMenuItem";
+            funcionarioToolStripMenuItem.Size = new Size(185, 22);
+            funcionarioToolStripMenuItem.Text = "Funcionario";
+            funcionarioToolStripMenuItem.Click += funcionárioToolStripMenuItem_Click;
+            // 
+            // aluguelToolStripMenuItem1
+            // 
+            aluguelToolStripMenuItem1.BackColor = SystemColors.ScrollBar;
+            aluguelToolStripMenuItem1.Name = "aluguelToolStripMenuItem1";
+            aluguelToolStripMenuItem1.Size = new Size(185, 22);
+            aluguelToolStripMenuItem1.Text = "Aluguel";
+            aluguelToolStripMenuItem1.Click += aluguelToolStripMenuItem_Click;
+            // 
+            // cupomToolStripMenuItem1
+            // 
+            cupomToolStripMenuItem1.BackColor = SystemColors.ScrollBar;
+            cupomToolStripMenuItem1.Name = "cupomToolStripMenuItem1";
+            cupomToolStripMenuItem1.Size = new Size(185, 22);
+            cupomToolStripMenuItem1.Text = "Cupom";
+            cupomToolStripMenuItem1.Click += cupomToolStripMenuItem_Click;
+            // 
+            // parceiroToolStripMenuItem
+            // 
+            parceiroToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            parceiroToolStripMenuItem.Name = "parceiroToolStripMenuItem";
+            parceiroToolStripMenuItem.Size = new Size(185, 22);
+            parceiroToolStripMenuItem.Text = "Parceiro";
+            parceiroToolStripMenuItem.Click += parceirosToolStripMenuItem_Click;
+            // 
+            // automovelToolStripMenuItem1
+            // 
+            automovelToolStripMenuItem1.BackColor = SystemColors.ScrollBar;
+            automovelToolStripMenuItem1.Name = "automovelToolStripMenuItem1";
+            automovelToolStripMenuItem1.Size = new Size(185, 22);
+            automovelToolStripMenuItem1.Text = "Automovel";
+            automovelToolStripMenuItem1.Click += automovelToolStripMenuItem_Click;
+            // 
+            // condutorToolStripMenuItem
+            // 
+            condutorToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            condutorToolStripMenuItem.Name = "condutorToolStripMenuItem";
+            condutorToolStripMenuItem.Size = new Size(185, 22);
+            condutorToolStripMenuItem.Text = "Condutor";
+            // 
+            // clienteToolStripMenuItem1
+            // 
+            clienteToolStripMenuItem1.BackColor = SystemColors.ScrollBar;
+            clienteToolStripMenuItem1.Name = "clienteToolStripMenuItem1";
+            clienteToolStripMenuItem1.Size = new Size(185, 22);
+            clienteToolStripMenuItem1.Text = "Cliente";
+            clienteToolStripMenuItem1.Click += clienteToolStripMenuItem_Click_1;
+            // 
+            // funcionarioToolStripMenuItem1
+            // 
+            funcionarioToolStripMenuItem1.BackColor = SystemColors.ScrollBar;
+            funcionarioToolStripMenuItem1.Name = "funcionarioToolStripMenuItem1";
+            funcionarioToolStripMenuItem1.Size = new Size(185, 22);
+            funcionarioToolStripMenuItem1.Text = "Funcionario";
+            funcionarioToolStripMenuItem1.Click += funcionárioToolStripMenuItem_Click;
+            // 
+            // grupoDeAutomovelToolStripMenuItem
+            // 
+            grupoDeAutomovelToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            grupoDeAutomovelToolStripMenuItem.Name = "grupoDeAutomovelToolStripMenuItem";
+            grupoDeAutomovelToolStripMenuItem.Size = new Size(185, 22);
+            grupoDeAutomovelToolStripMenuItem.Text = "Grupo de Automovel";
+            grupoDeAutomovelToolStripMenuItem.Click += grupoDeAutomoveisToolStripMenuItem_Click;
+            // 
+            // planoDeCobrancaToolStripMenuItem1
+            // 
+            planoDeCobrancaToolStripMenuItem1.BackColor = SystemColors.ScrollBar;
+            planoDeCobrancaToolStripMenuItem1.Name = "planoDeCobrancaToolStripMenuItem1";
+            planoDeCobrancaToolStripMenuItem1.Size = new Size(185, 22);
+            planoDeCobrancaToolStripMenuItem1.Text = "Plano de Cobranca";
+            planoDeCobrancaToolStripMenuItem1.Click += planoDeCobrancaToolStripMenuItem_Click;
+            // 
+            // taxasEServicosToolStripMenuItem
+            // 
+            taxasEServicosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            taxasEServicosToolStripMenuItem.Name = "taxasEServicosToolStripMenuItem";
+            taxasEServicosToolStripMenuItem.Size = new Size(185, 22);
+            taxasEServicosToolStripMenuItem.Text = "Taxas E Servicos";
+            taxasEServicosToolStripMenuItem.Click += taxaDeServicoToolStripMenuItem_Click;
             // 
             // parceirosToolStripMenuItem
             // 
@@ -149,7 +244,7 @@
             toolStripBarraDeTarefas.GripStyle = ToolStripGripStyle.Hidden;
             toolStripBarraDeTarefas.ImageScalingSize = new Size(20, 20);
             toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1, btnFiltrar, toolStripSeparator2 });
-            toolStripBarraDeTarefas.Location = new Point(124, 0);
+            toolStripBarraDeTarefas.Location = new Point(75, 0);
             toolStripBarraDeTarefas.Name = "toolStripBarraDeTarefas";
             toolStripBarraDeTarefas.RenderMode = ToolStripRenderMode.Professional;
             toolStripBarraDeTarefas.Size = new Size(51, 393);
@@ -217,10 +312,10 @@
             // 
             StatusRodape.ImageScalingSize = new Size(20, 20);
             StatusRodape.Items.AddRange(new ToolStripItem[] { lblRodape });
-            StatusRodape.Location = new Point(175, 371);
+            StatusRodape.Location = new Point(126, 371);
             StatusRodape.Name = "StatusRodape";
             StatusRodape.Padding = new Padding(1, 0, 10, 0);
-            StatusRodape.Size = new Size(629, 22);
+            StatusRodape.Size = new Size(678, 22);
             StatusRodape.TabIndex = 2;
             StatusRodape.Text = "statusStrip1";
             // 
@@ -295,5 +390,16 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem aluguelToolStripMenuItem;
         private ToolStripMenuItem taxaDeServicoToolStripMenuItem;
+        private ToolStripMenuItem funcionarioToolStripMenuItem;
+        private ToolStripMenuItem aluguelToolStripMenuItem1;
+        private ToolStripMenuItem cupomToolStripMenuItem1;
+        private ToolStripMenuItem parceiroToolStripMenuItem;
+        private ToolStripMenuItem automovelToolStripMenuItem1;
+        private ToolStripMenuItem condutorToolStripMenuItem;
+        private ToolStripMenuItem clienteToolStripMenuItem1;
+        private ToolStripMenuItem funcionarioToolStripMenuItem1;
+        private ToolStripMenuItem grupoDeAutomovelToolStripMenuItem;
+        private ToolStripMenuItem planoDeCobrancaToolStripMenuItem1;
+        private ToolStripMenuItem taxasEServicosToolStripMenuItem;
     }
 }

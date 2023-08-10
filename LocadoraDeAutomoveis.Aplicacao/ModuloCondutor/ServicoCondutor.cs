@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using Microsoft.Data.SqlClient;
@@ -15,11 +16,13 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor
     {
         private IRepositorioCondutor repositorioCondutor;
         private IValidadorCondutor validadorCondutor;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoCondutor(IRepositorioCondutor repositorioCondutor, IValidadorCondutor validadorCondutor)
+        public ServicoCondutor(IRepositorioCondutor repositorioCondutor, IValidadorCondutor validadorCondutor, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCondutor = repositorioCondutor;
             this.validadorCondutor = validadorCondutor;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result Inserir(Condutor Condutor)
@@ -29,11 +32,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor
             List<string> erros = ValidarCondutor(Condutor);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioCondutor.Inserir(Condutor);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Condutor {CondutorId} inserido com sucesso", Condutor.Id);
 
@@ -56,11 +63,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor
             List<string> erros = ValidarCondutor(Condutor);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioCondutor.Atualizar(Condutor);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Condutor {CondutorId} editado com sucesso", Condutor.Id);
 
@@ -92,12 +103,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor
 
                 repositorioCondutor.Deletar(Condutor);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("Condutor {CondutorID} excluído com sucesso", Condutor.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro = "não foi possivel deletar o Condutor";

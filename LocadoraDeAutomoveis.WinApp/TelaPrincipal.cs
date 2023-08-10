@@ -148,7 +148,7 @@ namespace LocadoraDeAutomoveis.WinApp
             }
 
 
-       
+
         }
         #endregion 
 
@@ -199,7 +199,7 @@ namespace LocadoraDeAutomoveis.WinApp
         }
         private void clienteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(IoC.Get<ControladorCliente>()); 
+            ConfigurarTelaPrincipal(IoC.Get<ControladorCliente>());
         }
         private void taxaDeServicoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -223,6 +223,5 @@ namespace LocadoraDeAutomoveis.WinApp
 
         }
 
-        
     }
 }
