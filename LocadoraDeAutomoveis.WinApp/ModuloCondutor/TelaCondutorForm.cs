@@ -2,7 +2,6 @@
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
-using LocadoraDeAutomoveis.Infra.Orm.Migrations;
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 {

@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
-using LocadoraDeAutomoveis.Infra.Orm.Migrations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

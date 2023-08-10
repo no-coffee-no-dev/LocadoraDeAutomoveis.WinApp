@@ -2,7 +2,6 @@
 using FluentAssertions;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
-using LocadoraDeAutomoveis.Infra.Orm.Migrations;
 using LocadoraDeAutomoveis.TestesIntregacao.Compartilhado;
 using System;
 using System.Collections.Generic;

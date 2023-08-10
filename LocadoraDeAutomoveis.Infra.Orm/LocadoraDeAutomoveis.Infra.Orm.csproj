@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Acesso a Dados\Migrations\**" />
+    <EmbeddedResource Remove="Acesso a Dados\Migrations\**" />
+    <None Remove="Acesso a Dados\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Acesso a Dados\ModuloAutomovel\" />
     <Folder Include="Acesso a Dados\ModuloCliente\" />
     <Folder Include="Acesso a Dados\ModuloTaxaServico\" />
-    <Folder Include="Acesso a Dados\Migrations\" />
     <Folder Include="Massa de Dados\" />
     <Folder Include="PDF\" />
   </ItemGroup>

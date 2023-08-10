@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class TBSAtualizadas : Migration
+    public partial class Tabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,6 +72,18 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TBGrupoDeAutomoveis", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBParceiro",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBParceiro", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +168,27 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                         name: "FK_TBPlanoDeCobranca_TBGrupoDeAutomoveis",
                         column: x => x.GrupoDeAutomoveisId,
                         principalTable: "TBGrupoDeAutomoveis",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBCupom",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    ParceiroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    DataDeValidade = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Expirado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBCupom", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBCupom_TBParceiro",
+                        column: x => x.ParceiroId,
+                        principalTable: "TBParceiro",
                         principalColumn: "Id");
                 });
 
@@ -321,6 +354,11 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                 column: "clienteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TBCupom_ParceiroId",
+                table: "TBCupom",
+                column: "ParceiroId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TBPlanoDeCobranca_GrupoDeAutomoveisId",
                 table: "TBPlanoDeCobranca",
                 column: "GrupoDeAutomoveisId");
@@ -351,6 +389,9 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                 name: "TBCondutor");
 
             migrationBuilder.DropTable(
+                name: "TBCupom");
+
+            migrationBuilder.DropTable(
                 name: "TBFuncionario");
 
             migrationBuilder.DropTable(
@@ -358,6 +399,9 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
 
             migrationBuilder.DropTable(
                 name: "TBCliente");
+
+            migrationBuilder.DropTable(
+                name: "TBParceiro");
 
             migrationBuilder.DropTable(
                 name: "TBGrupoDeAutomoveis");

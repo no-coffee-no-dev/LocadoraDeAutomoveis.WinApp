@@ -3,7 +3,6 @@ using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
-using LocadoraDeAutomoveis.Infra.Orm.Migrations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

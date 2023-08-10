@@ -33,6 +33,7 @@ using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloTaxaServico;
 using LocadoraDeAutomoveis.WinApp.ModuloAluguel;
 using LocadoraDeAutomoveis.WinApp.ModuloAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloCliente;
+using LocadoraDeAutomoveis.WinApp.ModuloCondutor;
 using LocadoraDeAutomoveis.WinApp.ModuloCupom;
 using LocadoraDeAutomoveis.WinApp.ModuloFuncionario;
 using LocadoraDeAutomoveis.WinApp.ModuloGrupoDoAutomovel;
@@ -112,7 +113,7 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado.IoC
             servicos.AddTransient<IRepositorioCondutor, RepositorioCondutorOrm>();
             servicos.AddTransient<IValidadorCondutor, ValidadorCondutor>();
             servicos.AddTransient<ServicoCondutor>();
-            //servicos.AddTransient<ControladorCondutor>();
+            servicos.AddTransient<ControladorCondutor>();
 
             servicos.AddTransient<IRepositorioFuncionario, RepositorioFuncionarioOrm>();
             servicos.AddTransient < IValidadorFuncionario, ValidadorFuncionario>();

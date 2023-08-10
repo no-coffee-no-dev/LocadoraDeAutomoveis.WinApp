@@ -2,7 +2,7 @@
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
-using LocadoraDeAutomoveis.Infra.Orm.Migrations;
+
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloGrupoDoAutomovel
 {
