@@ -19,9 +19,13 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAluguel
 
             aluguelBuilder.Property(a => a.Id).IsRequired().ValueGeneratedNever();
             aluguelBuilder.Property(a => a.ValorFinal).HasColumnType("decimal(9,2)").IsRequired();
-            aluguelBuilder.Property(a => a.DataDoAluguel).HasColumnType("date").IsRequired();
-            aluguelBuilder.Property(a => a.DataDaPrevistaDevolucao).HasColumnType("date").IsRequired();
+            aluguelBuilder.Property(a => a.DataDoAluguel).HasColumnType("datetime").IsRequired();
+            aluguelBuilder.Property(a => a.DataDaPrevistaDevolucao).HasColumnType("datetime").IsRequired();
+            aluguelBuilder.Property(a => a.Concluido).HasColumnType("bit").IsRequired();
 
+            aluguelBuilder.HasMany(a => a.Multas)
+                .WithMany()
+                .UsingEntity(x => x.ToTable("TBAluguel_TBMultas"));
 
             aluguelBuilder.HasOne(a => a.Cupom)             
                .WithMany()

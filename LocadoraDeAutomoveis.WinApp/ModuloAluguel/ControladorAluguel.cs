@@ -131,7 +131,32 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
 
 
+        public override void FinalizarAluguel()
+        {
+            Guid? id = tabelaAluguel.ObtemIdSelecionado();
 
+            Aluguel aluguelSelecionado = repositorioAluguel.Busca(id);
+
+            if (aluguelSelecionado == null)
+            {
+                MessageBox.Show("Selecione uma aluguel primeiro",
+                "Edição de Alugueis", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaDevolucaoAluguelForm tela = new TelaDevolucaoAluguelForm(repositorioCupom, repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioAutomovel, repositorioTaxaServico, repositorioCondutor, repositorioFuncionario);
+
+            tela.onGravarRegistro += servicoAluguel.Finalizar;
+
+            tela.ConfigurarAluguel(aluguelSelecionado);
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                CarregarEntidades();
+            }
+        }
 
 
 

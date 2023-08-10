@@ -38,6 +38,8 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCupom
             }
             try
             {
+                
+
                 cupom.Expirou();
 
                 repositorioCupom.Inserir(cupom);

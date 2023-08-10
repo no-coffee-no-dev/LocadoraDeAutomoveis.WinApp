@@ -8,5 +8,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 {
     public interface IRepositorioAluguel : IRepositorio<Aluguel>
     {
+        void Finalizar(Aluguel aluguel);
     }
 }

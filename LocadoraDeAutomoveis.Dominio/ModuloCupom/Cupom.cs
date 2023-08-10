@@ -57,5 +57,10 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCupom
         {
             return $"{Nome}";
         }
+
+        internal decimal? Descontar(decimal? valorTotal)
+        {
+            return valorTotal - Valor;
+        }
     }
 }

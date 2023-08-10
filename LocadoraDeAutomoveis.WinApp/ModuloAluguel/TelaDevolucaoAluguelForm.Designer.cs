@@ -1,6 +1,6 @@
 ﻿namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 {
-    partial class TelaAluguelForm
+    partial class TelaDevolucaoAluguelForm
     {
         /// <summary>
         /// Required designer variable.
@@ -49,19 +49,28 @@
             listaTaxasEServicos = new CheckedListBox();
             tabControl1 = new TabControl();
             tabPage2 = new TabPage();
+            tabPage1 = new TabPage();
+            listaTaxasEServicosAdicionais = new CheckedListBox();
             btnSalvar = new Button();
             btnCancelar = new Button();
             label11 = new Label();
-            lblValorPrevisto = new Label();
-            btnAplicarCupom = new Button();
-            txtBuscarCupom = new TextBox();
+            lblValorTotal = new Label();
             label10 = new Label();
+            datePickerDataDaDevolucaoFinal = new DateTimePicker();
+            nmrKmsPercorridos = new NumericUpDown();
+            label12 = new Label();
+            nmrNivelDoTanque = new NumericUpDown();
+            label13 = new Label();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nmrKmsPercorridos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nmrNivelDoTanque).BeginInit();
             SuspendLayout();
             // 
             // listGrupoDeAutomoveis
             // 
+            listGrupoDeAutomoveis.Enabled = false;
             listGrupoDeAutomoveis.FormattingEnabled = true;
             listGrupoDeAutomoveis.Location = new Point(144, 151);
             listGrupoDeAutomoveis.Name = "listGrupoDeAutomoveis";
@@ -80,6 +89,7 @@
             // 
             // listCliente
             // 
+            listCliente.Enabled = false;
             listCliente.FormattingEnabled = true;
             listCliente.Location = new Point(144, 106);
             listCliente.Name = "listCliente";
@@ -106,6 +116,7 @@
             // 
             // listFuncionario
             // 
+            listFuncionario.Enabled = false;
             listFuncionario.FormattingEnabled = true;
             listFuncionario.Location = new Point(144, 55);
             listFuncionario.Name = "listFuncionario";
@@ -123,6 +134,7 @@
             // 
             // listPlanoDeCobranca
             // 
+            listPlanoDeCobranca.Enabled = false;
             listPlanoDeCobranca.FormattingEnabled = true;
             listPlanoDeCobranca.Location = new Point(144, 193);
             listPlanoDeCobranca.Name = "listPlanoDeCobranca";
@@ -140,6 +152,7 @@
             // 
             // listCondutor
             // 
+            listCondutor.Enabled = false;
             listCondutor.FormattingEnabled = true;
             listCondutor.Location = new Point(464, 103);
             listCondutor.Name = "listCondutor";
@@ -157,6 +170,7 @@
             // 
             // listAutomovel
             // 
+            listAutomovel.Enabled = false;
             listAutomovel.FormattingEnabled = true;
             listAutomovel.Location = new Point(464, 151);
             listAutomovel.Name = "listAutomovel";
@@ -184,6 +198,7 @@
             // datePickerDataDoAluguel
             // 
             datePickerDataDoAluguel.CustomFormat = "yyyy";
+            datePickerDataDoAluguel.Enabled = false;
             datePickerDataDoAluguel.Format = DateTimePickerFormat.Short;
             datePickerDataDoAluguel.Location = new Point(144, 234);
             datePickerDataDoAluguel.Name = "datePickerDataDoAluguel";
@@ -193,6 +208,7 @@
             // datePickerDataDaDevolucao
             // 
             datePickerDataDaDevolucao.CustomFormat = "yyyy";
+            datePickerDataDaDevolucao.Enabled = false;
             datePickerDataDaDevolucao.Format = DateTimePickerFormat.Short;
             datePickerDataDaDevolucao.Location = new Point(464, 234);
             datePickerDataDaDevolucao.Name = "datePickerDataDaDevolucao";
@@ -220,6 +236,7 @@
             // listaTaxasEServicos
             // 
             listaTaxasEServicos.Dock = DockStyle.Fill;
+            listaTaxasEServicos.Enabled = false;
             listaTaxasEServicos.FormattingEnabled = true;
             listaTaxasEServicos.Location = new Point(3, 3);
             listaTaxasEServicos.Name = "listaTaxasEServicos";
@@ -229,6 +246,7 @@
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage1);
             tabControl1.Location = new Point(28, 351);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -245,6 +263,26 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Taxas E Servicos";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(listaTaxasEServicosAdicionais);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(634, 204);
+            tabPage1.TabIndex = 2;
+            tabPage1.Text = "Taxas Adicionais";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // listaTaxasEServicosAdicionais
+            // 
+            listaTaxasEServicosAdicionais.Dock = DockStyle.Fill;
+            listaTaxasEServicosAdicionais.FormattingEnabled = true;
+            listaTaxasEServicosAdicionais.Location = new Point(3, 3);
+            listaTaxasEServicosAdicionais.Name = "listaTaxasEServicosAdicionais";
+            listaTaxasEServicosAdicionais.Size = new Size(628, 198);
+            listaTaxasEServicosAdicionais.TabIndex = 44;
             // 
             // btnSalvar
             // 
@@ -276,50 +314,77 @@
             label11.TabIndex = 47;
             label11.Text = "Valor Total Previsto:";
             // 
-            // lblValorPrevisto
+            // lblValorTotal
             // 
-            lblValorPrevisto.AutoSize = true;
-            lblValorPrevisto.Location = new Point(158, 599);
-            lblValorPrevisto.Name = "lblValorPrevisto";
-            lblValorPrevisto.Size = new Size(23, 15);
-            lblValorPrevisto.TabIndex = 48;
-            lblValorPrevisto.Text = "R$:";
-            // 
-            // btnAplicarCupom
-            // 
-            btnAplicarCupom.Location = new Point(250, 295);
-            btnAplicarCupom.Name = "btnAplicarCupom";
-            btnAplicarCupom.Size = new Size(97, 31);
-            btnAplicarCupom.TabIndex = 49;
-            btnAplicarCupom.Text = "Aplicar Cupom";
-            btnAplicarCupom.UseVisualStyleBackColor = true;
-            btnAplicarCupom.Click += btnAplicarCupom_Click;
-            // 
-            // txtBuscarCupom
-            // 
-            txtBuscarCupom.Location = new Point(144, 300);
-            txtBuscarCupom.Name = "txtBuscarCupom";
-            txtBuscarCupom.Size = new Size(100, 23);
-            txtBuscarCupom.TabIndex = 50;
+            lblValorTotal.AutoSize = true;
+            lblValorTotal.Location = new Point(158, 599);
+            lblValorTotal.Name = "lblValorTotal";
+            lblValorTotal.Size = new Size(23, 15);
+            lblValorTotal.TabIndex = 48;
+            lblValorTotal.Text = "R$:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(88, 303);
+            label10.Location = new Point(12, 279);
             label10.Name = "label10";
-            label10.Size = new Size(50, 15);
-            label10.TabIndex = 51;
-            label10.Text = "Cupom:";
+            label10.Size = new Size(125, 15);
+            label10.TabIndex = 49;
+            label10.Text = "Devolucao Devolucao:";
             // 
-            // TelaAluguelForm
+            // datePickerDataDaDevolucaoFinal
+            // 
+            datePickerDataDaDevolucaoFinal.CustomFormat = "yyyy";
+            datePickerDataDaDevolucaoFinal.Format = DateTimePickerFormat.Short;
+            datePickerDataDaDevolucaoFinal.Location = new Point(144, 273);
+            datePickerDataDaDevolucaoFinal.Name = "datePickerDataDaDevolucaoFinal";
+            datePickerDataDaDevolucaoFinal.Size = new Size(185, 23);
+            datePickerDataDaDevolucaoFinal.TabIndex = 50;
+            // 
+            // nmrKmsPercorridos
+            // 
+            nmrKmsPercorridos.Location = new Point(464, 272);
+            nmrKmsPercorridos.Name = "nmrKmsPercorridos";
+            nmrKmsPercorridos.Size = new Size(185, 23);
+            nmrKmsPercorridos.TabIndex = 51;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(372, 279);
+            label12.Name = "label12";
+            label12.Size = new Size(86, 15);
+            label12.TabIndex = 52;
+            label12.Text = "Km Percorrido:";
+            // 
+            // nmrNivelDoTanque
+            // 
+            nmrNivelDoTanque.Location = new Point(144, 313);
+            nmrNivelDoTanque.Name = "nmrNivelDoTanque";
+            nmrNivelDoTanque.Size = new Size(185, 23);
+            nmrNivelDoTanque.TabIndex = 53;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(43, 315);
+            label13.Name = "label13";
+            label13.Size = new Size(95, 15);
+            label13.TabIndex = 54;
+            label13.Text = "Nivel do Tanque:";
+            // 
+            // TelaDevolucaoAluguelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(697, 644);
+            Controls.Add(label13);
+            Controls.Add(nmrNivelDoTanque);
+            Controls.Add(label12);
+            Controls.Add(nmrKmsPercorridos);
+            Controls.Add(datePickerDataDaDevolucaoFinal);
             Controls.Add(label10);
-            Controls.Add(txtBuscarCupom);
-            Controls.Add(btnAplicarCupom);
-            Controls.Add(lblValorPrevisto);
+            Controls.Add(lblValorTotal);
             Controls.Add(label11);
             Controls.Add(btnCancelar);
             Controls.Add(btnSalvar);
@@ -342,10 +407,13 @@
             Controls.Add(listCliente);
             Controls.Add(label4);
             Controls.Add(listGrupoDeAutomoveis);
-            Name = "TelaAluguelForm";
+            Name = "TelaDevolucaoAluguelForm";
             Text = "Cadastrar Aluguel";
             tabControl1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)nmrKmsPercorridos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nmrNivelDoTanque).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -376,9 +444,14 @@
         private Button btnSalvar;
         private Button btnCancelar;
         private Label label11;
-        private Label lblValorPrevisto;
-        private Button btnAplicarCupom;
-        private TextBox txtBuscarCupom;
+        private Label lblValorTotal;
+        private TabPage tabPage1;
+        private CheckedListBox listaTaxasEServicosAdicionais;
         private Label label10;
+        private DateTimePicker datePickerDataDaDevolucaoFinal;
+        private NumericUpDown nmrKmsPercorridos;
+        private Label label12;
+        private NumericUpDown nmrNivelDoTanque;
+        private Label label13;
     }
 }

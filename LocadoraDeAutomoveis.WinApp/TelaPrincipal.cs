@@ -40,7 +40,6 @@ namespace LocadoraDeAutomoveis.WinApp
 {
     public partial class TelaPrincipal : Form
     {
-        private Dictionary<string, ControladorBase> controladores;
 
         private IoC IoC;
         private ControladorBase controlador;
@@ -176,6 +175,11 @@ namespace LocadoraDeAutomoveis.WinApp
                 controlador.Filtrar();
         }
 
+        private void btnFinalizarAluguel_Click(object sender, EventArgs e)
+        {
+            if (VerificaControladorVazio(controlador) == false)
+                controlador.FinalizarAluguel();
+        }
         private void parceirosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal(IoC.Get<ControladorParceiro>());
@@ -226,7 +230,6 @@ namespace LocadoraDeAutomoveis.WinApp
                 return false;
 
         }
-
 
     }
 }

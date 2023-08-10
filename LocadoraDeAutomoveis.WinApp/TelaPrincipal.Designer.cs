@@ -61,6 +61,8 @@
             lblRodape = new ToolStripStatusLabel();
             painelPrincipal = new Panel();
             lblTipoCadastro = new Label();
+            btnFinalizarAluguel = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
             menuStrip1.SuspendLayout();
             toolStripBarraDeTarefas.SuspendLayout();
             StatusRodape.SuspendLayout();
@@ -75,7 +77,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(4, 2, 0, 2);
-            menuStrip1.Size = new Size(124, 393);
+            menuStrip1.Size = new Size(75, 393);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -84,7 +86,7 @@
             cadastrosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
             cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { funcionarioToolStripMenuItem, aluguelToolStripMenuItem1, cupomToolStripMenuItem1, parceiroToolStripMenuItem, automovelToolStripMenuItem1, condutorToolStripMenuItem, clienteToolStripMenuItem1, funcionarioToolStripMenuItem1, grupoDeAutomovelToolStripMenuItem, planoDeCobrancaToolStripMenuItem1, taxasEServicosToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
-            cadastrosToolStripMenuItem.Size = new Size(115, 19);
+            cadastrosToolStripMenuItem.Size = new Size(66, 19);
             cadastrosToolStripMenuItem.Text = "Cadastros";
             // 
             // funcionarioToolStripMenuItem
@@ -244,8 +246,8 @@
             toolStripBarraDeTarefas.Dock = DockStyle.Left;
             toolStripBarraDeTarefas.GripStyle = ToolStripGripStyle.Hidden;
             toolStripBarraDeTarefas.ImageScalingSize = new Size(20, 20);
-            toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1, btnFiltrar, toolStripSeparator2 });
-            toolStripBarraDeTarefas.Location = new Point(124, 0);
+            toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1, btnFiltrar, toolStripSeparator2, btnFinalizarAluguel, toolStripSeparator3 });
+            toolStripBarraDeTarefas.Location = new Point(75, 0);
             toolStripBarraDeTarefas.Name = "toolStripBarraDeTarefas";
             toolStripBarraDeTarefas.RenderMode = ToolStripRenderMode.Professional;
             toolStripBarraDeTarefas.Size = new Size(51, 393);
@@ -313,10 +315,10 @@
             // 
             StatusRodape.ImageScalingSize = new Size(20, 20);
             StatusRodape.Items.AddRange(new ToolStripItem[] { lblRodape });
-            StatusRodape.Location = new Point(175, 371);
+            StatusRodape.Location = new Point(126, 371);
             StatusRodape.Name = "StatusRodape";
             StatusRodape.Padding = new Padding(1, 0, 10, 0);
-            StatusRodape.Size = new Size(629, 22);
+            StatusRodape.Size = new Size(678, 22);
             StatusRodape.TabIndex = 2;
             StatusRodape.Text = "statusStrip1";
             // 
@@ -343,6 +345,24 @@
             lblTipoCadastro.Size = new Size(103, 17);
             lblTipoCadastro.TabIndex = 4;
             lblTipoCadastro.Text = "___________________";
+            // 
+            // btnFinalizarAluguel
+            // 
+            btnFinalizarAluguel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnFinalizarAluguel.Image = Properties.Resources.check_symbol;
+            btnFinalizarAluguel.ImageScaling = ToolStripItemImageScaling.None;
+            btnFinalizarAluguel.ImageTransparentColor = Color.Magenta;
+            btnFinalizarAluguel.Name = "btnFinalizarAluguel";
+            btnFinalizarAluguel.Padding = new Padding(7);
+            btnFinalizarAluguel.Size = new Size(48, 50);
+            btnFinalizarAluguel.Text = "Finalizar Aluguel";
+            btnFinalizarAluguel.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnFinalizarAluguel.Click += btnFinalizarAluguel_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(48, 6);
             // 
             // TelaPrincipal
             // 
@@ -402,5 +422,7 @@
         private ToolStripMenuItem grupoDeAutomovelToolStripMenuItem;
         private ToolStripMenuItem planoDeCobrancaToolStripMenuItem1;
         private ToolStripMenuItem taxasEServicosToolStripMenuItem;
+        private ToolStripButton btnFinalizarAluguel;
+        private ToolStripSeparator toolStripSeparator3;
     }
 }

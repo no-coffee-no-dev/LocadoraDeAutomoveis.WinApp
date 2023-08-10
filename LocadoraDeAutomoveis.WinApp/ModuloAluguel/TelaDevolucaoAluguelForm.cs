@@ -20,14 +20,14 @@ using System.Windows.Forms;
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 {
-    public partial class TelaAluguelForm : Form
+    public partial class TelaDevolucaoAluguelForm : Form
     {
         private Aluguel aluguel { get; set; }
         Cupom? cupom = new();
         public event GravarEntidadeDelegate<Aluguel> onGravarRegistro;
         IRepositorioCupom repositorioCupom;
         IRepositorioAutomovel repositorioAutomovel;
-        public TelaAluguelForm(IRepositorioCupom repositorioCupom, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioAutomovel repositorioAutomovel, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioCondutor repositorioCondutor, IRepositorioFuncionario repositorioFuncionario)
+        public TelaDevolucaoAluguelForm(IRepositorioCupom repositorioCupom, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioAutomovel repositorioAutomovel, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioCondutor repositorioCondutor, IRepositorioFuncionario repositorioFuncionario)
         {
             InitializeComponent();
             this.ConfigurarDialog();
@@ -59,13 +59,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             listPlanoDeCobranca.SelectedItem = aluguel.PlanoDeCobranca;
             listAutomovel.SelectedItem = aluguel.Automovel;
             listFuncionario.SelectedItem = aluguel.Funcionario;
-            if (aluguel.TaxasEServicos != null)
-            {
-                foreach (TaxaServico item in aluguel.TaxasEServicos)
-                {
-                    listaTaxasEServicos.SetItemChecked(listaTaxasEServicos.Items.IndexOf(item), true);
-                }
-            }
+            listaTaxasEServicos.SelectedItems.Add(aluguel.TaxasEServicos);
             listCondutor.SelectedItem = aluguel.Condutor;
             if (aluguel.DataDoAluguel != DateTime.MinValue)
                 datePickerDataDoAluguel.Value = aluguel.DataDoAluguel;
@@ -88,29 +82,28 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
                 aluguel.TaxasEServicos.Add((TaxaServico)item);
             }
             aluguel.DataDoAluguel = datePickerDataDoAluguel.Value.Date;
-            aluguel.DataDaPrevistaDevolucao = datePickerDataDaDevolucao.Value.Date;
+            aluguel.DataDaPrevistaDevolucao = datePickerDataDaDevolucaoFinal.Value.Date;
+            if (aluguel.DataDaPrevistaDevolucao > datePickerDataDaDevolucaoFinal.Value)
+            {
+                aluguel.Multas.Add(new Multa());
+            }
+            aluguel.KmsPercoridos = nmrKmsPercorridos.Value;
+            foreach (var item in listaTaxasEServicosAdicionais.CheckedItems)
+            {
+                aluguel.TaxasEServicos.Add((TaxaServico)item);
+            }
             aluguel.ValorFinal = aluguel.CalcularValorFinal();
-            aluguel.Cupom = cupom;
-            lblValorPrevisto.Text = "R$ " + aluguel.ValorFinal.ToString();
-
-
+            lblValorTotal.Text = "R$ " + aluguel.ValorFinal.ToString();
             return aluguel;
         }
 
 
         private void listAutomovel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listAutomovel.Enabled = true;
             Automovel automovel = (Automovel)listAutomovel.SelectedItem;
             txtKmDoAutomovel.Text = automovel.KmRodados.ToString();
         }
 
-        private void btnAplicarCupom_Click(object sender, EventArgs e)
-        {
-
-            if (txtBuscarCupom.Text != "")
-                cupom = repositorioCupom.SelecionarPorNome(txtBuscarCupom.Text);
-        }
         private void ConfigurarListas(IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioCondutor repositorioCondutor)
         {
 
@@ -144,7 +137,6 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
         private void listGrupoDeAutomoveis_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listAutomovel.Enabled = true;
             foreach (var item in repositorioAutomovel.RetornarCarrosFiltrados((GrupoDeAutomoveis)listGrupoDeAutomoveis.SelectedItem))
             {
                 listAutomovel.Items.Add(item);

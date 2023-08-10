@@ -9,6 +9,7 @@
         public virtual void Filtrar() { }
         public virtual void GerarPdf() { }
         public virtual void VisualizarItem() { }
+        public virtual void FinalizarAluguel() { }
         public abstract UserControl ObterListagem();
         public virtual void ConfigurarDesconto() { }
         public abstract ConfigurarToolTipBase ObtemConfiguracaoTooltip();

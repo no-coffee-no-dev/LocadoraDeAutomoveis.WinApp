@@ -3,7 +3,9 @@ using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
@@ -11,7 +13,9 @@ using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAluguel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCliente;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCondutor;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
@@ -35,6 +39,8 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
         protected IRepositorioAutomovel repositorioAutomovel;
         protected IRepositorioAluguel repositorioAluguel;
         protected IRepositorioCliente repositorioCliente;
+        protected IRepositorioCondutor repositorioCondutor;
+        protected IRepositorioFuncionario repositorioFuncionario;
 
         protected IContextoPersistencia contextoDePersistencia;
         public TesteDeIntegracaoBase()
@@ -58,6 +64,8 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
             repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
             repositorioAluguel = new RepositorioAluguelOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
+            repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
+            repositorioCondutor = new RepositorioCondutorOrm(dbContext);
 
             BuilderSetup.SetCreatePersistenceMethod<Parceiro>((parceiro) =>
             {
@@ -101,6 +109,18 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
                 contextoDePersistencia.GravarDados();
             }
             );
+            BuilderSetup.SetCreatePersistenceMethod<Condutor>((condutor) =>
+            {
+                repositorioCondutor.Inserir(condutor);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<Funcionario>((funcionario) =>
+            {
+                repositorioFuncionario.Inserir(funcionario);
+                contextoDePersistencia.GravarDados();
+            }
+           );
         }
 
         protected static void LimparTabelas()
@@ -111,7 +131,9 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
 
             string sqlLimpezaTabela =
                 @"
-                DELETE FROM [DBO].[TBALUGUEL]   
+                DELETE FROM [DBO].[TBALUGUEL]
+                DELETE FROM [DBO].[TBFUNCIONARIO]
+                DELETE FROM [DBO].[TBCONDUTOR]
                 DELETE FROM [DBO].[TBAUTOMOVEL]
                 DELETE FROM [DBO].[TBPLANODECOBRANCA]
                 DELETE FROM [DBO].[TBCUPOM]

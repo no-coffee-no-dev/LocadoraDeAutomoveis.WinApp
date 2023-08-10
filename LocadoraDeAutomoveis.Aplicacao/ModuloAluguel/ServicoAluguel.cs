@@ -31,7 +31,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel
 
             List<string> erros = ValidarAluguel(aluguel);
 
-            if (erros.Count() > 0)
+             if (erros.Count() > 0)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 
@@ -40,6 +40,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel
 
             try
             {
+
                 repositorioAluguel.Inserir(aluguel);
 
                 contextoPersistencia.GravarDados();
@@ -51,6 +52,39 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel
             catch (Exception exc)
             {
                 string msgErro = "Falha ao tentar inserir aluguel.";
+
+                Log.Error(exc, msgErro + "{@a}", aluguel);
+
+                return Result.Fail(msgErro); //cenário 3
+            }
+        }
+
+        public Result Finalizar(Aluguel aluguel)
+        {
+            Log.Debug("Tentando finalizar aluguel...{@a}", aluguel);
+
+            List<string> erros = ValidarAluguel(aluguel);
+
+            if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
+                return Result.Fail(erros);
+            }
+
+            try
+            {
+                repositorioAluguel.Finalizar(aluguel);
+
+                contextoPersistencia.GravarDados();
+
+                Log.Debug("Aluguel {AluguelId} finalizado com sucesso", aluguel.Id);
+
+                return Result.Ok(); //cenário 1
+            }
+            catch (Exception exc)
+            {
+                string msgErro = "Falha ao tentar finalizar aluguel.";
 
                 Log.Error(exc, msgErro + "{@a}", aluguel);
 

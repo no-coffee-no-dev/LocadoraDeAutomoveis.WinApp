@@ -1,5 +1,6 @@
 ﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloTaxaServico
@@ -41,6 +42,20 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloTaxaServico
         public override string? ToString()
         {
             return $"{Nome}";
+        }
+
+        internal decimal CalcularValor(DateTime dataDaPrevistaDevolucao)
+        {
+            int dias = dataDaPrevistaDevolucao.DayOfYear - DateTime.UtcNow.DayOfYear;
+            if (PlanoDeCalculo == EnumPlanoDeCalculo.PRECO_FIXO)
+            {
+                return (decimal)Preco;
+            }
+            if (PlanoDeCalculo == EnumPlanoDeCalculo.COBRANCA_DIARIA)
+            {
+                return (decimal)(Preco * dias);
+            }
+            return 0;
         }
     }
 }

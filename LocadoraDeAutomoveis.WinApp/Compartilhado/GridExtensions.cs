@@ -69,7 +69,7 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado
                 id = "";
             }
 
-            if(id != null)
+            if(id != "")
                 return Guid.Parse(id.ToString());
             else
                 return null;

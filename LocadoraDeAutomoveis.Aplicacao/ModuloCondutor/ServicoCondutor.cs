@@ -1,14 +1,8 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
-using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using Microsoft.Data.SqlClient;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor
 {

@@ -32,6 +32,9 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public PlanoDeCobranca PlanoDeCobranca { get; set; }
         public Cupom? Cupom { get; set; }
         public List<TaxaServico> TaxasEServicos { get; set; }
+        public decimal KmsPercoridos { get; set; }
+        public List<Multa> Multas { get; set; }
+        public bool Concluido { get; set; }
 
         public Aluguel()
         {
@@ -87,7 +90,53 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 
         public decimal CalcularValorFinal()
         {
-            return 100;
+             
+            if (PlanoDeCobranca == null)
+                return 0;
+
+            decimal? valorPlano = PlanoDeCobranca.CalcularPrecoFinal(DataDaPrevistaDevolucao, KmsPercoridos);
+
+            decimal valorTaxas = 0;
+
+            if (TaxasEServicos != null && TaxasEServicos.Any())
+                valorTaxas = TaxasEServicos.Sum(tax => tax.CalcularValor(DataDaPrevistaDevolucao));
+
+            decimal valorCombustivel = 0;
+
+            if(Automovel != null)
+            {
+                decimal precoCombustivel = 0;
+                
+            }
+            decimal? valorTotal = valorPlano + valorCombustivel + valorTaxas;
+            if (TemMulta())
+               valorTotal += valorTotal * Convert.ToDecimal(0.1);
+
+            if (TemCupom())
+                valorTotal -= Cupom.Descontar(valorTotal);
+
+            return (decimal)valorTotal;
+        }
+
+        private bool TemCupom()
+        {
+            if (Cupom == null)
+                Cupom = new();
+            if (Cupom.Nome != null)
+                return true;
+            else
+                return false;
+
+        }
+
+        private bool TemMulta()
+        {
+            if (Multas == null)
+                Multas = new();
+            if (Multas.Count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

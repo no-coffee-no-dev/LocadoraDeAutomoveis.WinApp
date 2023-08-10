@@ -3,7 +3,9 @@ using FluentAssertions;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
@@ -40,11 +42,20 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloAluguel
             var cliente = Builder<Cliente>.CreateNew().Build();
             repositorioCliente.Inserir(cliente);
 
+            var condutor = Builder<Condutor>.CreateNew().Build();
+            repositorioCondutor.Inserir(condutor);
+            condutor.cliente = cliente;
+
+            var funcionario = Builder<Funcionario>.CreateNew().Build();
+            repositorioFuncionario.Inserir(funcionario);
+
             aluguel.GrupoDeAutomoveis = grupoDeAutomovel;
             aluguel.Automovel = automovel;
             aluguel.PlanoDeCobranca = planoDeCobranca;
             aluguel.Cupom = cupom;
             aluguel.Cliente = cliente;
+            aluguel.Condutor = condutor;
+            aluguel.Funcionario = funcionario;
 
             aluguel.DataDoAluguel = DateTime.Now.Date.AddDays(1);
             aluguel.DataDaPrevistaDevolucao = DateTime.Now.Date.AddDays(1);
