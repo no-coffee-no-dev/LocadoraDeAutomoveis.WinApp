@@ -25,21 +25,14 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
             }
             set
             {
-                ConfigurarCondutor(condutor, condutor.cliente);
+                ConfigurarCondutor(condutor);
             }
         }
 
-        public void ConfigurarCondutor(Condutor condutor, Cliente cliente)
+        public void ConfigurarCondutor(Condutor condutor)
 
         {
-            this.condutor = condutor;
-            if (condutor.cliente != null)
-            {
-                cbx_cliente.SelectedItem = condutor.cliente;
-                return;
-
-
-            }
+           
 
             txt_NomeCondutor.Text = condutor.nome;
             txt_EmailCondutor.Text = condutor.email;
@@ -48,6 +41,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
             txt_CNHCondutor.Text = condutor.CNH;
             if (condutor.validadeCNH != DateTime.MinValue)
                 dtp_ValidadeCNHCondutor.Value = condutor.validadeCNH;
+                cbx_cliente.SelectedItem = condutor.cliente;
         }
         public void AdicionarAComboBoxCliente(IRepositorioCliente repositorioCliente)
         {

@@ -23,9 +23,9 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
         public DateTime validadeCNH { get; set; }
         public enumTipoCondutor tipoCondutor { get; set; }
 
-    
 
-        public Condutor(Cliente cliente)
+
+        public Condutor()
         {
             this.cliente = cliente;
             this.nome = nome;

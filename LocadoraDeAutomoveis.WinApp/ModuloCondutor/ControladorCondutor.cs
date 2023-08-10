@@ -103,7 +103,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 
             tela.onGravarRegistro += servicoCondutor.Inserir;
 
-            tela.ConfigurarCondutor(new Funcionario());
+            tela.ConfigurarCondutor(new Condutor());
 
             DialogResult resultado = tela.ShowDialog();
 
