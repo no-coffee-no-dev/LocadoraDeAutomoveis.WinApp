@@ -1,16 +1,19 @@
 using LocadoraDeAutomoveis.Aplicacao.ModuloCliente;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCupom;
+using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloParceiro;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCliente;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
+using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
@@ -138,6 +141,7 @@ namespace LocadoraDeAutomoveis.WinApp
             IRepositorioCupom repositorioCupom = new RepositorioCupomOrm(dbContext);
             IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis = new RepositorioGrupoDeAutomoveisOrm(dbContext);
             IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaOrm(dbContext);
+            IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
 
 
             ValidadorParceiro validadorParceiro = new ValidadorParceiro();
@@ -145,6 +149,7 @@ namespace LocadoraDeAutomoveis.WinApp
             ValidadorGrupoDeAutomoveis validadorGrupoDeAutomoveis = new ValidadorGrupoDeAutomoveis();
             ValidadorPlanoDeCobranca validadorPlanoDeCobranca = new ValidadorPlanoDeCobranca();
             ValidadorCliente validadorCliente = new ValidadorCliente();
+            ValidadorFuncionario validadorFuncionario = new ValidadorFuncionario();
 
 
 
@@ -153,6 +158,7 @@ namespace LocadoraDeAutomoveis.WinApp
             ServicoGrupoDeAutomoveis servicoGrupoDeAutomoveis = new ServicoGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, validadorGrupoDeAutomoveis);
             ServicoPlanoDeCobranca servicoPlanoDeCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca, validadorPlanoDeCobranca);
             ServicoCliente servicoCliente = new ServicoCliente(repositorioCliente, validadorCliente);
+            ServicoFuncionario servicoFuncionario = new ServicoFuncionario(repositorioFuncionario, validadorFuncionario);
 
 
 
