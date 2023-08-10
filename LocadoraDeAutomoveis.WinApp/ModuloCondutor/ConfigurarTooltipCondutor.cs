@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 {
-    internal class ConfigurarTooltipCondutor
+    public class ConfigurarTooltipCondutor : ConfigurarToolTipBase
     {
+        public override string TipoCadastro => "Cadastro de Condutor";
+
+        public override string TooltipInserir => "Inserir novo Condutor";
+
+        public override string TooltipEditar => "Editar um Condutor existente";
+
+        public override string TooltipExcluir => "Excluir um Condutor existente";
     }
 }

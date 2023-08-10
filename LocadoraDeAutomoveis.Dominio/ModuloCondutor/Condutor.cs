@@ -49,5 +49,10 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
             tipoCondutor = registro.tipoCondutor;
 
         }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using System;
@@ -39,16 +40,17 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloFuncionario
         public void ConfigurarFuncionario(Funcionario funcionario)
         {
             this.funcionario = funcionario;
-            funcionario.nome = txtNomeFuncionario.Text;
-            funcionario.admissao = dTPAdmissao.Value;
-            funcionario.salario = Convert.ToDecimal(txtSalario);
+            txtNomeFuncionario.Text = funcionario.nome;
+            if (funcionario.admissao != DateTime.MinValue)
+            dTPAdmissao.Value = funcionario.admissao;
+            txtSalario.Value = funcionario.salario;
         }
 
         public Funcionario ObterFuncionario()
         {
             funcionario.nome = txtNomeFuncionario.Text;
             funcionario.admissao = dTPAdmissao.Value;
-            funcionario.salario = Convert.ToDecimal(txtSalario);
+            funcionario.salario = txtSalario.Value;
 
 
             return funcionario;

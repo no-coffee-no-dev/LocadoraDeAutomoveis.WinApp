@@ -40,11 +40,11 @@
             txt_EmailCondutor = new TextBox();
             txt_TelefoneCondutor = new TextBox();
             txt_CNHCondutor = new TextBox();
-            cbx_cliente = new ComboBox();
             cb_Cliente = new CheckBox();
             dtp_ValidadeCNHCondutor = new DateTimePicker();
-            button1 = new Button();
+            btn_salvar = new Button();
             button2 = new Button();
+            cbx_cliente = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -145,14 +145,6 @@
             txt_CNHCondutor.Size = new Size(134, 23);
             txt_CNHCondutor.TabIndex = 13;
             // 
-            // cbx_cliente
-            // 
-            cbx_cliente.FormattingEnabled = true;
-            cbx_cliente.Location = new Point(72, 33);
-            cbx_cliente.Name = "cbx_cliente";
-            cbx_cliente.Size = new Size(272, 23);
-            cbx_cliente.TabIndex = 14;
-            // 
             // cb_Cliente
             // 
             cb_Cliente.AutoSize = true;
@@ -170,14 +162,16 @@
             dtp_ValidadeCNHCondutor.Size = new Size(130, 23);
             dtp_ValidadeCNHCondutor.TabIndex = 16;
             // 
-            // button1
+            // btn_salvar
             // 
-            button1.Location = new Point(175, 360);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 17;
-            button1.Text = "Gravar";
-            button1.UseVisualStyleBackColor = true;
+            btn_salvar.DialogResult = DialogResult.OK;
+            btn_salvar.Location = new Point(175, 360);
+            btn_salvar.Name = "btn_salvar";
+            btn_salvar.Size = new Size(75, 23);
+            btn_salvar.TabIndex = 17;
+            btn_salvar.Text = "Salvar";
+            btn_salvar.UseVisualStyleBackColor = true;
+            btn_salvar.Click += btn_salvar_Click;
             // 
             // button2
             // 
@@ -188,13 +182,21 @@
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
+            // cbx_cliente
+            // 
+            cbx_cliente.FormattingEnabled = true;
+            cbx_cliente.Location = new Point(72, 33);
+            cbx_cliente.Name = "cbx_cliente";
+            cbx_cliente.Size = new Size(272, 23);
+            cbx_cliente.TabIndex = 14;
+            // 
             // TelaCondutorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(394, 411);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btn_salvar);
             Controls.Add(dtp_ValidadeCNHCondutor);
             Controls.Add(cb_Cliente);
             Controls.Add(cbx_cliente);
@@ -230,10 +232,10 @@
         private TextBox txt_EmailCondutor;
         private TextBox txt_TelefoneCondutor;
         private TextBox txt_CNHCondutor;
-        private ComboBox cbx_cliente;
         private CheckBox cb_Cliente;
         private DateTimePicker dtp_ValidadeCNHCondutor;
-        private Button button1;
+        private Button btn_salvar;
         private Button button2;
+        private ComboBox cbx_cliente;
     }
 }

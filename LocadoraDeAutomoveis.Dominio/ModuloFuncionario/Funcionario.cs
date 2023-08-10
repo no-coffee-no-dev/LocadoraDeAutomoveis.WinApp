@@ -19,5 +19,10 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloFuncionario
             admissao = registro.admissao;
             salario = registro.salario;
         }
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
+
 }

@@ -19,9 +19,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloFuncionario
             return registros.ToList();
         }
 
-        public void CadastrarCliente(Funcionario funcionario)
-        {
-            this.Inserir(funcionario);
-        }
+      
     }
 }

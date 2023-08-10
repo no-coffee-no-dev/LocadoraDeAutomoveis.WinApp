@@ -16,6 +16,12 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
         private IRepositorioFuncionario repositorioFuncionario;
         private IValidadorFuncionario validadorFuncionario;
 
+        public ServicoFuncionario(IRepositorioFuncionario repositorioFuncionario, IValidadorFuncionario validadorFuncionario)
+        {
+            this.repositorioFuncionario = repositorioFuncionario;
+            this.validadorFuncionario = validadorFuncionario;
+        }
+
         public Result Inserir(Funcionario Funcionario)
         {
             Log.Debug("Tentando inserir Funcionário...{@f}", Funcionario);

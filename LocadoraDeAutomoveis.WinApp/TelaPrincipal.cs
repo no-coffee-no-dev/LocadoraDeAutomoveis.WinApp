@@ -19,6 +19,7 @@ using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.WinApp.ModuloCliente;
 using LocadoraDeAutomoveis.WinApp.ModuloCupom;
+using LocadoraDeAutomoveis.WinApp.ModuloFuncionario;
 using LocadoraDeAutomoveis.WinApp.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloParceiro;
 using LocadoraDeAutomoveis.WinApp.ModuloPlanoDeCobranca;
@@ -168,6 +169,7 @@ namespace LocadoraDeAutomoveis.WinApp
             controladores.Add("ControladorGrupoDeAutomoveis", new ControladorGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, servicoGrupoDeAutomoveis));
             controladores.Add("ControladorPlanoDeCobranca", new ControladorPlanoDeCobranca(repositorioPlanoDeCobranca, repositorioGrupoDeAutomoveis, servicoPlanoDeCobranca));
             controladores.Add("ControladorCliente", new ControladorCliente(repositorioCliente, servicoCliente));
+            controladores.Add("ControladorFuncionario", new ControladorFuncionario(repositorioFuncionario, servicoFuncionario));
 
         }
         #endregion 

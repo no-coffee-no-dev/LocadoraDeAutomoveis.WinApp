@@ -114,7 +114,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloFuncionario
 
         public override ConfigurarToolTipBase ObtemConfiguracaoTooltip()
         {
-            throw new NotImplementedException();
+            return new ConfigurarTooltipFuncionario();
         }
 
         public override UserControl ObterListagem()
