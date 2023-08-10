@@ -46,6 +46,9 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloAluguel
             aluguel.Cupom = cupom;
             aluguel.Cliente = cliente;
 
+            aluguel.DataDoAluguel = DateTime.Now.Date.AddDays(1);
+            aluguel.DataDaPrevistaDevolucao = DateTime.Now.Date.AddDays(1);
+
             //action
             repositorioAluguel.Inserir(aluguel);
             contextoDePersistencia.GravarDados();
