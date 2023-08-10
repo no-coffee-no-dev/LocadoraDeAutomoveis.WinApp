@@ -26,12 +26,16 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 
             RuleFor(x => x.DataDoAluguel)
                 .NotNull()
-                .NotEmpty();
+                .NotEmpty()
+                .Must(x => x >= DateTime.UtcNow)
+                .WithMessage("A Data deve ser maior que hoje.");
 
 
             RuleFor(x => x.DataDaPrevistaDevolucao)
               .NotNull()
-              .NotEmpty();
+              .NotEmpty()
+              .Must(x => x > DateTime.UtcNow)
+                .WithMessage("A Data deve ser maior que hoje."); ;
 
             RuleFor(x => x.GrupoDeAutomoveis)
               .NotNull()

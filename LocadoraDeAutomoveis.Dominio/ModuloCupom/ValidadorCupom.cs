@@ -21,7 +21,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCupom
             RuleFor(x => x.DataDeValidade)
                 .NotNull()
                 .NotEmpty()
-                .When(x => x.DataDeValidade > DateTime.UtcNow);
+                .Must(x => x > DateTime.UtcNow)
+                .WithMessage("A Data deve ser maior que hoje.");
 
             RuleFor(x => x.Parceiro)
               .NotNull()
