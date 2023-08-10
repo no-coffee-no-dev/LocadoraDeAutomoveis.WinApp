@@ -96,7 +96,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 
             foreach (Condutor condutor in condutores)
             {
-                tabelaCondutor.Rows.Add(condutor.Id, condutor.cliente, condutor.nome, condutor.email,condutor.telefone,condutor.CPF,condutor.CNH,condutor.validadeCNH);
+                tabelaCondutor.Rows.Add(condutor.Id, condutor.Cliente, condutor.Nome, condutor.Email,condutor.Telefone,condutor.CPF,condutor.CNH,condutor.ValidadeCNH);
             }
         }
 

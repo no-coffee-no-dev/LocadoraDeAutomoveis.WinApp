@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,45 +15,51 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
     }
     public class Condutor : EntidadeBase<Condutor>
     {
-        public Cliente cliente {  get; set; }
-        public string nome {  get; set; }
-        public string email { get; set; }
-        public string telefone { get; set; }
+        public Cliente Cliente {  get; set; }
+        public string Nome {  get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
         public string CPF { get; set; }
         public string CNH { get; set; }
-        public DateTime validadeCNH { get; set; }
-        public enumTipoCondutor tipoCondutor { get; set; }
-
-
+        public DateTime ValidadeCNH { get; set; }
+        public enumTipoCondutor TipoCondutor { get; set; }
 
         public Condutor()
         {
-            this.cliente = cliente;
-            this.nome = nome;
-            this.email = email;
-            this.telefone = telefone;
-            this.CPF = CPF;
-            this.CNH = CNH;
-            this.validadeCNH = validadeCNH;
-            this.tipoCondutor = tipoCondutor;
+        }
+
+        public Condutor(Guid id) : this()
+        {
+            Id = id;
+        }
+        public Condutor(Guid id, Cliente cliente, string nome, string email, string telefone, string cPF, string cNH, DateTime validadeCNH, enumTipoCondutor tipoCondutor) : this(id)
+        {
+            Cliente = cliente;
+            Nome = nome;
+            Email = email;
+            Telefone = telefone;
+            CPF = cPF;
+            CNH = cNH;
+            ValidadeCNH = validadeCNH;
+            TipoCondutor = tipoCondutor;
         }
 
         public override void Atualizar(Condutor registro)
         {
-            cliente = registro.cliente;
-            nome = registro.nome;
-            email = registro.email;
-            telefone = registro.telefone;
+            Cliente = registro.Cliente;
+            Nome = registro.Nome;
+            Email = registro.Email;
+            Telefone = registro.Telefone;
             CPF = registro.CPF;
             CNH = registro.CNH;
-            validadeCNH = registro.validadeCNH;
-            tipoCondutor = registro.tipoCondutor;
+            ValidadeCNH = registro.ValidadeCNH;
+            TipoCondutor = registro.TipoCondutor;
 
         }
 
         public override string? ToString()
         {
-            return $"{nome}";
+            return $"{Nome}";
         }
     }
 }

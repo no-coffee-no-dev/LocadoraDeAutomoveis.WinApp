@@ -111,12 +111,12 @@ namespace LocadoraDeAutomoveis.WinApp.Compartilhado.IoC
             servicos.AddTransient<ControladorTaxaServico>();
 
             servicos.AddTransient<IRepositorioCondutor, RepositorioCondutorOrm>();
-            servicos.AddTransient<IValidadorCondutor, ValidadorCondutor>();
+            servicos.AddTransient<IValidadorCondutor,ValidadorCondutor>();
             servicos.AddTransient<ServicoCondutor>();
             servicos.AddTransient<ControladorCondutor>();
 
             servicos.AddTransient<IRepositorioFuncionario, RepositorioFuncionarioOrm>();
-            servicos.AddTransient < IValidadorFuncionario, ValidadorFuncionario>();
+            servicos.AddTransient <IValidadorFuncionario,ValidadorFuncionario>();
             servicos.AddTransient<ServicoFuncionario>();
             servicos.AddTransient<ControladorFuncionario>();
 

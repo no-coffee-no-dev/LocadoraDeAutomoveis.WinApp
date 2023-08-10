@@ -19,13 +19,13 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCondutor
             condutorBuilder.ToTable("TBCondutor");
 
             condutorBuilder.Property(p => p.Id).IsRequired().ValueGeneratedNever();
-            condutorBuilder.Property(p => p.nome).HasColumnType("varchar(100)").IsRequired();
-            condutorBuilder.Property(p => p.email).HasColumnType("varchar(100)").IsRequired();
-            condutorBuilder.Property(p => p.telefone).HasColumnType("varchar(100)").IsRequired();
+            condutorBuilder.Property(p => p.Nome).HasColumnType("varchar(100)").IsRequired();
+            condutorBuilder.Property(p => p.Email).HasColumnType("varchar(100)").IsRequired();
+            condutorBuilder.Property(p => p.Telefone).HasColumnType("varchar(100)").IsRequired();
             condutorBuilder.Property(p => p.CPF).HasColumnType("varchar(100)").IsRequired();
             condutorBuilder.Property(p => p.CNH).HasColumnType("varchar(100)").IsRequired();
-            condutorBuilder.Property(p => p.validadeCNH).HasColumnType("varchar(100)").IsRequired();
-            condutorBuilder.HasOne(p => p.cliente)
+            condutorBuilder.Property(p => p.ValidadeCNH).HasColumnType("varchar(100)").IsRequired();
+            condutorBuilder.HasOne(p => p.Cliente)
                .WithMany()
                .IsRequired()
                .HasConstraintName("FK_TBCondutor_TBCliente")

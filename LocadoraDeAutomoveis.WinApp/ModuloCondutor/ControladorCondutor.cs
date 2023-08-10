@@ -20,11 +20,11 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
         private TabelaCondutorControl tabelaCondutor;
         private ServicoCondutor servicoCondutor;
 
-        public ControladorCondutor(IRepositorioCliente repositorioCliente, IRepositorioCondutor repositorioCondutor, TabelaCondutorControl tabelaCondutor)
+        public ControladorCondutor(IRepositorioCliente repositorioCliente, IRepositorioCondutor repositorioCondutor, ServicoCondutor servicoCondutor)
         {
             this.repositorioCliente = repositorioCliente;
             this.repositorioCondutor = repositorioCondutor;
-            this.tabelaCondutor = tabelaCondutor;
+            this.servicoCondutor = servicoCondutor;
         }
 
         public override void CarregarEntidades()
@@ -51,7 +51,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
                 return;
             }
 
-            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja realmente excluir o Condutor {condutorSelecionado.nome}?",
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja realmente excluir o Condutor {condutorSelecionado.Nome}?",
               "Exclusão de Condutor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (opcaoEscolhida == DialogResult.OK)

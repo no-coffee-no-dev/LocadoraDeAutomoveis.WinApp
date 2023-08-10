@@ -11,10 +11,14 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
     {
         public ValidadorCondutor()
         {
-            RuleFor(x => x.nome)
+            RuleFor(x => x.Nome)
                 .NotEmpty()
                 .NotNull()
                 .MinimumLength(3);
+
+            RuleFor(x => x.Cliente)
+               .NotEmpty()
+               .NotNull();
         }
     }
 }

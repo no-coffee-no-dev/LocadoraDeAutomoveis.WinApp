@@ -87,8 +87,8 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             {
                 aluguel.TaxasEServicos.Add((TaxaServico)item);
             }
-            aluguel.DataDoAluguel = datePickerDataDoAluguel.Value.Date;
-            aluguel.DataDaPrevistaDevolucao = datePickerDataDaDevolucao.Value.Date;
+            aluguel.DataDoAluguel = datePickerDataDoAluguel.Value;
+            aluguel.DataDaPrevistaDevolucao = datePickerDataDaDevolucao.Value;
             aluguel.ValorFinal = aluguel.CalcularValorFinal();
             aluguel.Cupom = cupom;
             lblValorPrevisto.Text = "R$ " + aluguel.ValorFinal.ToString();

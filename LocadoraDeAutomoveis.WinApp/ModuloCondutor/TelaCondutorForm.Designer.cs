@@ -154,6 +154,7 @@
             cb_Cliente.TabIndex = 15;
             cb_Cliente.Text = "Cliente é condutor";
             cb_Cliente.UseVisualStyleBackColor = true;
+            cb_Cliente.CheckedChanged += cb_Cliente_CheckedChanged;
             // 
             // dtp_ValidadeCNHCondutor
             // 
@@ -175,9 +176,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(269, 360);
+            button2.DialogResult = DialogResult.Cancel;
+            button2.Location = new Point(256, 360);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(90, 23);
             button2.TabIndex = 18;
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
@@ -194,7 +196,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(394, 411);
+            ClientSize = new Size(357, 389);
             Controls.Add(button2);
             Controls.Add(btn_salvar);
             Controls.Add(dtp_ValidadeCNHCondutor);
