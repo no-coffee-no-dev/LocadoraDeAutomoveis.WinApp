@@ -116,12 +116,16 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCliente
         {
             txtCPF.Enabled = true;
             txtCNPJ.Enabled = false;
+            txtCNH.Enabled = true;
+            txtRG.Enabled = true;
         }
 
         private void rdbPessoaJuridica_CheckedChanged_1(object sender, EventArgs e)
         {
             txtCNPJ.Enabled = true;
             txtCPF.Enabled = false;
+            txtCNH.Enabled = false;
+            txtRG.Enabled = false;
         }
     }
 }
