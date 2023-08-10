@@ -11,6 +11,47 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
                 .NotEmpty()
                 .NotNull()
                 .MinimumLength(3);
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .NotNull();
+            
+            RuleFor(x => x.Telefone)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.Estado)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.Bairro)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.Cidade)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.Rua)
+                .NotEmpty()
+                .NotNull();
+
+            RuleFor(x => x.Numero)
+                .NotEmpty()
+                .NotNull();
+
+
+            RuleFor(x => x.CPF)
+                .NotEmpty() 
+                .NotNull();
+
+            RuleFor(x => x.RG)
+                .NotEmpty()
+                .NotNull();
+            
+            RuleFor(x => x.CNH)
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

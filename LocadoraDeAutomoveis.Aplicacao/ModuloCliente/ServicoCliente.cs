@@ -19,11 +19,12 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             this.contextoPersistencia = contextoPersistencia;
         }
 
-        public Result Inserir(Cliente Cliente)
-        {
-            Log.Debug("Tentando inserir Cliente...{@c}", Cliente);
 
-            List<string> erros = ValidarCliente(Cliente);
+        public Result Inserir(Cliente cliente)
+        {
+            Log.Debug("Tentando inserir Cliente...{@c}", cliente);
+
+            List<string> erros = ValidarCliente(cliente);
 
             if (erros.Count() > 0)
             {
@@ -34,7 +35,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
             try
             {
-                repositorioCliente.Inserir(Cliente);
+                repositorioCliente.Inserir(cliente);
 
                 contextoPersistencia.GravarDados();
 
@@ -46,18 +47,18 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             {
                 string msgErro = "Falha ao tentar inserir cliente.";
 
-                Log.Error(exc, msgErro + "{@c}", Cliente);
+                Log.Error(exc, msgErro + "{@c}", cliente);
 
                 return Result.Fail(msgErro); //cenário 3
             }
         }
 
 
-        public Result Atualizar(Cliente Cliente)
+        public Result Atualizar(Cliente cliente)
         {
-            Log.Debug("Tentando editar Cliente...{@c}", Cliente);
+            Log.Debug("Tentando editar Cliente...{@c}", cliente);
 
-            List<string> erros = ValidarCliente(Cliente);
+            List<string> erros = ValidarCliente(cliente);
 
             if (erros.Count() > 0)
             {
@@ -66,7 +67,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             }
             try
             {
-                repositorioCliente.Atualizar(Cliente);
+                repositorioCliente.Atualizar(cliente);
 
                 contextoPersistencia.GravarDados();
 
@@ -78,29 +79,29 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             {
                 string msgErro = "Falha ao tentar editar Cliente.";
 
-                Log.Error(exc, msgErro + "{@c}", Cliente);
+                Log.Error(exc, msgErro + "{@c}", cliente);
 
                 return Result.Fail(msgErro);
             }
         }
 
 
-        public Result Excluir(Cliente Cliente)
+        public Result Excluir(Cliente cliente)
         {
-            Log.Debug("Tentando excluir Cliente...{@c}", Cliente);
+            Log.Debug("Tentando excluir Cliente...{@c}", cliente);
 
             try
             {
-                bool ClienteExiste = repositorioCliente.Existe(Cliente);
+                bool ClienteExiste = repositorioCliente.Existe(cliente);
 
                 if (ClienteExiste == false)
                 {
-                    Log.Warning("Cliente {ClienteId} não encontrada para excluir", Cliente.Id);
+                    Log.Warning("Cliente {ClienteId} não encontrada para excluir", cliente.Id);
 
                     return Result.Fail("Cliente não encontrado");
                 }
 
-                repositorioCliente.Deletar(Cliente);
+                repositorioCliente.Deletar(cliente);
 
                 contextoPersistencia.GravarDados();
 
@@ -116,7 +117,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
                 string msgErro = "não foi possivel deletar o cliente";
 
-                Log.Error(ex, msgErro + " {ClienteId}", Cliente.Id);
+                Log.Error(ex, msgErro + " {ClienteId}", cliente.Id);
 
                 return Result.Fail(erros);
             }

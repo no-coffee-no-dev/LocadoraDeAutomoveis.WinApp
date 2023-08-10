@@ -1,6 +1,5 @@
 ﻿
 using LocadoraDeAutomoveis.Dominio.Compartilhado;
-using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
 {
@@ -32,10 +31,3 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
         }
     }
 }
-
-//ublic interface IRepositorioDisciplina : IRepositorio<Disciplina>
-//{
-//Disciplina SelecionarPorNome(string nome);
-//List<Disciplina> SelecionarTodos(bool incluirMaterias = false, bool incluirQuestoes = false);
-//}
-//}
