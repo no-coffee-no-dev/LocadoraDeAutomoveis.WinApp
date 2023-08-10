@@ -97,8 +97,14 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor
 
                 repositorioCondutor.Deletar(Condutor);
 
-                contextoPersistencia.GravarDados();
+                try
+                {
+                    contextoPersistencia.GravarDados();
+                }
+                catch (Exception ex)
+                {
 
+                }
                 Log.Debug("Condutor {CondutorID} excluído com sucesso", Condutor.Id);
 
                 return Result.Ok();

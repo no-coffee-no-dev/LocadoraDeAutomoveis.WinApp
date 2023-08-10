@@ -158,6 +158,7 @@
             // 
             // dtp_ValidadeCNHCondutor
             // 
+            dtp_ValidadeCNHCondutor.Format = DateTimePickerFormat.Short;
             dtp_ValidadeCNHCondutor.Location = new Point(72, 298);
             dtp_ValidadeCNHCondutor.Name = "dtp_ValidadeCNHCondutor";
             dtp_ValidadeCNHCondutor.Size = new Size(130, 23);

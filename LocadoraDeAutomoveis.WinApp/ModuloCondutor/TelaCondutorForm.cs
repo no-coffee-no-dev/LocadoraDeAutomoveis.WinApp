@@ -84,7 +84,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
         {
             if (condutor.Cliente != null)
             {
-                if(cb_Cliente.Checked)
+                if (cb_Cliente.Checked)
                 {
                     txt_NomeCondutor.Text = condutor.Cliente.Nome;
                     txt_EmailCondutor.Text = condutor.Cliente.Email;

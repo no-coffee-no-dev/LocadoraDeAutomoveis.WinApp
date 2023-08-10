@@ -33,7 +33,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 
             tabelaCondutor.AtualizarRegistros(condutor);
 
-            stringRodape = string.Format("Visualizando {0} condutor{1}", condutor.Count, condutor.Count == 1 ? "" : "s");
+            stringRodape = string.Format("Visualizando {0} condutor{1}", condutor.Count, condutor.Count == 1 ? "" : "es");
 
             TelaPrincipal.Instancia.AtualizarRodape(stringRodape);
         }
@@ -115,7 +115,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 
         public override ConfigurarToolTipBase ObtemConfiguracaoTooltip()
         {
-            return new ConfigurarTooltipFuncionario();
+            return new ConfigurarTooltipCondutor();
         }
 
         public override UserControl ObterListagem()
