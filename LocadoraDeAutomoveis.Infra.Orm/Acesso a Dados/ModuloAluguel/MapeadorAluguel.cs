@@ -53,6 +53,16 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAluguel
                .HasConstraintName("FK_TBAluguel_TBGrupoDeAutoveis")
                .OnDelete(DeleteBehavior.NoAction);
 
+            aluguelBuilder.HasOne(a => a.Funcionario).WithMany()
+              .IsRequired()
+              .HasConstraintName("FK_TBAluguel_TBFuncionario")
+              .OnDelete(DeleteBehavior.NoAction);
+
+            aluguelBuilder.HasOne(a => a.Condutor).WithMany()
+              .IsRequired()
+              .HasConstraintName("FK_TBAluguel_TBCondutor")
+              .OnDelete(DeleteBehavior.NoAction);
+
             aluguelBuilder.HasMany(a => a.TaxasEServicos)
                 .WithMany()
                 .UsingEntity(x => x.ToTable("TBAluguel_TBTaxaServico"));

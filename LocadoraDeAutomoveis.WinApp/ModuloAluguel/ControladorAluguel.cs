@@ -1,14 +1,14 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel;
-using LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
-using LocadoraDeAutomoveis.WinApp.ModuloAutomovel;
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 {
@@ -21,10 +21,12 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
         private IRepositorioCupom repositorioCupom;
         private IRepositorioTaxaServico repositorioTaxaServico;
         private IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca;
+        private IRepositorioCondutor repositorioCondutor;
+        private IRepositorioFuncionario repositorioFuncionario;
         private TabelaAluguelControl tabelaAluguel;
         private ServicoAluguel servicoAluguel;
 
-        public ControladorAluguel(IRepositorioAutomovel repositorioAutomovel, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioAluguel repositorioAluguel, IRepositorioCliente repositorioCliente, IRepositorioCupom repositorioCupom, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, ServicoAluguel servicoAluguel)
+        public ControladorAluguel(IRepositorioAutomovel repositorioAutomovel, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioAluguel repositorioAluguel, IRepositorioCliente repositorioCliente, IRepositorioCupom repositorioCupom, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioCondutor repositorioCondutor, IRepositorioFuncionario repositorioFuncionario, ServicoAluguel servicoAluguel)
         {
             this.repositorioAutomovel = repositorioAutomovel;
             this.repositorioGrupoDeAutomoveis = repositorioGrupoDeAutomoveis;
@@ -33,6 +35,8 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             this.repositorioCupom = repositorioCupom;
             this.repositorioTaxaServico = repositorioTaxaServico;
             this.repositorioPlanoDeCobranca = repositorioPlanoDeCobranca;
+            this.repositorioCondutor = repositorioCondutor;
+            this.repositorioFuncionario = repositorioFuncionario;
             this.servicoAluguel = servicoAluguel;
         }
 
@@ -95,7 +99,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
                 return;
             }
 
-            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom, repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioAutomovel, repositorioTaxaServico);
+            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom, repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioAutomovel, repositorioTaxaServico,repositorioCondutor,repositorioFuncionario);
 
             tela.onGravarRegistro += servicoAluguel.Atualizar;
 
@@ -111,7 +115,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
         public override void Inserir()
         {
-            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom,repositorioGrupoDeAutomoveis,repositorioCliente,repositorioPlanoDeCobranca, repositorioAutomovel,repositorioTaxaServico);
+            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom,repositorioGrupoDeAutomoveis,repositorioCliente,repositorioPlanoDeCobranca, repositorioAutomovel,repositorioTaxaServico, repositorioCondutor, repositorioFuncionario);
 
             tela.onGravarRegistro += servicoAluguel.Inserir;
             

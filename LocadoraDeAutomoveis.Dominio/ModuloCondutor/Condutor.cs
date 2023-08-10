@@ -52,7 +52,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
 
         public override string? ToString()
         {
-            return base.ToString();
+            return $"{nome}";
         }
     }
 }

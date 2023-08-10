@@ -21,7 +21,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloFuncionario
         }
         public override string? ToString()
         {
-            return base.ToString();
+            return $"{nome}";
         }
     }
 

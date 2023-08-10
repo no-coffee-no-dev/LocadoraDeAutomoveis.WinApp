@@ -1,7 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
@@ -20,11 +22,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
     public class Aluguel : EntidadeBase<Aluguel>
     {
         public decimal ValorFinal { get; set; }
-        //public Funcionario funcionario { get; set; }
+        public Funcionario Funcionario { get; set; }
         public Cliente Cliente { get; set; }
         public GrupoDeAutomoveis GrupoDeAutomoveis { get; set; }
         public DateTime DataDoAluguel { get; set; }
-        //public Condutor Condutor { get; set; }
+        public Condutor Condutor { get; set; }
         public Automovel Automovel { get; set; }
         public DateTime DataDaPrevistaDevolucao { get; set; }
         public PlanoDeCobranca PlanoDeCobranca { get; set; }
@@ -40,23 +42,27 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
             Id = id;
         }
 
-        public Aluguel(Guid id, decimal valorFinal, List<TaxaServico> taxasEServicos, PlanoDeCobranca planoDeCobranca , Cliente cliente, GrupoDeAutomoveis grupoDeAutomoveis, DateTime dataDoAluguel, Automovel automovel, DateTime dataDaPrevistaDevolucao, Cupom? cupom) : this(id)
+        public Aluguel(Guid id,decimal valorFinal, Funcionario funcionario, Cliente cliente, GrupoDeAutomoveis grupoDeAutomoveis, DateTime dataDoAluguel, Condutor condutor, Automovel automovel, DateTime dataDaPrevistaDevolucao, PlanoDeCobranca planoDeCobranca, Cupom? cupom, List<TaxaServico> taxasEServicos) : this(id)
         {
             ValorFinal = valorFinal;
-            PlanoDeCobranca = planoDeCobranca;
-            TaxasEServicos = new();
+            Funcionario = funcionario;
             Cliente = cliente;
             GrupoDeAutomoveis = grupoDeAutomoveis;
             DataDoAluguel = dataDoAluguel;
+            Condutor = condutor;
             Automovel = automovel;
             DataDaPrevistaDevolucao = dataDaPrevistaDevolucao;
+            PlanoDeCobranca = planoDeCobranca;
             Cupom = cupom;
+            TaxasEServicos = taxasEServicos;
         }
 
         public override void Atualizar(Aluguel registro)
         {
             ValorFinal = registro.ValorFinal;
             Cliente = registro.Cliente;
+            Condutor = registro.Condutor;
+            Funcionario = registro.Funcionario;
             TaxasEServicos = registro.TaxasEServicos;
             PlanoDeCobranca = registro.PlanoDeCobranca;
             GrupoDeAutomoveis = registro.GrupoDeAutomoveis;
@@ -76,7 +82,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 
         public override string? ToString()
         {
-            return $"Aluguel do Carro{Automovel.Marca} {Automovel.Cor}";
+            return $"Aluguel do Carro{Automovel.Marca}  {Automovel.Cor}";
         }
 
         public decimal CalcularValorFinal()
