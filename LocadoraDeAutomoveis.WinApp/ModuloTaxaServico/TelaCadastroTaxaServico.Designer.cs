@@ -35,49 +35,52 @@
             rdbPrecoFixo = new RadioButton();
             rdbCobrancaDiaria = new RadioButton();
             groupBox1 = new GroupBox();
-            btnGravar = new Button();
-            btnCancelar = new Button();
+            btnSalvar = new Button();
+            button1 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // Nome
             // 
             Nome.AutoSize = true;
-            Nome.Location = new Point(35, 56);
+            Nome.Location = new Point(31, 42);
             Nome.Name = "Nome";
-            Nome.Size = new Size(57, 20);
+            Nome.Size = new Size(46, 15);
             Nome.TabIndex = 0;
             Nome.Text = "Nome: ";
             // 
             // Preco
             // 
             Preco.AutoSize = true;
-            Preco.Location = new Point(35, 114);
+            Preco.Location = new Point(31, 86);
             Preco.Name = "Preco";
-            Preco.Size = new Size(49, 20);
+            Preco.Size = new Size(40, 15);
             Preco.TabIndex = 1;
             Preco.Text = "Preço:";
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(98, 56);
+            txtNome.Location = new Point(86, 42);
+            txtNome.Margin = new Padding(3, 2, 3, 2);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(409, 27);
+            txtNome.Size = new Size(358, 23);
             txtNome.TabIndex = 2;
             // 
             // txtPreco
             // 
-            txtPreco.Location = new Point(98, 111);
+            txtPreco.Location = new Point(86, 83);
+            txtPreco.Margin = new Padding(3, 2, 3, 2);
             txtPreco.Name = "txtPreco";
-            txtPreco.Size = new Size(162, 27);
+            txtPreco.Size = new Size(142, 23);
             txtPreco.TabIndex = 3;
             // 
             // rdbPrecoFixo
             // 
             rdbPrecoFixo.AutoSize = true;
-            rdbPrecoFixo.Location = new Point(44, 37);
+            rdbPrecoFixo.Location = new Point(38, 28);
+            rdbPrecoFixo.Margin = new Padding(3, 2, 3, 2);
             rdbPrecoFixo.Name = "rdbPrecoFixo";
-            rdbPrecoFixo.Size = new Size(98, 24);
+            rdbPrecoFixo.Size = new Size(80, 19);
             rdbPrecoFixo.TabIndex = 4;
             rdbPrecoFixo.TabStop = true;
             rdbPrecoFixo.Text = "Preço Fixo";
@@ -86,9 +89,10 @@
             // rdbCobrancaDiaria
             // 
             rdbCobrancaDiaria.AutoSize = true;
-            rdbCobrancaDiaria.Location = new Point(212, 37);
+            rdbCobrancaDiaria.Location = new Point(186, 28);
+            rdbCobrancaDiaria.Margin = new Padding(3, 2, 3, 2);
             rdbCobrancaDiaria.Name = "rdbCobrancaDiaria";
-            rdbCobrancaDiaria.Size = new Size(137, 24);
+            rdbCobrancaDiaria.Size = new Size(109, 19);
             rdbCobrancaDiaria.TabIndex = 5;
             rdbCobrancaDiaria.TabStop = true;
             rdbCobrancaDiaria.Text = "Cobrança Diária";
@@ -98,45 +102,49 @@
             // 
             groupBox1.Controls.Add(rdbPrecoFixo);
             groupBox1.Controls.Add(rdbCobrancaDiaria);
-            groupBox1.Location = new Point(28, 171);
+            groupBox1.Location = new Point(24, 128);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(479, 85);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(419, 64);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Plano de Cálculo";
             // 
-            // btnGravar
+            // btnSalvar
             // 
-            btnGravar.Location = new Point(276, 288);
-            btnGravar.Name = "btnGravar";
-            btnGravar.Size = new Size(101, 59);
-            btnGravar.TabIndex = 7;
-            btnGravar.Text = "Gravar";
-            btnGravar.UseVisualStyleBackColor = true;
-            btnGravar.Click += btnGravar_Click_1;
+            btnSalvar.DialogResult = DialogResult.OK;
+            btnSalvar.Location = new Point(297, 234);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(79, 33);
+            btnSalvar.TabIndex = 46;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
-            // btnCancelar
+            // button1
             // 
-            btnCancelar.Location = new Point(405, 288);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(101, 59);
-            btnCancelar.TabIndex = 8;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click_1;
+            button1.DialogResult = DialogResult.Cancel;
+            button1.Location = new Point(382, 234);
+            button1.Name = "button1";
+            button1.Size = new Size(79, 33);
+            button1.TabIndex = 47;
+            button1.Text = "Cancelar";
+            button1.UseVisualStyleBackColor = true;
             // 
             // TelaCadastroTaxaServico
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(541, 372);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnGravar);
+            ClientSize = new Size(473, 279);
+            Controls.Add(button1);
+            Controls.Add(btnSalvar);
             Controls.Add(groupBox1);
             Controls.Add(txtPreco);
             Controls.Add(txtNome);
             Controls.Add(Preco);
             Controls.Add(Nome);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "TelaCadastroTaxaServico";
             Text = "Cadastro de Taxa ou Serviço";
             groupBox1.ResumeLayout(false);
@@ -154,7 +162,7 @@
         private RadioButton rdbPrecoFixo;
         private RadioButton rdbCobrancaDiaria;
         private GroupBox groupBox1;
-        private Button btnGravar;
-        private Button btnCancelar;
+        private Button btnSalvar;
+        private Button button1;
     }
 }

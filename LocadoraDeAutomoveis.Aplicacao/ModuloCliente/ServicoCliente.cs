@@ -39,7 +39,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
                 contextoPersistencia.GravarDados();
 
-                Log.Debug("Cliente {ClienteId} inserido com sucesso", Cliente.Id);
+                Log.Debug("Cliente {ClienteId} inserido com sucesso", cliente.Id);
 
                 return Result.Ok(); //cenário 1
             }
@@ -71,7 +71,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
                 contextoPersistencia.GravarDados();
 
-                Log.Debug("Cliente {ClienteId} editado com sucesso", Cliente.Id);
+                Log.Debug("Cliente {ClienteId} editado com sucesso", cliente.Id);
 
                 return Result.Ok();
             }
@@ -105,7 +105,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
                 contextoPersistencia.GravarDados();
 
-                Log.Debug("Cliente {ClienteId} excluída com sucesso", Cliente.Id);
+                Log.Debug("Cliente {ClienteId} excluída com sucesso", cliente.Id);
 
                 return Result.Ok();
             }

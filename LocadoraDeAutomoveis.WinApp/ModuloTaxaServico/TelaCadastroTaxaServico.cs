@@ -49,7 +49,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloTaxaServico
             }
         }
 
-        private void btnGravar_Click_1(object sender, EventArgs e)
+        private void btnSalvar_Click(object sender, EventArgs e)
         {
             this.taxaServico = ObterTaxaServico();
 
@@ -63,11 +63,6 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloTaxaServico
 
                 DialogResult = DialogResult.None;
             }
-        }
-
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

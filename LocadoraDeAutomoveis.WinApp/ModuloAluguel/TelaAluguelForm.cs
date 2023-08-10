@@ -73,7 +73,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             aluguel.PlanoDeCobranca = (PlanoDeCobranca)listPlanoDeCobranca.SelectedItem;
             aluguel.DataDoAluguel = datePickerDataDoAluguel.Value;
             aluguel.DataDaPrevistaDevolucao = datePickerDataDaDevolucao.Value;
-
+           // aluguel.ValorFinal = aluguel.CalcularValorFinal();
 
 
 

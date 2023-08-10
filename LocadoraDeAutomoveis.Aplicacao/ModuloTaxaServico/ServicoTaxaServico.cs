@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using Microsoft.Data.SqlClient;
 using Serilog;
@@ -9,13 +10,14 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico
     {
         private IRepositorioTaxaServico repositorioTaxaServico;
         private IValidadorTaxaServico validadorTaxaServico;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoTaxaServico(IRepositorioTaxaServico repositorioTaxaServico, IValidadorTaxaServico validadorTaxaServico)
+        public ServicoTaxaServico(IRepositorioTaxaServico repositorioTaxaServico, IValidadorTaxaServico validadorTaxaServico, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioTaxaServico = repositorioTaxaServico;
             this.validadorTaxaServico = validadorTaxaServico;
+            this.contextoPersistencia = contextoPersistencia;
         }
-
 
         public Result Inserir(TaxaServico taxaServico)
         {
@@ -24,11 +26,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico
             List<string> erros = ValidarTaxaServico(taxaServico);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros); //cenário 2
-
+            }
             try
             {
                 repositorioTaxaServico.Inserir(taxaServico);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("TaxaServico {TaxaServicoId} inserido com sucesso", taxaServico.Id);
 
@@ -52,11 +58,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico
             List<string> erros = ValidarTaxaServico(taxaServico);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioTaxaServico.Atualizar(taxaServico);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("TaxaServico {TaxaServicoId} editado com sucesso", taxaServico.Id);
 
@@ -90,12 +100,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico
 
                 repositorioTaxaServico.Deletar(taxaServico);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("TaxaServico {TaxaServicoId} excluída com sucesso", taxaServico.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro = "não foi possivel deletar a TaxaServico";
