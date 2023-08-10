@@ -28,9 +28,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
                 .NotNull()
                 .NotEmpty();
 
-            RuleFor(x => x.Cupom)
-              .NotNull();
-
 
             RuleFor(x => x.DataDaPrevistaDevolucao)
               .NotNull()

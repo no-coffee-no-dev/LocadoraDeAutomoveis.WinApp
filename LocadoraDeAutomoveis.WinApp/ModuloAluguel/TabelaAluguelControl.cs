@@ -90,7 +90,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
             foreach (Aluguel aluguel in alugueis)
             {                
-                tabelaAluguel.Rows.Add(aluguel.Id, aluguel.ValorFinal, aluguel.Cliente.Nome, aluguel.GrupoDeAutomoveis.Nome, aluguel.DataDoAluguel.ToString("d"), aluguel.DataDaPrevistaDevolucao.ToString("d"), aluguel.PlanoDeCobranca.TipoDePlano, aluguel.Cupom.Valor);
+                tabelaAluguel.Rows.Add(aluguel.Id, aluguel.ValorFinal, aluguel.Cliente.Nome, aluguel.GrupoDeAutomoveis.Nome, aluguel.DataDoAluguel.ToString("d"), aluguel.DataDaPrevistaDevolucao.ToString("d"), aluguel.PlanoDeCobranca.TipoDePlano, aluguel.Cupom?.Valor == null ? "Nao possui Cupom" : aluguel.Cupom?.Valor);
             }
         }
 

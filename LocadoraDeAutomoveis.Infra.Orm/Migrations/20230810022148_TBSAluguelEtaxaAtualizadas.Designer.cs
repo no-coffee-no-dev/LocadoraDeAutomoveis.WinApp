@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeAutomoveisDbContext))]
-    [Migration("20230809195311_TBAluguel")]
-    partial class TBAluguel
+    [Migration("20230810022148_TBSAluguelEtaxaAtualizadas")]
+    partial class TBSAluguelEtaxaAtualizadas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AluguelTaxaServico", b =>
+                {
+                    b.Property<Guid>("AluguelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TaxasEServicosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AluguelId", "TaxasEServicosId");
+
+                    b.HasIndex("TaxasEServicosId");
+
+                    b.ToTable("TBAluguel_TBTaxaServico", (string)null);
+                });
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", b =>
                 {
@@ -36,7 +51,7 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CupomId")
+                    b.Property<Guid?>("CupomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataDaPrevistaDevolucao")
@@ -260,6 +275,41 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.ToTable("TBPlanoDeCobranca", (string)null);
                 });
 
+            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloTaxaServico.TaxaServico", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("PlanoDeCalculo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TBTaxaServico", (string)null);
+                });
+
+            modelBuilder.Entity("AluguelTaxaServico", b =>
+                {
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", null)
+                        .WithMany()
+                        .HasForeignKey("AluguelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloTaxaServico.TaxaServico", null)
+                        .WithMany()
+                        .HasForeignKey("TaxasEServicosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", b =>
                 {
                     b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAutomovel.Automovel", "Automovel")
@@ -280,7 +330,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                         .WithMany()
                         .HasForeignKey("CupomId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
                         .HasConstraintName("FK_TBAluguel_TBCupom");
 
                     b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel.GrupoDeAutomoveis", "GrupoDeAutomoveis")

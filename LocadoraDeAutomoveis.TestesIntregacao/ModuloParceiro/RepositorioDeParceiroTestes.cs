@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao
 
             //action
             repositorioParceiro.Inserir(parceiro);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioParceiro.Busca(parceiro.Id).Should().Be(parceiro);
         }
@@ -31,7 +31,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao
 
             //action
             repositorioParceiro.Atualizar(parceiro);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioParceiro.Busca(parceiro.Id)
                 .Should().Be(parceiro);
@@ -47,7 +47,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao
 
             //action
             repositorioParceiro.Deletar(disciplina);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioParceiro.Busca(disciplina.Id)
                 .Should().BeNull();

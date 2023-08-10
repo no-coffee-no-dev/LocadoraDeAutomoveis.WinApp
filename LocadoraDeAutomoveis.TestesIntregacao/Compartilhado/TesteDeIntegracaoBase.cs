@@ -1,4 +1,5 @@
 ﻿using FizzWare.NBuilder;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
@@ -34,6 +35,8 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
         protected IRepositorioAutomovel repositorioAutomovel;
         protected IRepositorioAluguel repositorioAluguel;
         protected IRepositorioCliente repositorioCliente;
+
+        protected IContextoPersistencia contextoDePersistencia;
         public TesteDeIntegracaoBase()
         {
             LimparTabelas();
@@ -45,6 +48,8 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
             optionsBuilder.UseSqlServer(connectionString);
 
             var dbContext = new LocadoraDeAutomoveisDbContext(optionsBuilder.Options);
+            contextoDePersistencia = dbContext;
+
 
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             repositorioCupom = new RepositorioCupomOrm(dbContext);
@@ -54,13 +59,48 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.Compartilhado
             repositorioAluguel = new RepositorioAluguelOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
 
-            BuilderSetup.SetCreatePersistenceMethod<Parceiro>(repositorioParceiro.Inserir);
-            BuilderSetup.SetCreatePersistenceMethod<Cupom>(repositorioCupom.Inserir);
-            BuilderSetup.SetCreatePersistenceMethod<GrupoDeAutomoveis>(repositorioGrupoDeAutomoveis.Inserir);
-            BuilderSetup.SetCreatePersistenceMethod<PlanoDeCobranca>(repositorioPlanoDeCobranca.Inserir);
-            BuilderSetup.SetCreatePersistenceMethod<Automovel>(repositorioAutomovel.Inserir);
-            BuilderSetup.SetCreatePersistenceMethod<Aluguel>(repositorioAluguel.Inserir);
-            BuilderSetup.SetCreatePersistenceMethod<Cliente>(repositorioCliente.Inserir);
+            BuilderSetup.SetCreatePersistenceMethod<Parceiro>((parceiro) =>
+            {
+                repositorioParceiro.Inserir(parceiro);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<Cupom>((cupom) =>
+            {
+                repositorioCupom.Inserir(cupom);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<GrupoDeAutomoveis>((grupoDeAutomoveis) =>
+            {
+                repositorioGrupoDeAutomoveis.Inserir(grupoDeAutomoveis);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<PlanoDeCobranca>((planoDeCobranca) =>
+            {
+                repositorioPlanoDeCobranca.Inserir(planoDeCobranca);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<Automovel>((automovel) =>
+            {
+                repositorioAutomovel.Inserir(automovel);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<Aluguel>((aluguel) =>
+            {
+                repositorioAluguel.Inserir(aluguel);
+                contextoDePersistencia.GravarDados();
+            }
+            );
+            BuilderSetup.SetCreatePersistenceMethod<Cliente>((cliente) =>
+            {
+                repositorioCliente.Inserir(cliente);
+                contextoDePersistencia.GravarDados();
+            }
+            );
         }
 
         protected static void LimparTabelas()

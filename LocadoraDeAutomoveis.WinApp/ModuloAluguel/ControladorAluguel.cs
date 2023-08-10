@@ -1,4 +1,5 @@
-﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel;
+﻿using FluentResults;
+using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
@@ -6,6 +7,7 @@ using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
+using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using LocadoraDeAutomoveis.WinApp.ModuloAutomovel;
 
 namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
@@ -17,17 +19,19 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
         private IRepositorioAluguel repositorioAluguel;
         private IRepositorioCliente repositorioCliente;
         private IRepositorioCupom repositorioCupom;
+        private IRepositorioTaxaServico repositorioTaxaServico;
         private IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca;
         private TabelaAluguelControl tabelaAluguel;
         private ServicoAluguel servicoAluguel;
 
-        public ControladorAluguel(IRepositorioAutomovel repositorioAutomovel, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioAluguel repositorioAluguel, IRepositorioCliente repositorioCliente, IRepositorioCupom repositorioCupom, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, ServicoAluguel servicoAluguel)
+        public ControladorAluguel(IRepositorioAutomovel repositorioAutomovel, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioAluguel repositorioAluguel, IRepositorioCliente repositorioCliente, IRepositorioCupom repositorioCupom, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, ServicoAluguel servicoAluguel)
         {
             this.repositorioAutomovel = repositorioAutomovel;
             this.repositorioGrupoDeAutomoveis = repositorioGrupoDeAutomoveis;
             this.repositorioAluguel = repositorioAluguel;
             this.repositorioCliente = repositorioCliente;
             this.repositorioCupom = repositorioCupom;
+            this.repositorioTaxaServico = repositorioTaxaServico;
             this.repositorioPlanoDeCobranca = repositorioPlanoDeCobranca;
             this.servicoAluguel = servicoAluguel;
         }
@@ -48,17 +52,66 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
         public override void Deletar()
         {
-            throw new NotImplementedException();
+            Guid? id = tabelaAluguel.ObtemIdSelecionado();
+
+            Aluguel aluguelSelecionado = repositorioAluguel.Busca(id);
+
+            if (aluguelSelecionado == null)
+            {
+                MessageBox.Show("Selecione um aluguel primeiro",
+                "Exclusão de Alugueis", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja realmente excluir o aluguel do cliente {aluguelSelecionado.Cliente}?",
+               "Exclusão de Alugueis", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Result resultado = servicoAluguel.Excluir(aluguelSelecionado);
+
+                if (resultado.IsFailed)
+                {
+                    MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Alugueis",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                CarregarEntidades();
+            }
         }
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Guid? id = tabelaAluguel.ObtemIdSelecionado();
+
+            Aluguel aluguelSelecionado = repositorioAluguel.Busca(id);
+
+            if (aluguelSelecionado == null)
+            {
+                MessageBox.Show("Selecione uma aluguel primeiro",
+                "Edição de Alugueis", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom, repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioAutomovel, repositorioTaxaServico);
+
+            tela.onGravarRegistro += servicoAluguel.Atualizar;
+
+            tela.ConfigurarAluguel(aluguelSelecionado);
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                CarregarEntidades();
+            }
         }
 
         public override void Inserir()
         {
-            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom,repositorioGrupoDeAutomoveis,repositorioCliente,repositorioPlanoDeCobranca, repositorioAutomovel);
+            TelaAluguelForm tela = new TelaAluguelForm(repositorioCupom,repositorioGrupoDeAutomoveis,repositorioCliente,repositorioPlanoDeCobranca, repositorioAutomovel,repositorioTaxaServico);
 
             tela.onGravarRegistro += servicoAluguel.Inserir;
             

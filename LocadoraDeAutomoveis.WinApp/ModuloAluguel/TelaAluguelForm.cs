@@ -5,6 +5,7 @@ using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
+using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,18 +21,18 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
     public partial class TelaAluguelForm : Form
     {
         private Aluguel aluguel { get; set; }
-
+        Cupom? cupom = new();
         public event GravarEntidadeDelegate<Aluguel> onGravarRegistro;
         IRepositorioCupom repositorioCupom;
         IRepositorioAutomovel repositorioAutomovel;
-        public TelaAluguelForm(IRepositorioCupom repositorioCupom, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioAutomovel repositorioAutomovel)
+        public TelaAluguelForm(IRepositorioCupom repositorioCupom, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioAutomovel repositorioAutomovel, IRepositorioTaxaServico repositorioTaxaServico)
         {
             InitializeComponent();
             this.ConfigurarDialog();
             this.repositorioCupom = repositorioCupom;
             this.repositorioAutomovel = repositorioAutomovel;
             listAutomovel.Enabled = false;
-            ConfigurarListas(repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca);
+            ConfigurarListas(repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioTaxaServico);
         }
 
 
@@ -50,13 +51,13 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
         public void ConfigurarAluguel(Aluguel aluguel)
         {
-            this.aluguel = aluguel;
-            listAutomovel.SelectedItem = aluguel.Automovel;
+            this.aluguel = aluguel;          
             listCliente.SelectedItem = aluguel.Cliente;
             listGrupoDeAutomoveis.SelectedItem = aluguel.GrupoDeAutomoveis;
             listPlanoDeCobranca.SelectedItem = aluguel.PlanoDeCobranca;
+            listAutomovel.SelectedItem = aluguel.Automovel;
             //listFuncionario.SelectedItem = aluguel.Funcionario;
-            //listaTaxasEServicos.SelectedItems = aluguel.TaxasEServicos;
+            listaTaxasEServicos.SelectedItems.Add(aluguel.TaxasEServicos);
             //listCondutor.SelectedItem = aluguel.Condutor;
             if (aluguel.DataDoAluguel != DateTime.MinValue)
                 datePickerDataDoAluguel.Value = aluguel.DataDoAluguel;
@@ -71,10 +72,15 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             aluguel.Cliente = (Cliente)listCliente.SelectedItem;
             aluguel.GrupoDeAutomoveis = (GrupoDeAutomoveis)listGrupoDeAutomoveis.SelectedItem;
             aluguel.PlanoDeCobranca = (PlanoDeCobranca)listPlanoDeCobranca.SelectedItem;
+            aluguel.TaxasEServicos = new();
+            foreach (var item in listaTaxasEServicos.CheckedItems)
+            {
+                aluguel.TaxasEServicos.Add((TaxaServico)item);
+            }
             aluguel.DataDoAluguel = datePickerDataDoAluguel.Value;
             aluguel.DataDaPrevistaDevolucao = datePickerDataDaDevolucao.Value;
-           // aluguel.ValorFinal = aluguel.CalcularValorFinal();
-
+            aluguel.ValorFinal = aluguel.CalcularValorFinal();
+            aluguel.Cupom = cupom;
 
 
             return aluguel;
@@ -89,11 +95,10 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
 
         private void btnAplicarCupom_Click(object sender, EventArgs e)
         {
-            Cupom cupom = null;
             if (txtBuscarCupom.Text != "")
                 cupom = repositorioCupom.SelecionarPorNome(txtBuscarCupom.Text);
         }
-        private void ConfigurarListas(IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca)
+        private void ConfigurarListas(IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioTaxaServico repositorioTaxaServico)
         {
 
             foreach (var item in repositorioCliente.RetornarTodos())
@@ -107,6 +112,10 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             foreach (var item in repositorioPlanoDeCobranca.RetornarTodos())
             {
                 listPlanoDeCobranca.Items.Add(item);
+            }
+            foreach (var item in repositorioTaxaServico.RetornarTodos())
+            {
+                listaTaxasEServicos.Items.Add(item);
             }
 
 

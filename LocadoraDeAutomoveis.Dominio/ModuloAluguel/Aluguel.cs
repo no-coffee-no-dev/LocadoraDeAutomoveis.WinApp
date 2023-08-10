@@ -4,6 +4,7 @@ using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
+using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public Automovel Automovel { get; set; }
         public DateTime DataDaPrevistaDevolucao { get; set; }
         public PlanoDeCobranca PlanoDeCobranca { get; set; }
-        public Cupom Cupom { get; set; }
-        //public TaxasEServicos taxasEServicos { get; set; }
+        public Cupom? Cupom { get; set; }
+        public List<TaxaServico> TaxasEServicos { get; set; }
 
         public Aluguel()
         {
@@ -39,10 +40,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
             Id = id;
         }
 
-        public Aluguel(Guid id, decimal valorFinal, PlanoDeCobranca planoDeCobranca , Cliente cliente, GrupoDeAutomoveis grupoDeAutomoveis, DateTime dataDoAluguel, Automovel automovel, DateTime dataDaPrevistaDevolucao, Cupom cupom) : this(id)
+        public Aluguel(Guid id, decimal valorFinal, List<TaxaServico> taxasEServicos, PlanoDeCobranca planoDeCobranca , Cliente cliente, GrupoDeAutomoveis grupoDeAutomoveis, DateTime dataDoAluguel, Automovel automovel, DateTime dataDaPrevistaDevolucao, Cupom? cupom) : this(id)
         {
             ValorFinal = valorFinal;
             PlanoDeCobranca = planoDeCobranca;
+            TaxasEServicos = new();
             Cliente = cliente;
             GrupoDeAutomoveis = grupoDeAutomoveis;
             DataDoAluguel = dataDoAluguel;
@@ -55,6 +57,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         {
             ValorFinal = registro.ValorFinal;
             Cliente = registro.Cliente;
+            TaxasEServicos = registro.TaxasEServicos;
             PlanoDeCobranca = registro.PlanoDeCobranca;
             GrupoDeAutomoveis = registro.GrupoDeAutomoveis;
             DataDoAluguel = registro.DataDoAluguel;
@@ -74,6 +77,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public override string? ToString()
         {
             return $"Aluguel do Carro{Automovel.Marca} {Automovel.Cor}";
+        }
+
+        public decimal CalcularValorFinal()
+        {
+            return 100;
         }
     }
 }

@@ -48,6 +48,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloAluguel
 
             //action
             repositorioAluguel.Inserir(aluguel);
+            contextoDePersistencia.GravarDados();
 
             //assert
             repositorioAluguel.Busca(aluguel.Id).Should().Be(aluguel);
@@ -86,6 +87,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloAluguel
             aluguel.ValorFinal = 100;
             //action
             repositorioAluguel.Atualizar(aluguel);
+            contextoDePersistencia.GravarDados();
 
             //assert
             repositorioAluguel.Busca(aluguel.Id)
@@ -125,6 +127,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloAluguel
 
             //action
             repositorioAluguel.Deletar(aluguel);
+            contextoDePersistencia.GravarDados();
 
             //assert
             repositorioAluguel.Busca(aluguel.Id)

@@ -20,7 +20,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloPlanoDeCobranca
 
             //action
             repositorioPlanoDeCobranca.Inserir(planoDeCobranca);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioPlanoDeCobranca.Busca(planoDeCobranca.Id).Should().Be(planoDeCobranca);
         }
@@ -38,7 +38,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloPlanoDeCobranca
 
             //action
             repositorioPlanoDeCobranca.Atualizar(planoDeCobranca);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioPlanoDeCobranca.Busca(planoDeCobranca.Id)
                 .Should().Be(planoDeCobranca);
@@ -56,7 +56,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloPlanoDeCobranca
 
             //action
             repositorioPlanoDeCobranca.Deletar(planoDeCobranca);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioCupom.Busca(planoDeCobranca.Id)
                 .Should().BeNull();

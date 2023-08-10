@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloGrupoDeAutomoveis
             var grupoDeAutomoveis = Builder<GrupoDeAutomoveis>.CreateNew().Build();
             //action
             repositorioGrupoDeAutomoveis.Inserir(grupoDeAutomoveis);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioGrupoDeAutomoveis.Busca(grupoDeAutomoveis.Id).Should().Be(grupoDeAutomoveis);
         }
@@ -30,7 +30,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloGrupoDeAutomoveis
 
             //action
             repositorioGrupoDeAutomoveis.Atualizar(grupoDeAutomoveis);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioGrupoDeAutomoveis.Busca(grupoDeAutomoveis.Id)
                 .Should().Be(grupoDeAutomoveis);
@@ -45,7 +45,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloGrupoDeAutomoveis
 
             //action
             repositorioGrupoDeAutomoveis.Deletar(grupoDeAutomoveis);
-
+            contextoDePersistencia.GravarDados();
             //assert
             repositorioGrupoDeAutomoveis.Busca(grupoDeAutomoveis.Id)
                 .Should().BeNull();
