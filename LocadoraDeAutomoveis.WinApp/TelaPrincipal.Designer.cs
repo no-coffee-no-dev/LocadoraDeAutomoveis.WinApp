@@ -39,6 +39,8 @@
             automovelToolStripMenuItem = new ToolStripMenuItem();
             taxaDeServicoToolStripMenuItem = new ToolStripMenuItem();
             aluguelToolStripMenuItem = new ToolStripMenuItem();
+            clienteToolStripMenuItem = new ToolStripMenuItem();
+            funcionárioToolStripMenuItem = new ToolStripMenuItem();
             toolStripBarraDeTarefas = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -72,6 +74,7 @@
             // 
             cadastrosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
             cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem, clienteToolStripMenuItem, automovelToolStripMenuItem, taxaDeServicoToolStripMenuItem, aluguelToolStripMenuItem });
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem, clienteToolStripMenuItem, funcionárioToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(115, 19);
             cadastrosToolStripMenuItem.Text = "Cadastros";

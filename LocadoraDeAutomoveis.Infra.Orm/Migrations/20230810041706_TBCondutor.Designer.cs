@@ -4,6 +4,7 @@ using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeAutomoveisDbContext))]
-    partial class LocadoraDeAutomoveisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230810041706_TBCondutor")]
+    partial class TBCondutor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,72 +25,10 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AluguelTaxaServico", b =>
-                {
-                    b.Property<Guid>("AluguelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TaxasEServicosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AluguelId", "TaxasEServicosId");
-
-                    b.HasIndex("TaxasEServicosId");
-
-                    b.ToTable("TBAluguel_TBTaxaServico", (string)null);
-                });
-
-            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AutomovelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClienteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CupomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataDaPrevistaDevolucao")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("DataDoAluguel")
-                        .HasColumnType("datetime");
-
-                    b.Property<Guid>("GrupoDeAutomoveisId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PlanoDeCobrancaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("ValorFinal")
-                        .HasColumnType("decimal(9,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AutomovelId");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("CupomId");
-
-                    b.HasIndex("GrupoDeAutomoveisId");
-
-                    b.HasIndex("PlanoDeCobrancaId");
-
-                    b.ToTable("TBAluguel", (string)null);
-                });
-
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomovel.Automovel", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Ano")
-                        .HasColumnType("datetime");
 
                     b.Property<int>("CapacidadeEmLitros")
                         .HasColumnType("integer");
@@ -103,9 +44,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.Property<Guid>("GrupoDeAutomoveisId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("KmRodados")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
@@ -113,10 +51,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Placa")
-                        .IsRequired()
-                        .HasColumnType("varchar(7)");
 
                     b.Property<int>("TipoDeCombustivel")
                         .HasColumnType("int");
@@ -333,88 +267,6 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                     b.HasIndex("GrupoDeAutomoveisId");
 
                     b.ToTable("TBPlanoDeCobranca", (string)null);
-                });
-
-            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloTaxaServico.TaxaServico", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("PlanoDeCalculo")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Preco")
-                        .HasColumnType("decimal");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TBTaxaServico", (string)null);
-                });
-
-            modelBuilder.Entity("AluguelTaxaServico", b =>
-                {
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", null)
-                        .WithMany()
-                        .HasForeignKey("AluguelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloTaxaServico.TaxaServico", null)
-                        .WithMany()
-                        .HasForeignKey("TaxasEServicosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", b =>
-                {
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAutomovel.Automovel", "Automovel")
-                        .WithMany()
-                        .HasForeignKey("AutomovelId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_TBAluguel_TBAutomoveis");
-
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloCliente.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_TBAluguel_TBCliente");
-
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloCupom.Cupom", "Cupom")
-                        .WithMany()
-                        .HasForeignKey("CupomId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("FK_TBAluguel_TBCupom");
-
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel.GrupoDeAutomoveis", "GrupoDeAutomoveis")
-                        .WithMany()
-                        .HasForeignKey("GrupoDeAutomoveisId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_TBAluguel_TBGrupoDeAutoveis");
-
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca.PlanoDeCobranca", "PlanoDeCobranca")
-                        .WithMany()
-                        .HasForeignKey("PlanoDeCobrancaId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_TBAluguel_TBPlanoDeCobranca");
-
-                    b.Navigation("Automovel");
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Cupom");
-
-                    b.Navigation("GrupoDeAutomoveis");
-
-                    b.Navigation("PlanoDeCobranca");
                 });
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomovel.Automovel", b =>
