@@ -39,19 +39,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
             RuleFor(x => x.Numero)
                 .NotEmpty()
                 .NotNull();
-
-
-            RuleFor(x => x.CPF)
-                .NotEmpty() 
-                .NotNull();
-
-            RuleFor(x => x.RG)
-                .NotEmpty()
-                .NotNull();
-            
-            RuleFor(x => x.CNH)
-                .NotEmpty()
-                .NotNull();
         }
     }
 }
