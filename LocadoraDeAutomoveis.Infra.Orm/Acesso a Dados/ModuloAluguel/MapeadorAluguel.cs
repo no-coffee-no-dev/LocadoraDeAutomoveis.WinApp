@@ -19,8 +19,8 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAluguel
 
             aluguelBuilder.Property(a => a.Id).IsRequired().ValueGeneratedNever();
             aluguelBuilder.Property(a => a.ValorFinal).HasColumnType("decimal(9,2)").IsRequired();
-            aluguelBuilder.Property(a => a.DataDoAluguel).HasColumnType("datetime").IsRequired();
-            aluguelBuilder.Property(a => a.DataDaPrevistaDevolucao).HasColumnType("datetime").IsRequired();
+            aluguelBuilder.Property(a => a.DataDoAluguel).HasColumnType("date").IsRequired();
+            aluguelBuilder.Property(a => a.DataDaPrevistaDevolucao).HasColumnType("date").IsRequired();
 
 
             aluguelBuilder.HasOne(a => a.Cupom)             
@@ -52,6 +52,16 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloAluguel
                .IsRequired()
                .HasConstraintName("FK_TBAluguel_TBGrupoDeAutoveis")
                .OnDelete(DeleteBehavior.NoAction);
+
+            aluguelBuilder.HasOne(a => a.Funcionario).WithMany()
+              .IsRequired()
+              .HasConstraintName("FK_TBAluguel_TBFuncionario")
+              .OnDelete(DeleteBehavior.NoAction);
+
+            aluguelBuilder.HasOne(a => a.Condutor).WithMany()
+              .IsRequired()
+              .HasConstraintName("FK_TBAluguel_TBCondutor")
+              .OnDelete(DeleteBehavior.NoAction);
 
             aluguelBuilder.HasMany(a => a.TaxasEServicos)
                 .WithMany()

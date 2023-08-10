@@ -2,7 +2,9 @@
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloCupom;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
@@ -25,14 +27,14 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
         public event GravarEntidadeDelegate<Aluguel> onGravarRegistro;
         IRepositorioCupom repositorioCupom;
         IRepositorioAutomovel repositorioAutomovel;
-        public TelaAluguelForm(IRepositorioCupom repositorioCupom, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioAutomovel repositorioAutomovel, IRepositorioTaxaServico repositorioTaxaServico)
+        public TelaAluguelForm(IRepositorioCupom repositorioCupom, IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioAutomovel repositorioAutomovel, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioCondutor repositorioCondutor, IRepositorioFuncionario repositorioFuncionario)
         {
             InitializeComponent();
             this.ConfigurarDialog();
             this.repositorioCupom = repositorioCupom;
             this.repositorioAutomovel = repositorioAutomovel;
             listAutomovel.Enabled = false;
-            ConfigurarListas(repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioTaxaServico);
+            ConfigurarListas(repositorioGrupoDeAutomoveis, repositorioCliente, repositorioPlanoDeCobranca, repositorioTaxaServico, repositorioFuncionario, repositorioCondutor);
         }
 
 
@@ -56,9 +58,9 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             listGrupoDeAutomoveis.SelectedItem = aluguel.GrupoDeAutomoveis;
             listPlanoDeCobranca.SelectedItem = aluguel.PlanoDeCobranca;
             listAutomovel.SelectedItem = aluguel.Automovel;
-            //listFuncionario.SelectedItem = aluguel.Funcionario;
+            listFuncionario.SelectedItem = aluguel.Funcionario;
             listaTaxasEServicos.SelectedItems.Add(aluguel.TaxasEServicos);
-            //listCondutor.SelectedItem = aluguel.Condutor;
+            listCondutor.SelectedItem = aluguel.Condutor;
             if (aluguel.DataDoAluguel != DateTime.MinValue)
                 datePickerDataDoAluguel.Value = aluguel.DataDoAluguel;
             if (aluguel.DataDaPrevistaDevolucao != DateTime.MinValue)
@@ -72,6 +74,8 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             aluguel.Cliente = (Cliente)listCliente.SelectedItem;
             aluguel.GrupoDeAutomoveis = (GrupoDeAutomoveis)listGrupoDeAutomoveis.SelectedItem;
             aluguel.PlanoDeCobranca = (PlanoDeCobranca)listPlanoDeCobranca.SelectedItem;
+            aluguel.Condutor = (Condutor)listCondutor.SelectedItem;
+            aluguel.Funcionario = (Funcionario)listFuncionario.SelectedItem;
             aluguel.TaxasEServicos = new();
             foreach (var item in listaTaxasEServicos.CheckedItems)
             {
@@ -98,7 +102,7 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             if (txtBuscarCupom.Text != "")
                 cupom = repositorioCupom.SelecionarPorNome(txtBuscarCupom.Text);
         }
-        private void ConfigurarListas(IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioTaxaServico repositorioTaxaServico)
+        private void ConfigurarListas(IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis, IRepositorioCliente repositorioCliente, IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IRepositorioTaxaServico repositorioTaxaServico, IRepositorioFuncionario repositorioFuncionario, IRepositorioCondutor repositorioCondutor)
         {
 
             foreach (var item in repositorioCliente.RetornarTodos())
@@ -116,6 +120,14 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloAluguel
             foreach (var item in repositorioTaxaServico.RetornarTodos())
             {
                 listaTaxasEServicos.Items.Add(item);
+            }
+            foreach (var item in repositorioCondutor.RetornarTodos())
+            {
+                listCondutor.Items.Add(item);
+            }
+            foreach (var item in repositorioFuncionario.RetornarTodos())
+            {
+                listFuncionario.Items.Add(item);
             }
 
 
