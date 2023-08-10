@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
     }
     public class Condutor : EntidadeBase<Condutor>
     {
-        public Cliente cliente;
+        public Cliente cliente {  get; set; }
         public string nome {  get; set; }
         public string email { get; set; }
         public string telefone { get; set; }
@@ -25,7 +25,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
 
     
 
-        public Condutor(Cliente cliente)
+        public Condutor()
         {
             this.cliente = cliente;
             this.nome = nome;

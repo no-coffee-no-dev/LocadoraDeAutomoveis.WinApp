@@ -35,7 +35,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
             {
                 repositorioFuncionario.Inserir(Funcionario);
 
-                Log.Debug("Cliente {ClienteId} inserido com sucesso", Funcionario.Id);
+                Log.Debug("Funcionário {FuncionarioId} inserido com sucesso", Funcionario.Id);
 
                 return Result.Ok(); 
             }
@@ -51,7 +51,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario
 
         public Result Atualizar(Funcionario Funcionario)
         {
-            Log.Debug("Tentando editar Cliente...{@f}", Funcionario);
+            Log.Debug("Tentando editar funcionário...{@f}", Funcionario);
 
             List<string> erros = ValidarFuncionario(Funcionario);
 
