@@ -48,6 +48,7 @@
             lblRodape = new ToolStripStatusLabel();
             painelPrincipal = new Panel();
             lblTipoCadastro = new Label();
+            aluguelToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             toolStripBarraDeTarefas.SuspendLayout();
             StatusRodape.SuspendLayout();
@@ -62,16 +63,16 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(76, 393);
+            menuStrip1.Size = new Size(125, 393);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // cadastrosToolStripMenuItem
             // 
             cadastrosToolStripMenuItem.BackColor = SystemColors.ScrollBar;
-            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem, clienteToolStripMenuItem, automovelToolStripMenuItem });
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { parceirosToolStripMenuItem, cupomToolStripMenuItem, grupoDeAutomoveisToolStripMenuItem, planoDeCobrancaToolStripMenuItem, clienteToolStripMenuItem, automovelToolStripMenuItem, aluguelToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
-            cadastrosToolStripMenuItem.Size = new Size(65, 19);
+            cadastrosToolStripMenuItem.Size = new Size(114, 19);
             cadastrosToolStripMenuItem.Text = "Cadastros";
             // 
             // parceirosToolStripMenuItem
@@ -128,7 +129,7 @@
             toolStripBarraDeTarefas.GripStyle = ToolStripGripStyle.Hidden;
             toolStripBarraDeTarefas.ImageScalingSize = new Size(20, 20);
             toolStripBarraDeTarefas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnDeletar, toolStripSeparator1, btnFiltrar, toolStripSeparator2 });
-            toolStripBarraDeTarefas.Location = new Point(76, 0);
+            toolStripBarraDeTarefas.Location = new Point(125, 0);
             toolStripBarraDeTarefas.Name = "toolStripBarraDeTarefas";
             toolStripBarraDeTarefas.RenderMode = ToolStripRenderMode.Professional;
             toolStripBarraDeTarefas.Size = new Size(51, 393);
@@ -195,10 +196,10 @@
             // StatusRodape
             // 
             StatusRodape.Items.AddRange(new ToolStripItem[] { lblRodape });
-            StatusRodape.Location = new Point(127, 371);
+            StatusRodape.Location = new Point(176, 371);
             StatusRodape.Name = "StatusRodape";
             StatusRodape.Padding = new Padding(1, 0, 12, 0);
-            StatusRodape.Size = new Size(677, 22);
+            StatusRodape.Size = new Size(628, 22);
             StatusRodape.TabIndex = 2;
             StatusRodape.Text = "statusStrip1";
             // 
@@ -225,6 +226,14 @@
             lblTipoCadastro.Size = new Size(103, 17);
             lblTipoCadastro.TabIndex = 4;
             lblTipoCadastro.Text = "___________________";
+            // 
+            // aluguelToolStripMenuItem
+            // 
+            aluguelToolStripMenuItem.BackColor = SystemColors.ScrollBar;
+            aluguelToolStripMenuItem.Name = "aluguelToolStripMenuItem";
+            aluguelToolStripMenuItem.Size = new Size(191, 22);
+            aluguelToolStripMenuItem.Text = "Aluguel";
+            aluguelToolStripMenuItem.Click += aluguelToolStripMenuItem_Click;
             // 
             // TelaPrincipal
             // 
@@ -271,5 +280,6 @@
         private ToolStripMenuItem automovelToolStripMenuItem;
         private ToolStripButton btnFiltrar;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem aluguelToolStripMenuItem;
     }
 }

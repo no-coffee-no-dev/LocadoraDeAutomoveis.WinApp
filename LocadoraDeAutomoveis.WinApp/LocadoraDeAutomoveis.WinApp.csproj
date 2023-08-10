@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloAluguel\" />
     <Folder Include="ModuloCondutor\" />
     <Folder Include="ModuloFuncionario\" />
     <Folder Include="ModuloTaxaServico\" />

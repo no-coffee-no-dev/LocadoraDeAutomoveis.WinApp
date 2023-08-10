@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using Microsoft.Data.SqlClient;
 using Serilog;
@@ -9,13 +10,14 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
     {
         private IRepositorioCliente repositorioCliente;
         private IValidadorCliente validadorCliente;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoCliente(IRepositorioCliente repositorioCliente, IValidadorCliente validadorCliente)
+        public ServicoCliente(IRepositorioCliente repositorioCliente, IValidadorCliente validadorCliente, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCliente = repositorioCliente;
             this.validadorCliente = validadorCliente;
+            this.contextoPersistencia = contextoPersistencia;
         }
-
 
         public Result Inserir(Cliente Cliente)
         {
@@ -24,11 +26,17 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             List<string> erros = ValidarCliente(Cliente);
 
             if (erros.Count() > 0)
-                return Result.Fail(erros); //cenário 2
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+                return Result.Fail(erros);
+            }
+               
 
             try
             {
                 repositorioCliente.Inserir(Cliente);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Cliente {ClienteId} inserido com sucesso", Cliente.Id);
 
@@ -52,11 +60,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
             List<string> erros = ValidarCliente(Cliente);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioCliente.Atualizar(Cliente);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Cliente {ClienteId} editado com sucesso", Cliente.Id);
 
@@ -90,12 +102,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente
 
                 repositorioCliente.Deletar(Cliente);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("Cliente {ClienteId} excluída com sucesso", Cliente.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro = "não foi possivel deletar o cliente";

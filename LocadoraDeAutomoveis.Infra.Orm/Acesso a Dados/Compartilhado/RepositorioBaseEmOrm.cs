@@ -16,21 +16,15 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.Compartilhado
         public void Inserir(TEntidade novaEntidade)
         {
             registros.Add(novaEntidade);
-
-            dbContext.SaveChanges();
         }
 
         public void Atualizar(TEntidade entidade)
         {
             registros.Update(entidade);
-
-            dbContext.SaveChanges(); 
         }
         public void Deletar(TEntidade entidade)
         {
             registros.Remove(entidade);
-
-            dbContext.SaveChanges();
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoDeCobranca;
 using Microsoft.Data.SqlClient;
 using Serilog;
@@ -9,11 +10,13 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca
     {
         private IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca;
         private IValidadorPlanoDeCobranca validadorPlanoDeCobranca;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoPlanoDeCobranca(IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IValidadorPlanoDeCobranca validadorPlanoDeCobranca)
+        public ServicoPlanoDeCobranca(IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca, IValidadorPlanoDeCobranca validadorPlanoDeCobranca, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioPlanoDeCobranca = repositorioPlanoDeCobranca;
             this.validadorPlanoDeCobranca = validadorPlanoDeCobranca;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result Inserir(PlanoDeCobranca planoDeCobranca)
@@ -23,11 +26,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca
             List<string> erros = ValidarPlanoDeCobranca(planoDeCobranca);
 
             if (erros.Count() > 0)
-                return Result.Fail(erros); //cenário 2
-
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+                return Result.Fail(erros);
+            }
             try
             {
                 repositorioPlanoDeCobranca.Inserir(planoDeCobranca);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Plano De Cobranca {PlanoDeCobrancaId} inserido com sucesso", planoDeCobranca.Id);
 
@@ -53,11 +60,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca
             List<string> erros = ValidarPlanoDeCobranca(planoDeCobranca);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioPlanoDeCobranca.Atualizar(planoDeCobranca);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("PlanoDeCobranca {PlanoDeCobrancaId} editada com sucesso", planoDeCobranca.Id);
 
@@ -93,12 +104,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoDeCobranca
 
                 repositorioPlanoDeCobranca.Deletar(planoDeCobranca);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("PlanoDeCobranca {PlanoDeCobrancaId} excluída com sucesso", planoDeCobranca.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;

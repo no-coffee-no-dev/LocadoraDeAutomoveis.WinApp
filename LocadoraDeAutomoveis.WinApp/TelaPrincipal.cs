@@ -17,6 +17,8 @@ using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloCupom;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloGrupoDoAutomovel;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeAutomoveis.Infra.Orm.Acesso_a_Dados.ModuloPlanoDeCobranca;
+using LocadoraDeAutomoveis.WinApp.Compartilhado.IoC;
+using LocadoraDeAutomoveis.WinApp.ModuloAluguel;
 using LocadoraDeAutomoveis.WinApp.ModuloAutomovel;
 using LocadoraDeAutomoveis.WinApp.ModuloCliente;
 using LocadoraDeAutomoveis.WinApp.ModuloCupom;
@@ -32,13 +34,14 @@ namespace LocadoraDeAutomoveis.WinApp
     {
         private Dictionary<string, ControladorBase> controladores;
 
+        private IoC IoC;
         private ControladorBase controlador;
         public TelaPrincipal()
         {
             InitializeComponent();
             Instancia = this;
 
-            controladores = new Dictionary<string, ControladorBase>();
+            IoC = new IoC_ComInjecaoDependencia();
             this.ConfigurarDialog();
             ConfigurarControladores();
 
@@ -137,40 +140,6 @@ namespace LocadoraDeAutomoveis.WinApp
             }
 
 
-            IRepositorioCliente repositorioCliente = new RepositorioClienteOrm(dbContext);
-            IRepositorioParceiro repositorioParceiro = new RepositorioParceiroOrm(dbContext);
-            IRepositorioCupom repositorioCupom = new RepositorioCupomOrm(dbContext);
-            IRepositorioGrupoDeAutomoveis repositorioGrupoDeAutomoveis = new RepositorioGrupoDeAutomoveisOrm(dbContext);
-            IRepositorioPlanoDeCobranca repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaOrm(dbContext);
-            IRepositorioAutomovel repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
-
-
-            ValidadorParceiro validadorParceiro = new ValidadorParceiro();
-            ValidadorCupom validadorCupom = new ValidadorCupom();
-            ValidadorGrupoDeAutomoveis validadorGrupoDeAutomoveis = new ValidadorGrupoDeAutomoveis();
-            ValidadorPlanoDeCobranca validadorPlanoDeCobranca = new ValidadorPlanoDeCobranca();
-            ValidadorCliente validadorCliente = new ValidadorCliente();
-            ValidadorAutomovel validadorAutomovel = new ValidadorAutomovel();
-
-
-
-            ServicoParceiro servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
-            ServicoCupom servicoCupom = new ServicoCupom(repositorioCupom, validadorCupom);
-            ServicoGrupoDeAutomoveis servicoGrupoDeAutomoveis = new ServicoGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, validadorGrupoDeAutomoveis);
-            ServicoPlanoDeCobranca servicoPlanoDeCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca, validadorPlanoDeCobranca);
-            ServicoCliente servicoCliente = new ServicoCliente(repositorioCliente, validadorCliente);
-            ServicoAutomovel servicoAutomovel = new ServicoAutomovel(repositorioAutomovel, validadorAutomovel);
-
-
-
-
-            controladores.Add("ControladorParceiro", new ControladorParceiro(repositorioParceiro, servicoParceiro));
-            controladores.Add("ControladorCupom", new ControladorCupom(repositorioCupom, repositorioParceiro, servicoCupom));
-            controladores.Add("ControladorGrupoDeAutomoveis", new ControladorGrupoDeAutomoveis(repositorioGrupoDeAutomoveis, servicoGrupoDeAutomoveis));
-            controladores.Add("ControladorPlanoDeCobranca", new ControladorPlanoDeCobranca(repositorioPlanoDeCobranca, repositorioGrupoDeAutomoveis, servicoPlanoDeCobranca));
-            controladores.Add("ControladorCliente", new ControladorCliente(repositorioCliente, servicoCliente));
-            controladores.Add("ControladorAutomovel", new ControladorAutomovel(repositorioAutomovel, repositorioGrupoDeAutomoveis, servicoAutomovel));
-
         }
         #endregion 
 
@@ -200,30 +169,33 @@ namespace LocadoraDeAutomoveis.WinApp
 
         private void parceirosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorParceiro"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorParceiro>());
         }
 
         private void cupomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorCupom"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorCupom>());
         }
-
+        private void aluguelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal(IoC.Get<ControladorAluguel>());
+        }
         private void grupoDeAutomoveisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorGrupoDeAutomoveis"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorGrupoDeAutomoveis>());
         }
         private void planoDeCobrancaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorPlanoDeCobranca"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorPlanoDeCobranca>());
         }
         private void clienteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorCliente"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorCliente>()); ;
         }
 
         private void automovelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorAutomovel"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorAutomovel>());
         }
         private bool VerificaControladorVazio(ControladorBase controlador)
         {
@@ -232,6 +204,7 @@ namespace LocadoraDeAutomoveis.WinApp
             else
                 return false;
         }
+
 
     }
 }

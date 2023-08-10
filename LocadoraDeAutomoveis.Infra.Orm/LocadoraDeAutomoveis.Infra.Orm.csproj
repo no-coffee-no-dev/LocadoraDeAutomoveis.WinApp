@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Acesso a Dados\ModuloAluguel\" />
     <Folder Include="Acesso a Dados\ModuloAutomovel\" />
     <Folder Include="Acesso a Dados\ModuloCliente\" />
     <Folder Include="Acesso a Dados\ModuloCondutor\" />

@@ -14,6 +14,7 @@ namespace LocadoraDeAutomoveis.TestesIntregacao.ModuloAutomovel
             var automovel = Builder<Automovel>.CreateNew().Build();           
             var grupoDeAutomovel = Builder<GrupoDeAutomoveis>.CreateNew().Build();
             repositorioGrupoDeAutomoveis.Inserir(grupoDeAutomovel);
+
             automovel.GrupoDeAutomoveis = grupoDeAutomovel;
             automovel.Foto = new byte[1];
             

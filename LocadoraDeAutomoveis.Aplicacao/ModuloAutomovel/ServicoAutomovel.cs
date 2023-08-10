@@ -1,13 +1,8 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomovel;
-using LocadoraDeAutomoveis.Dominio.ModuloCupom;
 using Microsoft.Data.SqlClient;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel
 {
@@ -15,11 +10,13 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel
     {
         private IRepositorioAutomovel repositorioAutomovel;
         private IValidadorAutomovel validadorAutomovel;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoAutomovel(IRepositorioAutomovel repositorioAutomovel, IValidadorAutomovel validadorAutomovel)
+        public ServicoAutomovel(IRepositorioAutomovel repositorioAutomovel, IValidadorAutomovel validadorAutomovel, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioAutomovel = repositorioAutomovel;
             this.validadorAutomovel = validadorAutomovel;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result Inserir(Automovel automovel)
@@ -29,11 +26,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel
             List<string> erros = ValidarCupom(automovel);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros); //cenário 2
-
+            }
             try
             {
                 repositorioAutomovel.Inserir(automovel);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Automovel {AutomovelId} inserido com sucesso", automovel.Id);
 
@@ -57,11 +58,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel
             List<string> erros = ValidarCupom(automovel);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioAutomovel.Atualizar(automovel);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Automovel {AutomovelId} editado com sucesso", automovel.Id);
 
@@ -86,9 +92,9 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel
 
             try
             {
-                bool cupomExiste = repositorioAutomovel.Existe(automovel);
+                bool automovelExiste = repositorioAutomovel.Existe(automovel);
 
-                if (cupomExiste == false)
+                if (automovelExiste == false)
                 {
                     Log.Warning("Automovel {AutomovelId} não encontrada para excluir", automovel.Id);
 
@@ -97,12 +103,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutomovel
 
                 repositorioAutomovel.Deletar(automovel);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("Automovel {AutomovelId} excluída com sucesso", automovel.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;

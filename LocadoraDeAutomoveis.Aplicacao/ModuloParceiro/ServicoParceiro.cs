@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloParceiro;
 using Microsoft.Data.SqlClient;
 using Serilog;
@@ -14,15 +15,14 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloParceiro
     {
         private IRepositorioParceiro repositorioParceiro;
         private IValidadorParceiro validadorParceiro;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoParceiro(IRepositorioParceiro repositorioParceiro, IValidadorParceiro validadorParceiro)
+        public ServicoParceiro(IRepositorioParceiro repositorioParceiro, IValidadorParceiro validadorParceiro, IContextoPersistencia contextoPersistencia)
         {
-
             this.repositorioParceiro = repositorioParceiro;
             this.validadorParceiro = validadorParceiro;
-
+            this.contextoPersistencia = contextoPersistencia;
         }
-
 
         public Result Inserir(Parceiro parceiro)
         {
@@ -31,11 +31,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloParceiro
             List<string> erros = ValidarParceiro(parceiro);
 
             if (erros.Count() > 0)
-                return Result.Fail(erros); //cenário 2
-
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+                return Result.Fail(erros); 
+            }
             try
             {
                 repositorioParceiro.Inserir(parceiro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Parceiro {ParceiroId} inserida com sucesso", parceiro.Id);
 
@@ -59,11 +63,15 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloParceiro
             List<string> erros = ValidarParceiro(parceiro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
                 return Result.Fail(erros);
-
+            }
             try
             {
                 repositorioParceiro.Atualizar(parceiro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Parceiro {ParceiroId} editada com sucesso", parceiro.Id);
 
@@ -99,12 +107,16 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloParceiro
 
                 repositorioParceiro.Deletar(parceiro);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("Parceiro {ParceiroId} excluída com sucesso", parceiro.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;
