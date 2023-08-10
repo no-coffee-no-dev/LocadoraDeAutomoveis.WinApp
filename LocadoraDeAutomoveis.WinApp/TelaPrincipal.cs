@@ -212,7 +212,11 @@ namespace LocadoraDeAutomoveis.WinApp
         }
         private void funcionárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(controladores["ControladorFuncionario"]);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorFuncionario>());
+        }
+        private void condutorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //ConfigurarTelaPrincipal(IoC.Get<Contro>());
         }
         private bool VerificaControladorVazio(ControladorBase controlador)
         {
@@ -222,6 +226,7 @@ namespace LocadoraDeAutomoveis.WinApp
                 return false;
 
         }
+
 
     }
 }

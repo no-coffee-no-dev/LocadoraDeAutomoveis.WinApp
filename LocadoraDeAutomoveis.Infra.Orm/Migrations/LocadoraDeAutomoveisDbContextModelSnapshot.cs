@@ -52,10 +52,10 @@ namespace LocadoraDeAutomoveis.Infra.Orm.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataDaPrevistaDevolucao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("date");
 
                     b.Property<DateTime>("DataDoAluguel")
-                        .HasColumnType("datetime");
+                        .HasColumnType("date");
 
                     b.Property<Guid>("GrupoDeAutomoveisId")
                         .HasColumnType("uniqueidentifier");
