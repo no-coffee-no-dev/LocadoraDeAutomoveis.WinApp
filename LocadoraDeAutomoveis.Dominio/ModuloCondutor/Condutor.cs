@@ -25,7 +25,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
 
     
 
-        public Condutor()
+        public Condutor(Cliente cliente)
         {
             this.cliente = cliente;
             this.nome = nome;
