@@ -82,13 +82,31 @@ namespace LocadoraDeAutomoveis.WinApp.ModuloCondutor
 
         private void cb_Cliente_CheckedChanged(object sender, EventArgs e)
         {
-            txt_NomeCondutor.Text = condutor.Cliente.Nome;
-            txt_EmailCondutor.Text = condutor.Cliente.Email;
-            txt_TelefoneCondutor.Text = condutor.Cliente.Telefone;
-            txt_CPFCondutor.Text = condutor.Cliente.CPF;
-            txt_CNHCondutor.Text = condutor.Cliente.CNH;
-            if (condutor.ValidadeCNH != DateTime.MinValue)
-                dtp_ValidadeCNHCondutor.Value = condutor.ValidadeCNH;
+            if (condutor.Cliente != null)
+            {
+                if(cb_Cliente.Checked)
+                {
+                    txt_NomeCondutor.Text = condutor.Cliente.Nome;
+                    txt_EmailCondutor.Text = condutor.Cliente.Email;
+                    txt_TelefoneCondutor.Text = condutor.Cliente.Telefone;
+                    txt_CPFCondutor.Text = condutor.Cliente.CPF;
+                    txt_CNHCondutor.Text = condutor.Cliente.CNH;
+                    if (condutor.ValidadeCNH != DateTime.MinValue)
+                        dtp_ValidadeCNHCondutor.Value = condutor.ValidadeCNH;
+                }
+                else
+                {
+                    txt_NomeCondutor.Text = "";
+                    txt_EmailCondutor.Text = "";
+                    txt_TelefoneCondutor.Text = "";
+                    txt_CPFCondutor.Text = "";
+                    txt_CNHCondutor.Text = "";
+                    if (condutor.ValidadeCNH != DateTime.MinValue)
+                        dtp_ValidadeCNHCondutor.Value = condutor.ValidadeCNH;
+                }
+
+            }
+
         }
     }
 }
